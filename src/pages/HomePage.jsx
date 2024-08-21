@@ -1,8 +1,10 @@
-
+import Movies from '../components/Movies'
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <>
+      <Movies />
+    </>
   )
 }
 

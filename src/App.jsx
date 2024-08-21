@@ -1,6 +1,8 @@
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import HomePage from './pages/HomePage'
+import MovieDetails from './components/MovieDetails';
+
 
 const App = () => {
 
@@ -8,6 +10,7 @@ const App = () => {
     createRoutesFromElements(
       <Route path='/' element={<MainLayout />}>
         <Route index element={<HomePage />} />
+        <Route path='/:id/:title' element={<MovieDetails />} />
       </Route>
     )
   );

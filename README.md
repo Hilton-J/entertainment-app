@@ -26,6 +26,7 @@ This project uses the following main packages:
 - **ESLint**
 - **TailwindCSS** : npm install -D tailwindcss postcss autoprefixer
 - **React-Icons** : npm i react-icons --save
+- **React-Tostify** : npm i --save react-toastify
 
 ### APIs Used
 
