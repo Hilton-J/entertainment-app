@@ -9,7 +9,7 @@ const DrawerNavBar = ({ isMenuOpen, toggleMenu, linkClass }) => {
       <Drawer
         open={isMenuOpen}
         onClose={toggleMenu}
-        direction='right'
+        direction='left'
         className='bg-slate-900 p-4'
       >
         <input type="text" placeholder="Search" id="search" className="bg-transparent text-blue-600 border border-blue-600 px-6 p-2 rounded-full text-sm md:text-base w-full" />
@@ -18,10 +18,10 @@ const DrawerNavBar = ({ isMenuOpen, toggleMenu, linkClass }) => {
             <NavLink to={"/"} onClick={toggleMenu} className={({ isActive }) => `${linkClass({ isActive })} hover:text-blue-500`}>HOME</NavLink>
           </li>
           <li>
-            <NavLink to={"/now-playing"} onClick={toggleMenu} className={({ isActive }) => `${linkClass({ isActive })} hover:text-blue-500`}>NOW PLAYING</NavLink>
+            <NavLink to={"/movies"} onClick={toggleMenu} className={({ isActive }) => `${linkClass({ isActive })} hover:text-blue-500`}>MOVIES</NavLink>
           </li>
           <li>
-            <NavLink to={"/popular"} onClick={toggleMenu} className={({ isActive }) => `${linkClass({ isActive })} hover:text-blue-500`}>POPULAR</NavLink>
+            <NavLink to={"/tv-shows"} onClick={toggleMenu} className={({ isActive }) => `${linkClass({ isActive })} hover:text-blue-500`}>POPULAR</NavLink>
           </li>
           <li>
             <NavLink to={"/tv-shows"} onClick={toggleMenu} className={({ isActive }) => `${linkClass({ isActive })} hover:text-blue-500`}>TV SHOWS</NavLink>
