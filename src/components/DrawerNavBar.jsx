@@ -12,6 +12,7 @@ const DrawerNavBar = ({ isMenuOpen, toggleMenu, linkClass }) => {
         direction='right'
         className='bg-slate-900 p-4'
       >
+        <input type="text" placeholder="Search" id="search" className="bg-transparent text-blue-600 border border-blue-600 px-6 p-2 rounded-full text-sm md:text-base w-full" />
         <ul className="flex flex-col gap-4 items-center">
           <li className="m-0">
             <NavLink to={"/"} onClick={toggleMenu} className={({ isActive }) => `${linkClass({ isActive })} hover:text-blue-500`}>HOME</NavLink>
@@ -35,7 +36,7 @@ const DrawerNavBar = ({ isMenuOpen, toggleMenu, linkClass }) => {
 DrawerNavBar.propTypes = {
   isMenuOpen: PropTypes.bool,
   toggleMenu: PropTypes.func,
-  linkClass: PropTypes.string
+  linkClass: PropTypes.func
 };
 
 export default DrawerNavBar
