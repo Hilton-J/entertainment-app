@@ -26,7 +26,8 @@ const Movies = () => {
   return (
     <section className=" h-screen">
       <div className="container mx-auto">
-        <div className="grid grid-cols-8 gap-3">
+        <div className="flex flex-wrap gap-3">
+          <h2>LATEST MOVIES</h2>
           {movieList.map((movie) => (
             <div key={movie.id} className="bg-white shadow-md overflow-hidden h-full ">
               <div>

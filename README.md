@@ -27,6 +27,7 @@ This project uses the following main packages:
 - **TailwindCSS** : npm install -D tailwindcss postcss autoprefixer
 - **React-Icons** : npm i react-icons --save
 - **React-Tostify** : npm i --save react-toastify
+- **React-Modern-Drawer** : npm i react-modern-drawer
 
 ### APIs Used
 
