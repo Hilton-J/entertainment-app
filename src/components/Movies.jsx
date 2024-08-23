@@ -1,44 +1,96 @@
 import PropTypes from 'prop-types'
 import { useState, useEffect } from "react"
 import Listing from './Listing'
+import ReactPaginate from 'react-paginate';
+import Spinner from './Spinner';
 
 const Movies = ({ isHome = false }) => {
-
   const [movieList, setMovieList] = useState([]);
-  // const [searchQuery, setSearchQuery] = useState('');
-  // const [filteredMovies, setFilteredMovies] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 18;
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      const url = 'https://api.themoviedb.org/3/discover/movie?api_key=5db68074253f9e17fefb439ca8ab3682';
+    const fetchAllMovies = async () => {
+      let allMovies = [];
+      let page = 1;
+      let totalPages = 1;
 
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-        const limited = (isHome ? data.results.slice(0, 8) : data.results);
-        setMovieList(limited);
-      } catch (error) {
-        console.log('Error fetching data', error)
-      }
+      while (page <= totalPages) {
+        const url = `https://api.themoviedb.org/3/discover/movie?api_key=5db68074253f9e17fefb439ca8ab3682&page=${page}`;
+
+        try {
+          const res = await fetch(url);
+          const data = await res.json();
+
+          allMovies = [...allMovies, ...data.results];
+          totalPages = 200;
+          page++;
+        } catch (error) {
+          console.log('Error fetching data', error);
+          break;
+        }
+      };
+
+      const limited = isHome ? allMovies.slice(0, 6) : allMovies;
+      setMovieList(limited);
+      setLoading(false);
     };
-    fetchMovies();
+
+    fetchAllMovies();
   }, [isHome]);
 
+  // Filter TV Shows based on search query
+  const filteredMovies = movieList.filter((movie) => {
+    const title = (movie.title || movie.name || '').toLowerCase();
+    const search = (searchQuery || '').toLowerCase();
+    return search === '' ? movie : title.includes(search);
+  });
+
+  // Pagination logic
+  const pageCount = Math.ceil(filteredMovies.length / itemsPerPage);
+  const currentMovies = filteredMovies.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+
+  const handlePageClick = (e) => {
+    setCurrentPage(e.selected);
+  };
+
   return (
-    <section className="">
-      <div className="container mx-auto">
-        {/* <input type="text" placeholder="Search" id="search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="bg-transparent text-blue-600 border border-blue-600 px-6 p-2 rounded-full text-sm md:text-base lg:w-80" /> */}
-        <>
-          <h2>LATEST MOVIES</h2>
-          <div className="grid grid-cols-4 gap-3">
-            {movieList.map((movie) => (
+    <section className="px-4 py-10">
+      <div className="container m-auto flex justify-center">
+        <div className='w-[70%]'>
+          <input type="text" placeholder="Search" id="search" className="bg-transparent text-black border border-blue-600 px-6 py-2 rounded-full text-sm md:text-base lg:w-80"
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <h2 className="text-4xl font-bold mb-5 text-center">LATEST MOVIES</h2>
+          {loading ? (<Spinner />) : (<div className="grid  md:grid-cols-3 gap-3 justify-center">
+            {currentMovies.map((movie) => (
               <Listing key={movie.id} list={movie} />
             ))}
-          </div>
-        </>
+          </div>)}
+          {!isHome && (
+            <div>
+              <ReactPaginate
+                previousLabel='<'
+                nextLabel='>'
+                breakLabel='...'
+                renderOnZeroPageCount={null}
+                pageCount={pageCount}
+                marginPagesDisplayed={3}
+                pageRangeDisplayed={6}
+                onPageChange={handlePageClick}
+                containerClassName="flex justify-center mt-6 space-x-2"
+                activeClassName="bg-blue-500 text-white px-3 py-1 rounded"
+                disabledClassName="text-gray-400"
+                pageClassName="px-3 py-1 rounded border border-gray-300 cursor-pointer hover:bg-gray-200"
+                previousClassName="px-3 py-1 rounded border border-gray-300 cursor-pointer hover:bg-gray-200"
+                nextClassName="px-3 py-1 rounded border border-gray-300 cursor-pointer hover:bg-gray-200"
+                breakClassName="px-3 py-1 rounded border border-gray-300 cursor-pointer hover:bg-gray-200"
+              />
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )
@@ -49,3 +101,4 @@ Movies.propTypes = {
 };
 
 export default Movies
+

@@ -28,6 +28,8 @@ This project uses the following main packages:
 - **React-Icons** : npm i react-icons --save
 - **React-Tostify** : npm i --save react-toastify
 - **React-Modern-Drawer** : npm i react-modern-drawer
+- **React-Pagination** : npm i react-paginate --save
+- **React-Spinners** : npm i react-spinners --save
 
 ### APIs Used
 

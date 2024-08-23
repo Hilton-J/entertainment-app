@@ -10,6 +10,6 @@ const MainLayout = () => {
       <ToastContainer />
     </>
   )
-}
+};
 
 export default MainLayout
