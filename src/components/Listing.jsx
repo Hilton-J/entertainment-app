@@ -6,20 +6,18 @@ const Listing = ({ list }) => {
 
   const rating = list.vote_average.toFixed(2);
   return (
-    <div key={list.id} className="bg-white shadow-md overflow-hidden">
-      <div className='grid grid-rows-[1fr_auto0] rounded-lg overflow-hidden shadow-lg bg-white relative h-full'>
-        <Link to={`/${list.title}/${list.id}`}><img src={`https://image.tmdb.org/t/p/w500${list.poster_path}`} alt={list.title} className=' w-full object-cover transform transition-transform hover:scale-105 ' /></Link>
-        <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">{list.title || list.name}</div>
-          <div className='flex gap-1 items-center rounded-r-full px-3 py-1 text-xs font-semibold text-green-700 mr-2  absolute top-10 left-0 bg-slate-900 opacity-[0.86]'><IoStar />
-            <span>
-              {rating}
-            </span>
-          </div>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-            Release Date: {list.release_date || list.first_air_date}
+    <div key={list.id} className='grid grid-rows-subgrid row-span-2 rounded-lg overflow-hidden shadow-lg bg-white relative h-full'>
+      <Link to={`/${list.title}/${list.id}`}><img src={`https://image.tmdb.org/t/p/w500${list.poster_path}`} alt={list.title} className=' w-full h-full object-cover transform transition-transform hover:scale-105 ' /></Link>
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">{list.title || list.name}</div>
+        <div className='flex gap-1 items-center rounded-r-full px-3 py-1 text-xs font-semibold text-green-700 mr-2  absolute top-10 left-0 bg-slate-900 opacity-[0.86]'><IoStar />
+          <span>
+            {rating}
           </span>
         </div>
+        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+          Release Date: {list.release_date || list.first_air_date}
+        </span>
       </div>
     </div>
   )

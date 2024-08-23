@@ -9,7 +9,7 @@ const TVShows = ({ isHome = false }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(true);
-  const itemsPerPage = 18;
+  const itemsPerPage = 17;
 
   useEffect(() => {
     const fetchAllTVShows = async () => {
@@ -25,7 +25,7 @@ const TVShows = ({ isHome = false }) => {
           const data = await res.json();
 
           allShows = [...allShows, ...data.results];
-          totalPages = 200;
+          totalPages = 100;
           page++;
         } catch (error) {
           console.log('Error fetching data', error);
@@ -63,12 +63,12 @@ const TVShows = ({ isHome = false }) => {
           <input
             type="text"
             placeholder="Search"
-            id="search"
+            id="searchTv"
             className="bg-transparent text-black border border-blue-600 px-6 py-2 rounded-full text-sm md:text-base lg:w-80"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <h2 className="text-4xl font-bold mb-5 text-center">LATEST TV SHOWS</h2>
-          {loading ? (<Spinner />) : (<div className="grid md:grid-cols-3 gap-3 justify-center">
+          {loading ? (<Spinner />) : (<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 justify-center">
             {currentShows.map((tvShow) => (
               <Listing key={tvShow.id} list={tvShow} />
             ))}

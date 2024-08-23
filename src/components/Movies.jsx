@@ -9,7 +9,7 @@ const Movies = ({ isHome = false }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 18;
+  const itemsPerPage = 11;
 
   useEffect(() => {
     const fetchAllMovies = async () => {
@@ -25,7 +25,7 @@ const Movies = ({ isHome = false }) => {
           const data = await res.json();
 
           allMovies = [...allMovies, ...data.results];
-          totalPages = 200;
+          totalPages = 100;
           page++;
         } catch (error) {
           console.log('Error fetching data', error);
@@ -60,11 +60,11 @@ const Movies = ({ isHome = false }) => {
     <section className="px-4 py-10">
       <div className="container m-auto flex justify-center">
         <div className='w-[70%]'>
-          <input type="text" placeholder="Search" id="search" className="bg-transparent text-black border border-blue-600 px-6 py-2 rounded-full text-sm md:text-base lg:w-80"
+          <input type="text" placeholder="Search" id="searchMov" className="bg-transparent text-black border border-blue-600 px-6 py-2 rounded-full text-sm md:text-base lg:w-80"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <h2 className="text-4xl font-bold mb-5 text-center">LATEST MOVIES</h2>
-          {loading ? (<Spinner />) : (<div className="grid  md:grid-cols-3 gap-3 justify-center">
+          {loading ? (<Spinner />) : (<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 justify-center">
             {currentMovies.map((movie) => (
               <Listing key={movie.id} list={movie} />
             ))}
