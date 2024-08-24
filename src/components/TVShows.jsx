@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import Listing from './Listing';
 import Spinner from './Spinner';
 import CustomPagination from './CustomPagination';
+import Genres from './Genres';
 
 const TVShows = () => {
   const [tvShowList, setTVShowList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     const fetchTVShows = async () => {
@@ -57,6 +60,14 @@ const TVShows = () => {
       <div className="container m-auto flex justify-center">
         <div className='w-[70%]'>
           <h2 className="text-4xl font-bold mb-5 text-center">LATEST TV SHOWS</h2>
+          <Genres
+            type='tv'
+            selectedGenres={selectedGenres}
+            setSelectedGenres={setSelectedGenres}
+            genres={genres}
+            setGenres={setGenres}
+            setCurrentPage={setCurrentPage}
+          />
           {loading ? (<Spinner />) : (<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3 justify-center">
             {tvShowList.map((tvShow) => (
               <Listing key={tvShow.id} list={tvShow} type={'TV Show'} />

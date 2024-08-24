@@ -1,13 +1,11 @@
 import { Pagination } from "@mui/material";
 import PropTypes from 'prop-types'
 
-const CustomPagination = ({ setCurrentPage, numberOfPages = 10 }) => {
+const CustomPagination = ({ setCurrentPage, numberOfPages = 100 }) => {
   const handlePageClick = (page) => {
     setCurrentPage(page);
     window.scroll(0, 0);
   };
-
-
 
   return (
     <div className="w-full flex justify-center mt-7">
@@ -26,7 +24,8 @@ const CustomPagination = ({ setCurrentPage, numberOfPages = 10 }) => {
               color: 'white',          // Changes the text color when selected
             },
           },
-        }} />
+        }}
+        className="space-x-2" />
 
     </div>
   )

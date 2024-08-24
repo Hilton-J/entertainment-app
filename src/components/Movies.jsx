@@ -4,17 +4,19 @@ import { useState, useEffect } from "react"
 import Listing from './Listing'
 import Spinner from './Spinner';
 import CustomPagination from './CustomPagination';
+import Genres from './Genres';
 
 const Movies = () => {
   const [movieList, setMovieList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
       const apiKey = import.meta.env.VITE_API_KEY;
       const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${currentPage}`);
-      console.log(data);
       setMovieList(data.results);
       setLoading(false);
     };
@@ -72,6 +74,14 @@ const Movies = () => {
       <div className="container m-auto flex justify-center">
         <div className='w-[70%]'>
           <h2 className="text-4xl font-bold mb-5 text-center">LATEST MOVIES</h2>
+          <Genres
+            type='movie'
+            selectedGenres={selectedGenres}
+            setSelectedGenres={setSelectedGenres}
+            genres={genres}
+            setGenres={setGenres}
+            setCurrentPage={setCurrentPage}
+          />
           {loading ? (<Spinner />) : (<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3 justify-center">
             {movieList.map((movie) => (
               <Listing key={movie.id} list={movie} type={'Movie'} />
