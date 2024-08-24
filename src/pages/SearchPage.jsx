@@ -12,6 +12,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     const fetchSearch = async () => {
+      window.scroll(0, 0);
       const apiKey = import.meta.env.VITE_API_KEY;
       const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${currentPage}&include_adult=false`);
       console.log(data);
@@ -32,8 +33,9 @@ const SearchPage = () => {
             {searchList.map((movie) => (
               <Listing key={movie.id} list={movie} type={'Movie'} />
             ))}
+
+            {searchList.length > 1 && <CustomPagination setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} />}
           </div>
-          {searchList.length > 1 && <CustomPagination setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} />}
         </div>
       </div>
     </section>
