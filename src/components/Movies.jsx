@@ -5,6 +5,7 @@ import Listing from './Listing'
 import Spinner from './Spinner';
 import CustomPagination from './CustomPagination';
 import Genres from './Genres';
+import useGenres from '../Hooks/useGenres';
 
 const Movies = () => {
   const [movieList, setMovieList] = useState([]);
@@ -12,16 +13,17 @@ const Movies = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [genres, setGenres] = useState([]);
+  const genreURL = useGenres(selectedGenres);
 
   useEffect(() => {
     const fetchMovies = async () => {
       const apiKey = import.meta.env.VITE_API_KEY;
-      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${currentPage}`);
+      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${currentPage}&with_genres=${genreURL}`);
       setMovieList(data.results);
       setLoading(false);
     };
     fetchMovies();
-  }, [currentPage]);
+  }, [currentPage, genreURL]);
 
   // useEffect(() => {
   //   const fetchAllMovies = async () => {

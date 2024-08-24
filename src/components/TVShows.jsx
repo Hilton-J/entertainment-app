@@ -5,6 +5,7 @@ import Listing from './Listing';
 import Spinner from './Spinner';
 import CustomPagination from './CustomPagination';
 import Genres from './Genres';
+import useGenres from '../Hooks/useGenres';
 
 const TVShows = () => {
   const [tvShowList, setTVShowList] = useState([]);
@@ -12,17 +13,19 @@ const TVShows = () => {
   const [loading, setLoading] = useState(true);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [genres, setGenres] = useState([]);
+  const genreURL = useGenres(selectedGenres);
+
 
   useEffect(() => {
     const fetchTVShows = async () => {
       const apiKey = import.meta.env.VITE_API_KEY;
-      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${currentPage}`);
+      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${currentPage}&with_genres=${genreURL}`);
       console.log(data);
       setTVShowList(data.results);
       setLoading(false);
     };
     fetchTVShows();
-  }, [currentPage]);
+  }, [currentPage, genreURL]);
 
   // useEffect(() => {
   //   const fetchAllTVShows = async () => {
