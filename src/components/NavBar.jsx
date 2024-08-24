@@ -21,8 +21,9 @@ const NavBar = () => {
         <div className="md:flex hidden items-center gap-4 lg:gap-8">
 
           <ul className="flex md:flex-row flex-col gap-4 lg:gap-8 items-center">
-
-
+            <li>
+              <NavLink to={"/search"} className={({ isActive }) => `${linkClass({ isActive })} hover:text-blue-500`}>SEARCH</NavLink>
+            </li>
             <li>
               <NavLink to={"/movies"} className={({ isActive }) => `${linkClass({ isActive })} hover:text-blue-500`}>MOVIES</NavLink>
             </li>

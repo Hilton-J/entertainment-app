@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import MoviesPage from './pages/MoviesPage';
 import TVShowsPage from './pages/TVShowsPage';
+import SearchPage from './pages/SearchPage';
 
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
         <Route index element={<HomePage />} />
         <Route path='/movies' element={<MoviesPage />} />
         <Route path='/tv-shows' element={<TVShowsPage />} />
+        <Route path='/search' element={<SearchPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     )
