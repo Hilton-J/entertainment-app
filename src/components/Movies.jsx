@@ -74,8 +74,8 @@ const Movies = () => {
   return (
     <section className="px-4 py-10">
       <div className="container m-auto flex justify-center">
-        <div className='w-[70%]'>
-          <h2 className="text-4xl font-bold mb-5 text-center">LATEST MOVIES</h2>
+        <div className='lg:w-[70%]'>
+          <h2 className="text-2xl md:text-4xl font-bold mb-5 text-center">LATEST MOVIES</h2>
           <Genres
             type='movie'
             selectedGenres={selectedGenres}
@@ -84,7 +84,7 @@ const Movies = () => {
             setGenres={setGenres}
             setCurrentPage={setCurrentPage}
           />
-          {loading ? (<Spinner />) : (<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3 justify-center">
+          {loading ? (<Spinner />) : (<div className="grid sm:grid-cols-3 lg:grid-cols-4 gap-3 justify-center">
             {movieList.map((movie) => (
               <Listing key={movie.id} list={movie} type={'Movie'} />
             ))}

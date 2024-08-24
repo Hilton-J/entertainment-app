@@ -23,11 +23,11 @@ const Trending = () => {
 
 
   return (
-    <section className="py-10">
+    <section className="py-10 px-4">
       <div className="container m-auto flex justify-center">
-        <div className='w-[70%]'>
-          <h2 className="text-4xl font-bold mb-5 text-center">TRENDING</h2>
-          {loading ? (<Spinner />) : (<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3 justify-center">
+        <div className='lg:w-[70%]'>
+          <h2 className="text-2xl md:text-4xl font-bold mb-5 text-center">TRENDING</h2>
+          {loading ? (<Spinner />) : (<div className="grid sm:grid-cols-3 lg:grid-cols-4 gap-3 justify-center">
             {content.map((movie) => (
               <Listing key={movie.id} list={movie} type={movie.media_type === "tv" ? "TV Show" : "Movie"} />
             ))}

@@ -1,7 +1,7 @@
 import { Pagination } from "@mui/material";
 import PropTypes from 'prop-types'
 
-const CustomPagination = ({ setCurrentPage, numberOfPages = 100 }) => {
+const CustomPagination = ({ setCurrentPage, numberOfPages = 10 }) => {
   const handlePageClick = (page) => {
     setCurrentPage(page);
     window.scroll(0, 0);

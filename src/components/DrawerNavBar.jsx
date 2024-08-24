@@ -12,8 +12,10 @@ const DrawerNavBar = ({ isMenuOpen, toggleMenu, linkClass }) => {
         direction='left'
         className='bg-slate-900 p-4'
       >
-        <input type="text" placeholder="Search" id="search" className="bg-transparent text-blue-600 border border-blue-600 px-6 p-2 rounded-full text-sm md:text-base w-full" />
-        <ul className="flex flex-col gap-4 items-center">
+        <ul className="flex flex-col gap-4 items-start mb-auto">
+          <li>
+            <NavLink to={"/search"} className={({ isActive }) => `${linkClass({ isActive })} hover:text-blue-500`}>SEARCH</NavLink>
+          </li>
           <li>
             <NavLink to={"/movies"} onClick={toggleMenu} className={({ isActive }) => `${linkClass({ isActive })} hover:text-blue-500`}>MOVIES</NavLink>
           </li>

@@ -62,7 +62,7 @@ const TVShows = () => {
     <section className="px-4 py-10">
       <div className="container m-auto flex justify-center">
         <div className='w-[70%]'>
-          <h2 className="text-4xl font-bold mb-5 text-center">LATEST TV SHOWS</h2>
+          <h2 className="text-2xl md:text-4xl font-bold mb-5 text-center">LATEST TV SHOWS</h2>
           <Genres
             type='tv'
             selectedGenres={selectedGenres}
