@@ -2,21 +2,44 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import { IoStar } from 'react-icons/io5';
 
-const Listing = ({ list }) => {
+const Listing = ({ list, type }) => {
 
+  let textColor;
   const rating = list.vote_average.toFixed(2);
+
+  if (rating >= 8)
+    textColor = '#57e32c';
+  else if (rating >= 6)
+    textColor = '#b7dd29';
+  else if (rating >= 4)
+    textColor = '#ffe234';
+  else if (rating >= 2)
+    textColor = '#ffa534';
+  else
+    textColor = '#ff4545';
+
   return (
-    <div key={list.id} className='grid grid-rows-subgrid row-span-2 rounded-lg overflow-hidden shadow-lg bg-white relative h-full'>
-      <Link to={`/${list.title}/${list.id}`}><img src={`https://image.tmdb.org/t/p/w500${list.poster_path}`} alt={list.title} className=' w-full h-full object-cover transform transition-transform hover:scale-105 ' /></Link>
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{list.title || list.name}</div>
-        <div className='flex gap-1 items-center rounded-r-full px-3 py-1 text-xs font-semibold text-green-700 mr-2  absolute top-10 left-0 bg-slate-900 opacity-[0.86]'><IoStar />
+    <div key={list.id} className='grid grid-rows-subgrid row-span-2 rounded-lg overflow-hidden shadow-xl hover:bg-slate-900 hover:bg-opacity-[0.86] relative h-full transform transition-transform hover:text-white px-3 py-2'>
+      <Link to={`/${list.title}/${list.id}`}><img src={list.poster_path ? `https://image.tmdb.org/t/p/w300${list.poster_path}` : 'https://www.movienewz.com/img/films/poster-holder.jpg'} alt={list.title} className=' w-full h-full object-cover rounded-lg ' /></Link>
+      <div className="px-1 flex flex-col justify-between">
+        <div className="font-bold text-xl ">{list.title || list.name}</div>
+
+        {/* ============ RATING DIV========== */}
+        <div className='flex gap-1 items-center rounded-r-full px-3 py-1 text-xs font-semibold mr-2  absolute top-10 left-0 bg-slate-900 bg-opacity-[0.86]'
+
+          style={{ color: textColor }}><IoStar />
           <span>
             {rating}
           </span>
         </div>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-          Release Date: {list.release_date || list.first_air_date}
+
+
+        <span className="flex justify-between py-1 text-l font-semibold">
+          {type}
+          <span className="flex justify-between">
+            {list.release_date || list.first_air_date}
+          </span>
+
         </span>
       </div>
     </div>
@@ -39,7 +62,8 @@ Listing.propTypes = {
     first_air_date: PropTypes.string,
     title: PropTypes.string,
     vote_average: PropTypes.number,
-  }).isRequired
+  }).isRequired,
+  type: PropTypes.string
 };
 
 export default Listing

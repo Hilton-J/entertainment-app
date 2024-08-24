@@ -18,7 +18,8 @@ const TVShows = ({ isHome = false }) => {
       let totalPages = 1;
 
       while (page <= totalPages) {
-        const url = `https://api.themoviedb.org/3/discover/tv?api_key=5db68074253f9e17fefb439ca8ab3682&page=${page}`;
+        const apiKey = import.meta.env.VITE_API_KEY;
+        const url = `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${page}`;
 
         try {
           const res = await fetch(url);
@@ -68,9 +69,9 @@ const TVShows = ({ isHome = false }) => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <h2 className="text-4xl font-bold mb-5 text-center">LATEST TV SHOWS</h2>
-          {loading ? (<Spinner />) : (<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 justify-center">
+          {loading ? (<Spinner />) : (<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3 justify-center">
             {currentShows.map((tvShow) => (
-              <Listing key={tvShow.id} list={tvShow} />
+              <Listing key={tvShow.id} list={tvShow} type={'TV Show'} />
             ))}
           </div>)}
           {!isHome && (

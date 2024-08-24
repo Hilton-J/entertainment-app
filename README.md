@@ -30,6 +30,7 @@ This project uses the following main packages:
 - **React-Modern-Drawer** : npm i react-modern-drawer
 - **React-Pagination** : npm i react-paginate --save
 - **React-Spinners** : npm i react-spinners --save
+- **AXIOS** : npm i axios
 
 ### APIs Used
 
