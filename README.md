@@ -32,6 +32,9 @@ This project uses the following main packages:
 - **React-Spinners** : npm i react-spinners --save
 - **AXIOS** : npm i axios
 - **MATERIAL UI for Pagination** : npm i @mui/material @emotion/react @emotion/styled
+- **@TAILWIND/FORMS** : npm i @tailwindcss/forms@latest
+- **@heroicons/react** : npm i @heroicons/react@latest
+
   .
 
 ### APIs Used

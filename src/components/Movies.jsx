@@ -6,6 +6,7 @@ import Spinner from './Spinner';
 import CustomPagination from './CustomPagination';
 import Genres from './Genres';
 import useGenres from '../Hooks/useGenres';
+import FilterProvider from './FilterProvider';
 
 const Movies = () => {
   const [movieList, setMovieList] = useState([]);
@@ -25,57 +26,12 @@ const Movies = () => {
     fetchMovies();
   }, [currentPage, genreURL]);
 
-  // useEffect(() => {
-  //   const fetchAllMovies = async () => {
-  //     let allMovies = [];
-  //     let page = 1;
-  //     let totalPages = 1;
-
-  //     while (page <= totalPages) {
-  //       const apiKey = import.meta.env.VITE_API_KEY;
-  //       const url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}`;
-
-  //       try {
-  //         const res = await fetch(url);
-  //         const data = await res.json();
-
-  //         allMovies = [...allMovies, ...data.results];
-  //         totalPages = 100;
-  //         page++;
-  //       } catch (error) {
-  //         console.log('Error fetching data', error);
-  //         break;
-  //       }
-  //     };
-
-  //     const limited = isHome ? allMovies.slice(0, 6) : allMovies;
-  //     setMovieList(limited);
-  //     setLoading(false);
-  //   };
-
-  //   fetchAllMovies();
-  // }, [isHome]);
-
-  // // Filter TV Shows based on search query
-  // const filteredMovies = movieList.filter((movie) => {
-  //   const title = (movie.title || movie.name || '').toLowerCase();
-  //   const search = (searchQuery || '').toLowerCase();
-  //   return search === '' ? movie : title.includes(search);
-  // });
-
-  // // Pagination logic
-  // const pageCount = Math.ceil(filteredMovies.length / itemsPerPage);
-  // const currentMovies = filteredMovies.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
-
-  // const handlePageClick = (e) => {
-  //   setCurrentPage(e.selected);
-  // };
-
   return (
     <section className="px-4 py-10">
       <div className="container m-auto flex justify-center">
         <div className='lg:w-[70%]'>
           <h2 className="text-2xl md:text-4xl font-bold mb-5 text-center">LATEST MOVIES</h2>
+          <FilterProvider />
           <Genres
             type='movie'
             selectedGenres={selectedGenres}
