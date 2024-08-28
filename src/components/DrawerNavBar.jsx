@@ -9,7 +9,7 @@ const DrawerNavBar = ({ isMenuOpen, toggleMenu, linkClass }) => {
       <Drawer
         open={isMenuOpen}
         onClose={toggleMenu}
-        direction='left'
+        direction='right'
         className='bg-slate-900 p-4'
       >
         <ul className="flex flex-col gap-4 items-start mb-auto">
