@@ -274,7 +274,7 @@ export default function Example() {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3">{/* Your content */}</div>
+              <div className="lg:col-span-3"></div>
             </div>
           </section>
         </main>
