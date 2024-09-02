@@ -19,12 +19,19 @@ const Listing = ({ list, type }) => {
     textColor = '#ff4545';
 
   return (
-    <div key={list.id} className='grid grid-rows-subgrid row-span-3 rounded-lg overflow-hidden shadow-xl hover:bg-slate-900 hover:bg-opacity-[0.86] relative h-full transform transition-transform hover:text-white px-3 py-2'>
-      <Link to={`/${list.title}/${list.id}`}><img src={list.poster_path ? `https://image.tmdb.org/t/p/w300${list.poster_path}` : 'https://www.movienewz.com/img/films/poster-holder.jpg'} alt={list.title || list.name} className=' w-full h-full object-cover rounded-lg ' /></Link>
+    <div key={list.id} className='grid grid-rows-subgrid row-span-3 rounded-lg overflow-hidden shadow-xl hover:bg-slate-900 hover:bg-opacity-95 relative h-full transform transition-transform hover:text-white px-3 py-2'>
+      <Link to={`/${list.title}/${list.id}`}>
+        <img
+          src={list.poster_path ?
+            `https://image.tmdb.org/t/p/w300${list.poster_path}`
+            :
+            'https://www.movienewz.com/img/films/poster-holder.jpg'}
+          alt={list.title || list.name}
+          className='w-full h-full object-cover rounded-lg' />
+      </Link>
 
       {/* ============ RATING DIV========== */}
       <div className='flex gap-1 items-center rounded-r-full px-3 py-1 text-xs font-semibold mr-2  absolute top-10 left-0 bg-slate-900 bg-opacity-[0.86]'
-
         style={{ color: textColor }}><IoStar />
         <span>
           {rating}
