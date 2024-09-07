@@ -86,7 +86,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Example({ children }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
   return (
@@ -170,7 +170,7 @@ export default function Example() {
         </Dialog>
 
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
 
             <div className="flex items-center">
@@ -227,7 +227,7 @@ export default function Example() {
               Products
             </h2>
 
-            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+            <div className="grid gap-x-4 lg:grid-cols-4">
               {/* Filters */}
               <form className="hidden lg:block">
                 <h3 className="sr-only">Categories</h3>
@@ -274,7 +274,9 @@ export default function Example() {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3"></div>
+              <div className="lg:col-span-3 grid grid-cols-3 gap-3">
+                {children}
+              </div>
             </div>
           </section>
         </main>

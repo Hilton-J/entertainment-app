@@ -27,7 +27,7 @@ const Listing = ({ list, type }) => {
             :
             'https://www.movienewz.com/img/films/poster-holder.jpg'}
           alt={list.title || list.name}
-          className='w-full h-full object-cover rounded-lg' />
+          className=' object-cover rounded-lg' />
       </Link>
 
       {/* ============ RATING DIV========== */}
