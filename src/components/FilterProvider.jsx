@@ -87,11 +87,11 @@ function classNames(...classes) {
 }
 
 export default function Example({ children }) {
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
     <div className="bg-white">
-      <div>
+      <div className='border-2 border-green-800'>
         {/* Mobile filter dialog */}
         <Dialog open={mobileFiltersOpen} onClose={setMobileFiltersOpen} className="relative z-40 lg:hidden">
           <DialogBackdrop
@@ -169,7 +169,7 @@ export default function Example({ children }) {
           </div>
         </Dialog>
 
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"> {/*//Main container starts */}
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
 
@@ -274,7 +274,7 @@ export default function Example({ children }) {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3 grid grid-cols-3 gap-3">
+              <div className="lg:col-span-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
                 {children}
               </div>
             </div>

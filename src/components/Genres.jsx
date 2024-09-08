@@ -12,6 +12,7 @@ const Genres = ({
   setCurrentPage
 }) => {
 
+  //FETCHES GENRES from the api
   useEffect(() => {
     const fetchGenres = async () => {
       const apiKey = import.meta.env.VITE_API_KEY;
@@ -24,8 +25,7 @@ const Genres = ({
     return () => {
       setGenres([]);
     };
-  }, [setGenres, type])
-  console.log(genres);
+  }, [])
 
   const handleGenreSelect = (genre) => {
     setSelectedGenres([...selectedGenres, genre]);
@@ -70,7 +70,7 @@ Genres.propTypes = {
   selectedGenres: PropTypes.array,
   setSelectedGenres: PropTypes.func,
   genres: PropTypes.array,
-  setGenres: PropTypes.object,
+  setGenres: PropTypes.func,
   setCurrentPage: PropTypes.func
 }
 
