@@ -19,15 +19,15 @@ const Listing = ({ list, type }) => {
     textColor = '#ff4545';
 
   return (
-    <div key={list.id} className='grid grid-rows-subgrid row-span-3 rounded-lg overflow-hidden shadow-xl hover:bg-slate-900 hover:bg-opacity-95 relative h-full transform transition-transform hover:text-white px-3 py-2'>
-      <Link to={`/${list.title}/${list.id}`}>
+    <div key={list.id} className='grid grid-rows-subgrid row-span-3 rounded-lg overflow-hidden shadow-xl relative h-full px-3 py-2'>
+      <Link to={`/${list.title}/${list.id}`} className='transition ease-in-out duration-700'>
         <img
           src={list.poster_path ?
             `https://image.tmdb.org/t/p/w300${list.poster_path}`
             :
             'https://www.movienewz.com/img/films/poster-holder.jpg'}
           alt={list.title || list.name}
-          className=' object-cover rounded-lg' />
+          className=' object-cover rounded-lg size-full' />
       </Link>
 
       {/* ============ RATING DIV========== */}
@@ -38,7 +38,7 @@ const Listing = ({ list, type }) => {
         </span>
       </div>
       <div className="font-bold text-xl ">
-        {list.title || list.name}
+        <Link to={`/${list.title}/${list.id}`} className='hover:text-blue-600'>{list.title || list.name}</Link>
       </div>
       <div className="flex flex-col justify-between">
 

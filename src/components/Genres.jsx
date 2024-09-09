@@ -25,7 +25,7 @@ const Genres = ({
     return () => {
       setGenres([]);
     };
-  }, [])
+  }, [setGenres, type])
 
   const handleGenreSelect = (genre) => {
     setSelectedGenres([...selectedGenres, genre]);
