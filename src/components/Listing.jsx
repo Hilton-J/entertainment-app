@@ -43,7 +43,7 @@ const Listing = ({ list, type }) => {
       <div className="flex flex-col justify-between">
 
         <span className="flex justify-between py-1 text-l font-semibold">
-          {type}
+          {type === 'tv' ? 'TV Show' : 'Movie'}
           <span className="flex justify-between">
             {list.release_date || list.first_air_date}
           </span>

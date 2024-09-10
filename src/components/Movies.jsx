@@ -30,18 +30,13 @@ const Movies = () => {
       const apiKey = import.meta.env.VITE_API_KEY;
       // const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}&with_genres=${genreURL}`);
       const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}`);
-      
+
       setMovieList(data.results);
       setLoading(false);
 
     };
     fetchMovies();
   }, [currentPage]);
-
-  const handlePageClick = (event) => {
-    window.scroll(0, 0);
-    setCurrentPage(event.selected + 1);
-  };
 
   return (
     <section className="px-4 py-10">
@@ -51,7 +46,7 @@ const Movies = () => {
         {loading ? (<Spinner />) : (
           <FilterProvider>
             {movieList.map((movie) => (
-              <Listing key={movie.id} list={movie} type={'Movie'} />
+              <Listing key={movie.id} list={movie} type={'movie'} />
             ))}
           </FilterProvider>)}
 
@@ -65,7 +60,7 @@ const Movies = () => {
           /> */}
 
 
-        <Paginate handlePageClick={handlePageClick} />
+        <Paginate setCurrentPage={setCurrentPage} />
       </div>
     </section>
   )

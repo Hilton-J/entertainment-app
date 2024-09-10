@@ -2,9 +2,14 @@ import ReactPaginate from 'react-paginate'
 // import { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const Paginate = ({ handlePageClick, pageCount=50 }) => {
+const Paginate = ({ setCurrentPage, pageCount = 50 }) => {
 
-  
+
+  const handlePageClick = (event) => {
+    window.scroll(0, 0);
+    setCurrentPage(event.selected + 1);
+  };
+
 
   return (
     <ReactPaginate
@@ -31,7 +36,7 @@ const Paginate = ({ handlePageClick, pageCount=50 }) => {
 };
 
 Paginate.propTypes = {
-  handlePageClick: PropTypes.func,
+  setCurrentPage: PropTypes.func,
   pageCount: PropTypes.number
 }
 
