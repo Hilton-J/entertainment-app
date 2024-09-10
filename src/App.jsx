@@ -5,6 +5,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import MoviesPage from './pages/MoviesPage';
 import TVShowsPage from './pages/TVShowsPage';
 import SearchPage from './pages/SearchPage';
+import ViewPage from './pages/ViewPage';
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/movies' element={<MoviesPage />} />
         <Route path='/tv-shows' element={<TVShowsPage />} />
         <Route path='/search' element={<SearchPage />} />
+        <Route path='/:type/:id' element={<ViewPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     )

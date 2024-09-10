@@ -13,6 +13,8 @@ const Movies = () => {
   const [movieList, setMovieList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+
+
   // const [selectedGenres, setSelectedGenres] = useState([]);
   // const [genres, setGenres] = useState([]);
   // const genreURL = useGenres(selectedGenres);
@@ -28,15 +30,16 @@ const Movies = () => {
       const apiKey = import.meta.env.VITE_API_KEY;
       // const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}&with_genres=${genreURL}`);
       const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}`);
+      
       setMovieList(data.results);
       setLoading(false);
+
     };
     fetchMovies();
   }, [currentPage]);
 
   const handlePageClick = (event) => {
-    // window.scroll(0, 0);
-    console.log(event.selected);
+    window.scroll(0, 0);
     setCurrentPage(event.selected + 1);
   };
 
@@ -62,7 +65,7 @@ const Movies = () => {
           /> */}
 
 
-        <Paginate handlePageClick={handlePageClick} pageCount={50} />
+        <Paginate handlePageClick={handlePageClick} />
       </div>
     </section>
   )

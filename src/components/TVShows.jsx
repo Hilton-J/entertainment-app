@@ -3,9 +3,9 @@ import axios from 'axios'
 import { useEffect, useState } from "react";
 import Listing from './Listing';
 import Spinner from './Spinner';
-import CustomPagination from './CustomPagination';
 import Genres from './Genres';
 import useGenres from '../Hooks/useGenres';
+import Paginate from './Paginate';
 
 const TVShows = () => {
   const [tvShowList, setTVShowList] = useState([]);
@@ -20,13 +20,18 @@ const TVShows = () => {
     const fetchTVShows = async () => {
       const apiKey = import.meta.env.VITE_API_KEY;
       const { data } = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${currentPage}&with_genres=${genreURL}`);
-      console.log(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${currentPage}&with_genres=${genreURL}`);
+      console.log(data);
       setTVShowList(data.results);
       setLoading(false);
     };
     fetchTVShows();
   }, [currentPage, genreURL]);
 
+  const handlePageClick = (event) => {
+    window.scroll(0, 0);
+    console.log(event.selected);
+    setCurrentPage(event.selected + 1);
+  };
   // useEffect(() => {
   //   const fetchAllTVShows = async () => {
   //     let allShows = [];
@@ -71,20 +76,17 @@ const TVShows = () => {
             setGenres={setGenres}
             setCurrentPage={setCurrentPage}
           />
+
           {loading ? (<Spinner />) : (<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3 justify-center">
             {tvShowList.map((tvShow) => (
-              <Listing key={tvShow.id} list={tvShow} type={'TV Show'} />
+              <Listing key={tvShow.id} list={tvShow} type={'tv'} />
             ))}
           </div>)}
-          <CustomPagination setCurrentPage={setCurrentPage} />
+          <Paginate handlePageClick={handlePageClick} />
         </div>
       </div>
     </section>
   )
 };
-
-// TVShows.propTypes = {
-//   isHome: PropTypes.bool
-// };
 
 export default TVShows;

@@ -112,7 +112,7 @@ export default function Example({ children }) {
                 onClick={() => setMobileFiltersOpen(false)}
                 className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
               >
-                <span className="sr-only">Close menu</span>
+                <span className="no-sr-only">Close menu</span>
                 <XMarkIcon aria-hidden="true" className="h-6 w-6" />
               </button>
             </div>
@@ -251,6 +251,7 @@ export default function Example({ children }) {
                       </span>
                     </DisclosureButton>
                   </h3>
+
                   <DisclosurePanel className="pt-6">
                     <div className="space-y-4">
                       {section.options.map((option, optionIdx) => (

@@ -17,7 +17,7 @@ const Genres = ({
     const fetchGenres = async () => {
       const apiKey = import.meta.env.VITE_API_KEY;
       const { data } = await axios.get(`https://api.themoviedb.org/3/genre/${type}/list?api_key=${apiKey}&language=en-US`);
-
+      // console.log(data);
       setGenres(data.genres);
     };
     fetchGenres();

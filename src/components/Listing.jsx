@@ -19,8 +19,8 @@ const Listing = ({ list, type }) => {
     textColor = '#ff4545';
 
   return (
-    <div key={list.id} className='grid grid-rows-subgrid row-span-3 rounded-lg overflow-hidden shadow-xl relative h-full px-3 py-2'>
-      <Link to={`/${list.title}/${list.id}`} className='transition ease-in-out duration-700'>
+    <div key={list.id} className='grid grid-rows-subgrid row-span-3 rounded-lg overflow-hidden shadow-xl relative h-full px-3 py-2 max-w-xs'>
+      <Link to={`/${type}/${list.id}`} className='transition ease-in-out duration-700'>
         <img
           src={list.poster_path ?
             `https://image.tmdb.org/t/p/w300${list.poster_path}`

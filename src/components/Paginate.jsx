@@ -2,8 +2,9 @@ import ReactPaginate from 'react-paginate'
 // import { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const Paginate = ({ handlePageClick, pageCount }) => {
+const Paginate = ({ handlePageClick, pageCount=50 }) => {
 
+  
 
   return (
     <ReactPaginate
