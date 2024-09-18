@@ -2,7 +2,6 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Spinner from './Spinner';
 import Listing from './Listing';
-// import CustomPagination from './CustomPagination';
 import Paginate from './Paginate';
 
 const Trending = () => {
@@ -30,11 +29,10 @@ const Trending = () => {
           <h2 className="text-2xl md:text-4xl font-bold mb-5 text-center">TRENDING</h2>
           {loading ? (<Spinner />) : (<div className="grid sm:grid-cols-3 lg:grid-cols-4 gap-3 justify-center">
             {content.map((movie) => (
-              <Listing key={movie.id} list={movie} type={movie.media_type === "tv" ? "TV Show" : "Movie"} />
+              <Listing key={movie.id} list={movie} type={movie.media_type} />
             ))}
           </div>)}
 
-          {/* <CustomPagination setCurrentPage={setCurrentPage} /> */}
           <Paginate setCurrentPage={setCurrentPage} />
         </div>
 

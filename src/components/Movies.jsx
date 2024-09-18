@@ -38,11 +38,6 @@ const Movies = () => {
     fetchMovies();
   }, [currentPage]);
 
-  // const handlePageClick = (event) => {
-  //   window.scroll(0, 0);
-  //   setCurrentPage(event.selected + 1);
-  // };
-
   return (
     <section className="px-4 py-10">
       <div className=" m-auto flex flex-col justify-center w-full">
@@ -51,7 +46,7 @@ const Movies = () => {
         {loading ? (<Spinner />) : (
           <FilterProvider>
             {movieList.map((movie) => (
-              <Listing key={movie.id} list={movie} type={'Movie'} />
+              <Listing key={movie.id} list={movie} type={'movie'} />
             ))}
           </FilterProvider>)}
 

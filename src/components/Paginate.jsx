@@ -36,6 +36,7 @@ const Paginate = ({ setCurrentPage, pageCount = 50 }) => {
 
 Paginate.propTypes = {
   setCurrentPage: PropTypes.func,
+  setCurrentPage: PropTypes.func,
   pageCount: PropTypes.number
 }
 
