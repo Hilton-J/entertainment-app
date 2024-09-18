@@ -9,11 +9,14 @@ import Spinner from './Spinner';
 import FilterProvider from './FilterProvider';
 import Paginate from './Paginate';
 
+
 const Movies = () => {
+
   const [movieList, setMovieList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-
+  // const pathName = useLocation();
+  // console.log(pathName.pathname.split('/'));
 
   // const [selectedGenres, setSelectedGenres] = useState([]);
   // const [genres, setGenres] = useState([]);
@@ -44,7 +47,7 @@ const Movies = () => {
         <h2 className="text-2xl md:text-4xl font-bold mb-5 text-center">LATEST MOVIES</h2>
 
         {loading ? (<Spinner />) : (
-          <FilterProvider>
+          <FilterProvider type={'movies'}>
             {movieList.map((movie) => (
               <Listing key={movie.id} list={movie} type={'movie'} />
             ))}

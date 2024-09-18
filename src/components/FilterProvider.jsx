@@ -1,20 +1,6 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import {
   Dialog,
   DialogBackdrop,
@@ -30,8 +16,9 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import PropTypes from 'prop-types'
+import { GenreContext } from '../contexts/GenreContext'
 
-const sortOptions = [
+const sortSections = [
   { name: 'Most Popular', href: '#', current: true },
   { name: 'Best Rating', href: '#', current: false },
   { name: 'Newest', href: '#', current: false },
@@ -46,11 +33,12 @@ const subCategories = [
   { name: 'Laptop Sleeves', href: '#' },
 ]
 
+//Sidebar filter
 const filters = [
   {
     id: 'color',
     name: 'Color',
-    options: [
+    sections: [
       { value: 'white', label: 'White', checked: false },
       { value: 'beige', label: 'Beige', checked: false },
       { value: 'blue', label: 'Blue', checked: true },
@@ -62,7 +50,7 @@ const filters = [
   {
     id: 'category',
     name: 'Category',
-    options: [
+    sections: [
       { value: 'new-arrivals', label: 'New Arrivals', checked: false },
       { value: 'sale', label: 'Sale', checked: false },
       { value: 'travel', label: 'Travel', checked: true },
@@ -73,7 +61,7 @@ const filters = [
   {
     id: 'size',
     name: 'Size',
-    options: [
+    sections: [
       { value: '2l', label: '2L', checked: false },
       { value: '6l', label: '6L', checked: false },
       { value: '12l', label: '12L', checked: false },
@@ -84,13 +72,32 @@ const filters = [
   },
 ]
 
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example({ children }) {
+
+
+export default function FilterProvider({ children, type }) {
+
+  const { tvGenres, movieGenres, selectedGenres, setSelectedGenres } = useContext(GenreContext);
+  // const [selectedGenres, setSelectedGenres] = useState([]);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
+  const handleSelected = (e) => {
+    const genreId = parseInt(e.target.id);
+
+    if (e.target.checked) {
+      // If checkbox is checked, add the genre to the selected array
+      setSelectedGenres((prevSelectedGenres) => [...prevSelectedGenres, genreId]);
+    } else {
+      // If unchecked, remove the genre from the selected array
+      setSelectedGenres((prevSelectedGenres) => prevSelectedGenres.filter(id => id !== genreId));
+    }
+  };
+
+  console.log(selectedGenres);
   return (
     <div className="bg-white">
       {/* Mobile filter dialog */}
@@ -143,21 +150,21 @@ export default function Example({ children }) {
                   </h3>
                   <DisclosurePanel className="pt-6">
                     <div className="space-y-6">
-                      {section.options.map((option, optionIdx) => (
-                        <div key={option.value} className="flex items-center">
+                      {section.sections.map((section, sectionIdx) => (
+                        <div key={section.value} className="flex items-center">
                           <input
-                            defaultValue={option.value}
-                            defaultChecked={option.checked}
-                            id={`filter-mobile-${section.id}-${optionIdx}`}
+                            defaultValue={section.value}
+                            defaultChecked={section.checked}
+                            id={`filter-mobile-${section.id}-${sectionIdx}`}
                             name={`${section.id}[]`}
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                           />
                           <label
-                            htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
+                            htmlFor={`filter-mobile-${section.id}-${sectionIdx}`}
                             className="ml-3 min-w-0 flex-1 text-gray-500"
                           >
-                            {option.label}
+                            {section.label}
                           </label>
                         </div>
                       ))}
@@ -191,16 +198,16 @@ export default function Example({ children }) {
                 className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
               >
                 <div className="py-1">
-                  {sortOptions.map((option) => (
-                    <MenuItem key={option.name}>
+                  {sortSections.map((section) => (
+                    <MenuItem key={section.name}>
                       <a
-                        href={option.href}
+                        href={section.href}
                         className={classNames(
-                          option.current ? 'font-medium text-gray-900' : 'text-gray-500',
+                          section.current ? 'font-medium text-gray-900' : 'text-gray-500',
                           'block px-4 py-2 text-sm data-[focus]:bg-gray-100',
                         )}
                       >
-                        {option.name}
+                        {section.name}
                       </a>
                     </MenuItem>
                   ))}
@@ -208,71 +215,76 @@ export default function Example({ children }) {
               </MenuItems>
             </Menu>
 
-            <button type="button" className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
-              <span className="sr-only">View grid</span>
-              <Squares2X2Icon aria-hidden="true" className="h-5 w-5" />
-            </button>
+
             <button
               type="button"
               onClick={() => setMobileFiltersOpen(true)}
               className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
             >
-              <span className="sr-only">Filters</span>
-              <FunnelIcon aria-hidden="true" className="h-5 w-5" />
+              <span className="no-sr-only">Filters</span>
+              <FunnelIcon aria-hidden="true" className="h-5 w-5 text-slate-900" />
             </button>
           </div>
         </div>
 
+        {/* =================================== Sidebar =================================== */}
         <section aria-labelledby="products-heading" className="pb-24 pt-6">
-          <h2 id="products-heading" className="sr-only">
-            Products
-          </h2>
-
           <div className="grid gap-x-4 lg:grid-cols-4">
             {/* Filters */}
             <form className="hidden lg:block">
-              <h3 className="sr-only">Categories</h3>
-              <ul role="list" className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
-                {subCategories.map((category) => (
-                  <li key={category.name}>
-                    <a href={category.href}>{category.name}</a>
-                  </li>
-                ))}
-              </ul>
+              {/* =========================== Categories ======================== */}
+              <h3 className="no-sr-only">Categories</h3>
 
-              {filters.map((section) => (
-                <Disclosure key={section.id} as="div" className="border-b border-gray-200 py-6">
-                  <h3 className="-my-3 flow-root">
-                    <DisclosureButton className="group flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                      <span className="font-medium text-gray-900">{section.name}</span>
-                      <span className="ml-6 flex items-center">
-                        <PlusIcon aria-hidden="true" className="h-5 w-5 group-data-[open]:hidden" />
-                        <MinusIcon aria-hidden="true" className="h-5 w-5 [.group:not([data-open])_&]:hidden" />
-                      </span>
-                    </DisclosureButton>
-                  </h3>
 
-                  <DisclosurePanel className="pt-6">
+              <Disclosure as="div" className="border-b border-gray-200 py-6">
+                <h3 className="-my-3 flow-root">
+                  <DisclosureButton className="group flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                    <span className="font-medium text-gray-900">Genres</span>
+                    <span className="ml-6 flex items-center">
+                      <PlusIcon aria-hidden="true" className="h-5 w-5 group-data-[open]:hidden" />
+                      <MinusIcon aria-hidden="true" className="h-5 w-5 [.group:not([data-open])_&]:hidden" />
+                    </span>
+                  </DisclosureButton>
+                </h3>
+
+                {type === 'movies' ? movieGenres.map((section, sectionIdx) => (
+                  <DisclosurePanel className="pt-6" key={section.id}>
                     <div className="space-y-4">
-                      {section.options.map((option, optionIdx) => (
-                        <div key={option.value} className="flex items-center">
-                          <input
-                            defaultValue={option.value}
-                            defaultChecked={option.checked}
-                            id={`filter-${section.id}-${optionIdx}`}
-                            name={`${section.id}[]`}
-                            type="checkbox"
-                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                          />
-                          <label htmlFor={`filter-${section.id}-${optionIdx}`} className="ml-3 text-sm text-gray-600">
-                            {option.label}
-                          </label>
-                        </div>
-                      ))}
+                      <div className="flex items-center">
+                        <input
+                          defaultValue={section.value}
+                          id={section.id}
+                          name={`${section.id}[]`}
+                          type="checkbox"
+                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          onChange={handleSelected}
+                        />
+                        <label htmlFor={`filter-${section.id}-${sectionIdx}`} className="ml-3 text-sm text-gray-600">
+                          {section.name}
+                        </label>
+                      </div>
                     </div>
                   </DisclosurePanel>
-                </Disclosure>
-              ))}
+                )) : tvGenres.map((section, sectionIdx) => (
+                  <DisclosurePanel className="pt-6" key={section.id}>
+                    <div className="space-y-4">
+                      <div className="flex items-center">
+                        <input
+                          defaultValue={section.value}
+                          id={section.id}
+                          name={`${section.id}[]`}
+                          type="checkbox"
+                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          onChange={handleSelected}
+                        />
+                        <label htmlFor={`filter-${section.id}-${sectionIdx}`} className="ml-3 text-sm text-gray-600">
+                          {section.name}
+                        </label>
+                      </div>
+                    </div>
+                  </DisclosurePanel>
+                ))}
+              </Disclosure>
             </form>
 
             {/* Product grid */}
@@ -286,6 +298,6 @@ export default function Example({ children }) {
   )
 };
 
-Example.propTypes = {
+FilterProvider.propTypes = {
   children: PropTypes.node
 }

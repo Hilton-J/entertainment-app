@@ -8,12 +8,16 @@ import useGenres from '../Hooks/useGenres';
 import Paginate from './Paginate';
 
 const TVShows = () => {
+
+
   const [tvShowList, setTVShowList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [genres, setGenres] = useState([]);
   const genreURL = useGenres(selectedGenres);
+
+  console.log(genreURL);
 
 
   useEffect(() => {

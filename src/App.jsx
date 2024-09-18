@@ -6,6 +6,7 @@ import MoviesPage from './pages/MoviesPage';
 import TVShowsPage from './pages/TVShowsPage';
 import SearchPage from './pages/SearchPage';
 import ViewPage from './pages/ViewPage';
+import { GenreProvider } from './contexts/GenreContext';
 
 
 const App = () => {
@@ -23,7 +24,12 @@ const App = () => {
     )
   );
 
-  return <RouterProvider router={router} />
+  return (
+    <GenreProvider>
+      <RouterProvider router={router} />
+    </GenreProvider>
+
+  )
 };
 
 export default App
