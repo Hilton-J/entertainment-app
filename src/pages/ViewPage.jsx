@@ -51,9 +51,9 @@ const ViewPage = () => {
   )
 };
 
-
 ViewPage.propTypes = {
   deleteItem: PropTypes.func,
   editItem: PropTypes.func
 };
+
 export default ViewPage

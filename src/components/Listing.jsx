@@ -37,12 +37,12 @@ const Listing = ({ list, type }) => {
           {rating}
         </span>
       </div>
-      <div className="font-bold text-xl ">
+      {/* <div className="font-bold text-xl ">
         <Link to={`/${list.title}/${list.id}`} className='hover:text-blue-600'>{list.title || list.name}</Link>
-      </div>
+      </div> */}
       <div className="flex flex-col justify-between">
 
-        <span className="flex justify-between py-1 text-l font-semibold">
+        <span className="flex justify-between py-1 text-lg font-semibold">
           {type}
           <span className="flex justify-between">
             {list.release_date || list.first_air_date}

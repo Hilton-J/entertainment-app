@@ -3,7 +3,9 @@ import Movies from "../components/Movies"
 
 const MoviesPage = () => {
   return (
-    <><Movies /></>
+    <>
+      <Movies />
+    </>
   )
 }
 

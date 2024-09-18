@@ -2,7 +2,9 @@ import TVShows from '../components/TVShows'
 
 const TVShowsPage = () => {
   return (
-    <><TVShows /></>
+    <>
+      <TVShows />
+    </>
   )
 }
 

@@ -2,7 +2,8 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Spinner from './Spinner';
 import Listing from './Listing';
-import CustomPagination from './CustomPagination';
+// import CustomPagination from './CustomPagination';
+import Paginate from './Paginate';
 
 const Trending = () => {
 
@@ -33,7 +34,8 @@ const Trending = () => {
             ))}
           </div>)}
 
-          <CustomPagination setCurrentPage={setCurrentPage} />
+          {/* <CustomPagination setCurrentPage={setCurrentPage} /> */}
+          <Paginate setCurrentPage={setCurrentPage} />
         </div>
 
       </div>

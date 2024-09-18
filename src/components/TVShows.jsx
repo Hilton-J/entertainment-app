@@ -27,11 +27,7 @@ const TVShows = () => {
     fetchTVShows();
   }, [currentPage, genreURL]);
 
-  const handlePageClick = (event) => {
-    window.scroll(0, 0);
-    console.log(event.selected);
-    setCurrentPage(event.selected + 1);
-  };
+
   // useEffect(() => {
   //   const fetchAllTVShows = async () => {
   //     let allShows = [];
@@ -79,10 +75,10 @@ const TVShows = () => {
 
           {loading ? (<Spinner />) : (<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3 justify-center">
             {tvShowList.map((tvShow) => (
-              <Listing key={tvShow.id} list={tvShow} type={'tv'} />
+              <Listing key={tvShow.id} list={tvShow} type={'TV Show'} />
             ))}
           </div>)}
-          <Paginate handlePageClick={handlePageClick} />
+          <Paginate setCurrentPage={setCurrentPage} />
         </div>
       </div>
     </section>
