@@ -22,11 +22,9 @@ const Movies = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       const apiKey = import.meta.env.VITE_API_KEY;
-      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}&with_genres=${selectedGenres}`);
+      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}&with_genres=${selectedGenres}&primary_release_year`);
       data.total_pages > 50 ? setPageCount(50) : setPageCount(data.total_pages);
       setMovieList(data.results);
-      console.log(pageCount);
-      console.log(data);
       setLoading(false);
 
     };

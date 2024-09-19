@@ -308,7 +308,7 @@ export default function FilterProvider({ children, type }) {
             </form>
 
             {/* Product grid */}
-            <div className="lg:col-span-3 grid sgrid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
+            <div className="lg:col-span-3 grid sgrid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-3">
               {children}
             </div>
           </div>
