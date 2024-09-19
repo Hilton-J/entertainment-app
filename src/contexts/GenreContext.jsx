@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types'
 
 export const GenreContext = createContext();
 
@@ -21,7 +22,7 @@ export const GenreProvider = ({ children }) => {
 
     fetchMovieGenres();
 
-  }, []);
+  }, [apiKey]);
 
   useEffect(() => {
     const fetchTvGenres = async () => {
@@ -29,7 +30,7 @@ export const GenreProvider = ({ children }) => {
       setTvGenres(data.genres);
     };
     fetchTvGenres();
-  }, []);
+  }, [apiKey]);
 
 
   return (
@@ -46,4 +47,6 @@ export const GenreProvider = ({ children }) => {
   );
 };
 
-
+GenreProvider.propTypes = {
+  children: PropTypes.node
+};

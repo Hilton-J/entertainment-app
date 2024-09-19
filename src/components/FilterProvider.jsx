@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import {
   Dialog,
   DialogBackdrop,
@@ -14,7 +14,7 @@ import {
   MenuItems,
 } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
+import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
 import PropTypes from 'prop-types'
 import { GenreContext } from '../contexts/GenreContext'
 
@@ -36,15 +36,27 @@ const subCategories = [
 //Sidebar filter
 const filters = [
   {
-    id: 'color',
-    name: 'Color',
+    id: 'movies',
+    name: 'Genres',
+    genres: [],
     sections: [
-      { value: 'white', label: 'White', checked: false },
-      { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: true },
-      { value: 'brown', label: 'Brown', checked: false },
-      { value: 'green', label: 'Green', checked: false },
-      { value: 'purple', label: 'Purple', checked: false },
+      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
+      { value: 'sale', label: 'Sale', checked: false },
+      { value: 'travel', label: 'Travel', checked: true },
+      { value: 'organization', label: 'Organization', checked: false },
+      { value: 'accessories', label: 'Accessories', checked: false },
+    ],
+  },
+  {
+    id: 'tv',
+    name: 'Genres',
+    genres: [],
+    sections: [
+      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
+      { value: 'sale', label: 'Sale', checked: false },
+      { value: 'travel', label: 'Travel', checked: true },
+      { value: 'organization', label: 'Organization', checked: false },
+      { value: 'accessories', label: 'Accessories', checked: false },
     ],
   },
   {
@@ -56,18 +68,6 @@ const filters = [
       { value: 'travel', label: 'Travel', checked: true },
       { value: 'organization', label: 'Organization', checked: false },
       { value: 'accessories', label: 'Accessories', checked: false },
-    ],
-  },
-  {
-    id: 'size',
-    name: 'Size',
-    sections: [
-      { value: '2l', label: '2L', checked: false },
-      { value: '6l', label: '6L', checked: false },
-      { value: '12l', label: '12L', checked: false },
-      { value: '18l', label: '18L', checked: false },
-      { value: '20l', label: '20L', checked: false },
-      { value: '40l', label: '40L', checked: true },
     ],
   },
 ]
@@ -84,20 +84,36 @@ export default function FilterProvider({ children, type }) {
   const { tvGenres, movieGenres, selectedGenres, setSelectedGenres } = useContext(GenreContext);
   // const [selectedGenres, setSelectedGenres] = useState([]);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [filter, setFilter] = useState(filters);
+
+
+
+  useEffect(() => {
+    if (type === 'movies') {
+      setFilter((prevFilter) => prevFilter.map((filt) => {
+        if (filt.id === 'movies') {
+          return {
+            ...filt,
+            genres: movieGenres,
+          }
+        }
+        return filt
+      }))
+    }
+  }, [type, movieGenres]);
+
+  console.log(filter);
 
   const handleSelected = (e) => {
     const genreId = parseInt(e.target.id);
 
     if (e.target.checked) {
-      // If checkbox is checked, add the genre to the selected array
       setSelectedGenres((prevSelectedGenres) => [...prevSelectedGenres, genreId]);
     } else {
-      // If unchecked, remove the genre from the selected array
       setSelectedGenres((prevSelectedGenres) => prevSelectedGenres.filter(id => id !== genreId));
     }
   };
 
-  console.log(selectedGenres);
   return (
     <div className="bg-white">
       {/* Mobile filter dialog */}
@@ -228,12 +244,11 @@ export default function FilterProvider({ children, type }) {
         </div>
 
         {/* =================================== Sidebar =================================== */}
-        <section aria-labelledby="products-heading" className="pb-24 pt-6">
+        <section aria-labelledby="products-heading" className="pb-24">
           <div className="grid gap-x-4 lg:grid-cols-4">
             {/* Filters */}
             <form className="hidden lg:block">
               {/* =========================== Categories ======================== */}
-              <h3 className="no-sr-only">Categories</h3>
 
 
               <Disclosure as="div" className="border-b border-gray-200 py-6">
@@ -247,48 +262,53 @@ export default function FilterProvider({ children, type }) {
                   </DisclosureButton>
                 </h3>
 
-                {type === 'movies' ? movieGenres.map((section, sectionIdx) => (
-                  <DisclosurePanel className="pt-6" key={section.id}>
-                    <div className="space-y-4">
-                      <div className="flex items-center">
-                        <input
-                          defaultValue={section.value}
-                          id={section.id}
-                          name={`${section.id}[]`}
-                          type="checkbox"
-                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                          onChange={handleSelected}
-                        />
-                        <label htmlFor={`filter-${section.id}-${sectionIdx}`} className="ml-3 text-sm text-gray-600">
-                          {section.name}
-                        </label>
+                {type === 'movies' ?
+                  movieGenres.map((section, sectionIdx) => (
+                    <DisclosurePanel className="pt-6" key={section.id}>
+                      <div className="space-y-4">
+                        <div className="flex items-center">
+                          <input
+                            defaultValue={section.value}
+                            checked={selectedGenres.includes(section.id)}
+                            id={section.id}
+                            name={section.name}
+                            type="checkbox"
+                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            onChange={handleSelected}
+                          />
+                          <label htmlFor={`filter-${section.id}-${sectionIdx}`} className="ml-3 text-sm text-gray-600">
+                            {section.name}
+                          </label>
+                        </div>
                       </div>
-                    </div>
-                  </DisclosurePanel>
-                )) : tvGenres.map((section, sectionIdx) => (
-                  <DisclosurePanel className="pt-6" key={section.id}>
-                    <div className="space-y-4">
-                      <div className="flex items-center">
-                        <input
-                          defaultValue={section.value}
-                          id={section.id}
-                          name={`${section.id}[]`}
-                          type="checkbox"
-                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                          onChange={handleSelected}
-                        />
-                        <label htmlFor={`filter-${section.id}-${sectionIdx}`} className="ml-3 text-sm text-gray-600">
-                          {section.name}
-                        </label>
+                    </DisclosurePanel>
+                  ))
+                  :
+                  tvGenres.map((section, sectionIdx) => (
+                    <DisclosurePanel className="pt-6" key={section.id}>
+                      <div className="space-y-4">
+                        <div className="flex items-center">
+                          <input
+                            defaultValue={section.value}
+
+                            id={section.id}
+                            name={`${section.id}[]`}
+                            type="checkbox"
+                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            onChange={handleSelected}
+                          />
+                          <label htmlFor={`filter-${section.id}-${sectionIdx}`} className="ml-3 text-sm text-gray-600">
+                            {section.name}
+                          </label>
+                        </div>
                       </div>
-                    </div>
-                  </DisclosurePanel>
-                ))}
+                    </DisclosurePanel>
+                  ))}
               </Disclosure>
             </form>
 
             {/* Product grid */}
-            <div className="lg:col-span-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
+            <div className="lg:col-span-3 grid sgrid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
               {children}
             </div>
           </div>
@@ -299,5 +319,6 @@ export default function FilterProvider({ children, type }) {
 };
 
 FilterProvider.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  type: PropTypes.string
 }

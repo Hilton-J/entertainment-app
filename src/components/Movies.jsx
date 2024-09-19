@@ -1,45 +1,37 @@
 // import PropTypes from 'prop-types'
 import axios from 'axios'
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import Listing from './Listing'
 import Spinner from './Spinner';
-// import CustomPagination from './CustomPagination';
-// import Genres from './Genres';
-// import useGenres from '../Hooks/useGenres';
 import FilterProvider from './FilterProvider';
 import Paginate from './Paginate';
+import { GenreContext } from '../contexts/GenreContext';
 
 
 const Movies = () => {
 
+  const { selectedGenres } = useContext(GenreContext);
+
   const [movieList, setMovieList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  // const pathName = useLocation();
-  // console.log(pathName.pathname.split('/'));
-
-  // const [selectedGenres, setSelectedGenres] = useState([]);
-  // const [genres, setGenres] = useState([]);
+  const [pageCount, setPageCount] = useState();
   // const genreURL = useGenres(selectedGenres);
-  // const [listLength, setListLength] = useState(0);
 
-  // const itemsPerPage = 20;
-
-  // const pageCount = Math.ceil(listLength / itemsPerPage);
-  // console.log(pageCount);
 
   useEffect(() => {
     const fetchMovies = async () => {
       const apiKey = import.meta.env.VITE_API_KEY;
-      // const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}&with_genres=${genreURL}`);
-      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}`);
-
+      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}&with_genres=${selectedGenres}`);
+      data.total_pages > 50 ? setPageCount(50) : setPageCount(data.total_pages);
       setMovieList(data.results);
+      console.log(pageCount);
+      console.log(data);
       setLoading(false);
 
     };
     fetchMovies();
-  }, [currentPage]);
+  }, [currentPage, selectedGenres, pageCount]);
 
   return (
     <section className="px-4 py-10">
@@ -53,17 +45,7 @@ const Movies = () => {
             ))}
           </FilterProvider>)}
 
-        {/* <Genres
-            type='movie'
-            selectedGenres={selectedGenres}
-            setSelectedGenres={setSelectedGenres}
-            genres={genres}
-            setGenres={setGenres}
-            setCurrentPage={setCurrentPage}
-          /> */}
-
-
-        <Paginate setCurrentPage={setCurrentPage} />
+        <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />
       </div>
     </section>
   )

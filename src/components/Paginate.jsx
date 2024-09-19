@@ -23,13 +23,10 @@ const Paginate = ({ setCurrentPage, pageCount = 50 }) => {
       previousLabel="< previous"
       previousLinkClassName='px-3 py-2 rounded-lg hover:bg-blue-400 hover:text-white'
       previousClassName='hidden sm:block'
-      renderOnZeroPageCount={null}
-      containerClassName='flex space-x-5 justify-center my-6'
-      pageLinkClassName='hover:bg-blue-400 hover:text-white px-2 sm:px-3 py-2 rounded-lg'
-      // pageClassName=''
+      containerClassName='flex justify-center my-6 gap-3'
+      pageLinkClassName='hover:bg-blue-400 hover:text-white px-3 py-2 rounded-lg'
       activeLinkClassName='bg-blue-400 px-3 py-2 rounded-lg text-white'
       disabledLinkClassName={'hover:cursor-not-allowed hover:bg-white hover:text-black'}
-    // className=' w-full'
     />
   )
 };
