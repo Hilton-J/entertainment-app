@@ -23,7 +23,7 @@ const TVShows = () => {
   useEffect(() => {
     const fetchTVShows = async () => {
       const apiKey = import.meta.env.VITE_API_KEY;
-      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${currentPage}&with_genres=${genreURL}`);
+      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${currentPage}&with_genres=${genreURL}` );
       console.log(data);
       setTVShowList(data.results);
       setLoading(false);

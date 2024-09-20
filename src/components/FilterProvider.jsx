@@ -79,7 +79,7 @@ function classNames(...classes) {
 
 
 
-export default function FilterProvider({ children, type }) {
+export default function FilterProvider({ children, type, setSearchQuery }) {
 
   const { tvGenres, movieGenres, selectedGenres, setSelectedGenres } = useContext(GenreContext);
   // const [selectedGenres, setSelectedGenres] = useState([]);
@@ -197,6 +197,8 @@ export default function FilterProvider({ children, type }) {
         <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
           <h1 className="text-xl md:text-3xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
 
+          <input type="text" placeholder="Search" id="search" className="bg-transparent text-slate-800 border border-slate-800 focus:border-blue-600 focus:outline-none px-6 py-2 rounded-full text-sm md:text-base w-3/5" onChange={(e) => setSearchQuery(e.target.value)} />
+
           <div className="flex items-center">
             <Menu as="div" className="relative inline-block text-left">
               <div>
@@ -245,8 +247,9 @@ export default function FilterProvider({ children, type }) {
 
         {/* =================================== Sidebar =================================== */}
         <section aria-labelledby="products-heading" className="pb-24">
-          <div className="grid gap-x-4 lg:grid-cols-4">
-            {/* Filters */}
+          <div className="grid gap-x-[2%] lg:grid-cols-[16%_82%]">
+
+            {/* Sidebar Filters */}
             <form className="hidden lg:block">
               {/* =========================== Categories ======================== */}
 
@@ -308,7 +311,7 @@ export default function FilterProvider({ children, type }) {
             </form>
 
             {/* Product grid */}
-            <div className="lg:col-span-3 grid sgrid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
               {children}
             </div>
           </div>
@@ -320,5 +323,6 @@ export default function FilterProvider({ children, type }) {
 
 FilterProvider.propTypes = {
   children: PropTypes.node,
-  type: PropTypes.string
+  type: PropTypes.string,
+  setSearchQuery: PropTypes.func
 }

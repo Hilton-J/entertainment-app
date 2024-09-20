@@ -16,22 +16,24 @@ const Movies = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState();
+  const [searchQuery, setSearchQuery] = useState('');
   // const genreURL = useGenres(selectedGenres);
-
 
   useEffect(() => {
     const fetchMovies = async () => {
+
       const apiKey = import.meta.env.VITE_API_KEY;
-      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}&with_genres=${selectedGenres}`);
+      const apiURL = !searchQuery ? `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}&with_genres=${selectedGenres}` : `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${currentPage}&include_adult=false`;
+
+      const { data } = await axios.get(apiURL);
       data.total_pages > 50 ? setPageCount(50) : setPageCount(data.total_pages);
       setMovieList(data.results);
-      console.log(pageCount);
-      console.log(data);
+
       setLoading(false);
 
     };
     fetchMovies();
-  }, [currentPage, selectedGenres, pageCount]);
+  }, [currentPage, selectedGenres, pageCount, searchQuery]);
 
   return (
     <section className="px-4 py-10">
@@ -39,7 +41,7 @@ const Movies = () => {
         <h2 className="text-2xl md:text-4xl font-bold mb-5 text-center">LATEST MOVIES</h2>
 
         {loading ? (<Spinner />) : (
-          <FilterProvider type={'movies'}>
+          <FilterProvider type={'movies'} setSearchQuery={setSearchQuery}>
             {movieList.map((movie) => (
               <Listing key={movie.id} list={movie} type={'movie'} />
             ))}
