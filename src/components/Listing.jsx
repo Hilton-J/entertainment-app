@@ -63,7 +63,7 @@ const Listing = ({ list, type }) => {
 
       {/* ============ RATING DIV========== */}
       <div
-        className='flex gap-1 items-center rounded-r-full px-3 py-1 text-xs font-semibold mr-2 absolute top-10 left-0 bg-slate-900 bg-opacity-[0.86]'
+        className='flex gap-1 items-center rounded-r-full px-3 py-1 text-xs font-semibold mr-2 absolute top-5 left-0 bg-slate-900 bg-opacity-[0.86]'
         style={{ color: textColor }}
       >
         <IoStar />
