@@ -11,7 +11,6 @@ import { GenreContext } from '../contexts/GenreContext';
 const Movies = () => {
 
   const { selectedGenres } = useContext(GenreContext);
-
   const [movieList, setMovieList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
