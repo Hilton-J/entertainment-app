@@ -102,7 +102,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
     }
   }, [type, movieGenres]);
 
-  console.log(filter);
+
 
   const handleSelected = (e) => {
     const genreId = parseInt(e.target.id);
