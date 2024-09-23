@@ -59,17 +59,6 @@ const filters = [
       { value: 'accessories', label: 'Accessories', checked: false },
     ],
   },
-  {
-    id: 'category',
-    name: 'Category',
-    sections: [
-      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-      { value: 'sale', label: 'Sale', checked: false },
-      { value: 'travel', label: 'Travel', checked: true },
-      { value: 'organization', label: 'Organization', checked: false },
-      { value: 'accessories', label: 'Accessories', checked: false },
-    ],
-  },
 ]
 
 
@@ -102,7 +91,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
     }
   }, [type, movieGenres]);
 
-
+  console.log(filter);
 
   const handleSelected = (e) => {
     const genreId = parseInt(e.target.id);
@@ -198,6 +187,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
           <h1 className="text-xl md:text-3xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
 
           <input type="text" placeholder="Search" id="search" className="bg-transparent text-slate-800 border border-slate-800 focus:border-blue-600 focus:outline-none px-6 py-2 rounded-full text-sm md:text-base w-3/5" onChange={(e) => setSearchQuery(e.target.value)} />
+          
 
           <div className="flex items-center">
             <Menu as="div" className="relative inline-block text-left">

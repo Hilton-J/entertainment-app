@@ -35,13 +35,8 @@ const Listing = ({ list, type }) => {
   else textColor = '#ff4545';
 
   return (
-    <div
-      key={list.id}
-      className=' grid grid-rows-subgrid row-span-3 rounded-lg overflow-hidden shadow-xl h-full px-3 py-2 max-w-xs'
-    >
-      <div
-        className='relative'
-      >
+    <div key={list.id} className='  rounded-lg overflow-hidden shadow-2xl h-full  max-w-xs'>
+      <div className='relative'>
         <Link to={`/${type}/${list.id}`} className='transition ease-in-out duration-700'>
           <img
             src={list.poster_path ? `https://image.tmdb.org/t/p/w300${list.poster_path}` : 'https://www.movienewz.com/img/films/poster-holder.jpg'}
@@ -49,33 +44,13 @@ const Listing = ({ list, type }) => {
             className='object-cover rounded-lg size-full'
           />
         </Link>
-
-      </div>
-
-      {/* {isHovered && <div
-        ref={cardRef}
-        className="absolute p-4 bg-white rounded-lg shadow-lg z-50 w-80 h-20"
-        style={{ transform: 'translate(20px, 20px)' }}
-      >
-        <h3 className="text-lg font-bold">{list.title || list.name}</h3>
-        <p>{list.overview}</p>
-      </div>} */}
-
-      {/* ============ RATING DIV========== */}
-      <div
-        className='flex gap-1 items-center rounded-r-full px-3 py-1 text-xs font-semibold mr-2 absolute top-5 left-0 bg-slate-900 bg-opacity-[0.86]'
-        style={{ color: textColor }}
-      >
-        <IoStar />
-        <span>{rating}</span>
-      </div>
-      <div className="flex flex-col justify-between">
-        <span className="flex justify-between py-1 text-l font-semibold">
-          {type === 'tv' ? 'TV Show' : 'Movie'}
-          <span className="flex justify-between">
-            {list.release_date || list.first_air_date}
-          </span>
-        </span>
+        
+        <div className='flex gap-1 items-center rounded-r-full px-3 py-1 text-xs font-semibold mr-2 absolute top-5 left-0 bg-slate-900 bg-opacity-[0.86]'
+          style={{ color: textColor }}
+        >
+          <IoStar />
+          <span>{rating}</span>
+        </div>
       </div>
     </div>
   );
@@ -102,3 +77,24 @@ Listing.propTypes = {
 };
 
 export default Listing;
+
+{/* {isHovered && <div
+        ref={cardRef}
+        className="absolute p-4 bg-white rounded-lg shadow-lg z-50 w-80 h-20"
+        style={{ transform: 'translate(20px, 20px)' }}
+      >
+        <h3 className="text-lg font-bold">{list.title || list.name}</h3>
+        <p>{list.overview}</p>
+      </div>} */}
+
+{/* ============ RATING DIV========== */ }
+
+
+{/* <div className="flex flex-col justify-between">
+        <span className="flex justify-between py-1 text-l font-semibold">
+          {type === 'tv' ? 'TV Show' : 'Movie'}
+          <span className="flex justify-between">
+            {list.release_date || list.first_air_date}
+          </span>
+        </span>
+      </div> */}
