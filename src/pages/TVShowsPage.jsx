@@ -1,11 +1,11 @@
-import TVShows from "../components/TVShows";
+import TVShows from '../components/TVShows'
 
 const TVShowsPage = () => {
   return (
     <>
       <TVShows />
     </>
-  );
-};
+  )
+}
 
-export default TVShowsPage;
+export default TVShowsPage

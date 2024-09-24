@@ -1,11 +1,11 @@
-import Movies from "../components/Movies";
+import Movies from '../components/Movies'
 
 const MoviesPage = () => {
   return (
     <>
       <Movies />
     </>
-  );
-};
+  )
+}
 
-export default MoviesPage;
+export default MoviesPage

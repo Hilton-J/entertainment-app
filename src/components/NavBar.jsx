@@ -1,30 +1,30 @@
-import { NavLink } from "react-router-dom";
-import { IoMenuOutline, IoCloseOutline } from "react-icons/io5";
-import { useState } from "react";
-import DrawerNavBar from "./DrawerNavBar";
+import { NavLink } from 'react-router-dom'
+import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5'
+import { useState } from 'react'
+import DrawerNavBar from './DrawerNavBar'
 
 const NavBar = () => {
   const linkClass = ({ isActive }) =>
-    isActive ? "text-blue-600" : "text-gray-600";
+    isActive ? 'text-blue-600' : 'text-gray-600'
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   return (
     <header className="bg-slate-900">
-      <nav className="container mx-auto flex justify-between items-center p-4">
+      <nav className="container mx-auto flex items-center justify-between p-4">
         <NavLink
-          to={"/"}
-          className="text-xl w-fit sm:text-2xl font-bold text-blue-600 hover:text-blue-500"
+          to={'/'}
+          className="w-fit text-xl font-bold text-blue-600 hover:text-blue-500 sm:text-2xl"
         >
           Steam-Trends
         </NavLink>
-        <div className="md:flex hidden items-center gap-4 lg:gap-8">
-          <ul className="flex md:flex-row flex-col gap-4 lg:gap-8 items-center">
+        <div className="hidden items-center gap-4 md:flex lg:gap-8">
+          <ul className="flex flex-col items-center gap-4 md:flex-row lg:gap-8">
             <li>
               <NavLink
-                to={"/movies"}
+                to={'/movies'}
                 className={({ isActive }) =>
                   `${linkClass({ isActive })} hover:text-blue-500`
                 }
@@ -34,7 +34,7 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink
-                to={"/tv-shows"}
+                to={'/tv-shows'}
                 className={({ isActive }) =>
                   `${linkClass({ isActive })} hover:text-blue-500`
                 }
@@ -43,15 +43,15 @@ const NavBar = () => {
               </NavLink>
             </li>
           </ul>
-          <button className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm md:text-base">
+          <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-500 md:text-base">
             LOG IN
           </button>
         </div>
 
-        <div className="flex items-center md:hidden gap-4">
+        <div className="flex items-center gap-4 md:hidden">
           <a
             onClick={toggleMenu}
-            className="text-3xl cursor-pointer text-gray-600"
+            className="cursor-pointer text-3xl text-gray-600"
           >
             {isMenuOpen ? <IoCloseOutline /> : <IoMenuOutline />}
           </a>
@@ -64,7 +64,7 @@ const NavBar = () => {
         linkClass={linkClass}
       />
     </header>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

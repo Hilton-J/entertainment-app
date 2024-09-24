@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from 'react'
 import {
   Dialog,
   DialogBackdrop,
@@ -12,103 +12,103 @@ import {
   MenuButton,
   MenuItem,
   MenuItems,
-} from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+} from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import {
   ChevronDownIcon,
   FunnelIcon,
   MinusIcon,
   PlusIcon,
-} from "@heroicons/react/20/solid";
-import PropTypes from "prop-types";
-import { GenreContext } from "../contexts/GenreContext";
+} from '@heroicons/react/20/solid'
+import PropTypes from 'prop-types'
+import { GenreContext } from '../contexts/GenreContext'
 
 const sortSections = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
-];
+  { name: 'Most Popular', href: '#', current: true },
+  { name: 'Best Rating', href: '#', current: false },
+  { name: 'Newest', href: '#', current: false },
+  { name: 'Price: Low to High', href: '#', current: false },
+  { name: 'Price: High to Low', href: '#', current: false },
+]
 const subCategories = [
-  { name: "Totes", href: "#" },
-  { name: "Backpacks", href: "#" },
-  { name: "Travel Bags", href: "#" },
-  { name: "Hip Bags", href: "#" },
-  { name: "Laptop Sleeves", href: "#" },
-];
+  { name: 'Totes', href: '#' },
+  { name: 'Backpacks', href: '#' },
+  { name: 'Travel Bags', href: '#' },
+  { name: 'Hip Bags', href: '#' },
+  { name: 'Laptop Sleeves', href: '#' },
+]
 
 //Sidebar filter
 const filters = [
   {
-    id: "movies",
-    name: "Genres",
+    id: 'movies',
+    name: 'Genres',
     genres: [],
     sections: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
+      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
+      { value: 'sale', label: 'Sale', checked: false },
+      { value: 'travel', label: 'Travel', checked: true },
+      { value: 'organization', label: 'Organization', checked: false },
+      { value: 'accessories', label: 'Accessories', checked: false },
     ],
   },
   {
-    id: "tv",
-    name: "Genres",
+    id: 'tv',
+    name: 'Genres',
     genres: [],
     sections: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
+      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
+      { value: 'sale', label: 'Sale', checked: false },
+      { value: 'travel', label: 'Travel', checked: true },
+      { value: 'organization', label: 'Organization', checked: false },
+      { value: 'accessories', label: 'Accessories', checked: false },
     ],
   },
-];
+]
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ')
 }
 
 export default function FilterProvider({ children, type, setSearchQuery }) {
   const { tvGenres, movieGenres, selectedGenres, setSelectedGenres } =
-    useContext(GenreContext);
+    useContext(GenreContext)
   // const [selectedGenres, setSelectedGenres] = useState([]);
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [filter, setFilter] = useState(filters);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [filter, setFilter] = useState(filters)
 
   useEffect(() => {
-    if (type === "movies") {
+    if (type === 'movies') {
       setFilter((prevFilter) =>
         prevFilter.map((filt) => {
-          if (filt.id === "movies") {
+          if (filt.id === 'movies') {
             return {
               ...filt,
               genres: movieGenres,
-            };
+            }
           }
-          return filt;
+          return filt
         }),
-      );
+      )
     }
-  }, [type, movieGenres]);
+  }, [type, movieGenres])
 
-  console.log(filter);
+  console.log(filter)
 
   const handleSelected = (e) => {
-    const genreId = parseInt(e.target.id);
+    const genreId = parseInt(e.target.id)
 
     if (e.target.checked) {
       setSelectedGenres((prevSelectedGenres) => [
         ...prevSelectedGenres,
         genreId,
-      ]);
+      ])
     } else {
       setSelectedGenres((prevSelectedGenres) =>
         prevSelectedGenres.filter((id) => id !== genreId),
-      );
+      )
     }
-  };
+  }
 
   return (
     <div className="bg-white">
@@ -206,10 +206,10 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
       </Dialog>
 
       <main className="mx-auto max-w-[95rem] px-4 sm:px-6 lg:px-8">
-        {" "}
+        {' '}
         {/*//Main container starts */}
         <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
-          <h1 className="text-xl md:text-3xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-xl font-bold tracking-tight text-gray-900 md:text-3xl">
             New Arrivals
           </h1>
 
@@ -217,7 +217,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
             type="text"
             placeholder="Search"
             id="search"
-            className="bg-transparent text-slate-800 border border-slate-800 focus:border-blue-600 focus:outline-none px-6 py-2 rounded-full text-sm md:text-base w-3/5"
+            className="w-3/5 rounded-full border border-slate-800 bg-transparent px-6 py-2 text-sm text-slate-800 focus:border-blue-600 focus:outline-none md:text-base"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
 
@@ -244,9 +244,9 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
                         href={section.href}
                         className={classNames(
                           section.current
-                            ? "font-medium text-gray-900"
-                            : "text-gray-500",
-                          "block px-4 py-2 text-sm data-[focus]:bg-gray-100",
+                            ? 'font-medium text-gray-900'
+                            : 'text-gray-500',
+                          'block px-4 py-2 text-sm data-[focus]:bg-gray-100',
                         )}
                       >
                         {section.name}
@@ -294,7 +294,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
                   </DisclosureButton>
                 </h3>
 
-                {type === "movies"
+                {type === 'movies'
                   ? movieGenres.map((section, sectionIdx) => (
                       <DisclosurePanel className="pt-6" key={section.id}>
                         <div className="space-y-4">
@@ -344,18 +344,18 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
             </form>
 
             {/* Product grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
               {children}
             </div>
           </div>
         </section>
       </main>
     </div>
-  );
+  )
 }
 
 FilterProvider.propTypes = {
   children: PropTypes.node,
   type: PropTypes.string,
   setSearchQuery: PropTypes.func,
-};
+}

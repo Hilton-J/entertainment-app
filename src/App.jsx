@@ -3,15 +3,15 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
-} from "react-router-dom";
-import MainLayout from "./layouts/MainLayout";
-import HomePage from "./pages/HomePage";
-import NotFoundPage from "./pages/NotFoundPage";
-import MoviesPage from "./pages/MoviesPage";
-import TVShowsPage from "./pages/TVShowsPage";
-import SearchPage from "./pages/SearchPage";
-import ViewPage from "./pages/ViewPage";
-import { GenreProvider } from "./contexts/GenreContext";
+} from 'react-router-dom'
+import MainLayout from './layouts/MainLayout'
+import HomePage from './pages/HomePage'
+import NotFoundPage from './pages/NotFoundPage'
+import MoviesPage from './pages/MoviesPage'
+import TVShowsPage from './pages/TVShowsPage'
+import SearchPage from './pages/SearchPage'
+import ViewPage from './pages/ViewPage'
+import { GenreProvider } from './contexts/GenreContext'
 
 const App = () => {
   const router = createBrowserRouter(
@@ -25,13 +25,13 @@ const App = () => {
         <Route path="*" element={<NotFoundPage />} />
       </Route>,
     ),
-  );
+  )
 
   return (
     <GenreProvider>
       <RouterProvider router={router} />
     </GenreProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

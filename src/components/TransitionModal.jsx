@@ -1,28 +1,28 @@
-import { useState } from "react";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import PropTypes from "prop-types";
+import { useState } from 'react'
+import Backdrop from '@mui/material/Backdrop'
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
+import Fade from '@mui/material/Fade'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import PropTypes from 'prop-types'
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
-};
+}
 
 function TransitionsModal({ children }) {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
   return (
     <div>
@@ -52,11 +52,11 @@ function TransitionsModal({ children }) {
         </Fade>
       </Modal>
     </div>
-  );
+  )
 }
 
 TransitionsModal.propTypes = {
   children: PropTypes.node,
-};
+}
 
-export default TransitionsModal;
+export default TransitionsModal
