@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -12,82 +12,84 @@ import {
   MenuButton,
   MenuItem,
   MenuItems,
-} from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
-import PropTypes from 'prop-types'
-import { GenreContext } from '../contexts/GenreContext'
+} from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronDownIcon,
+  FunnelIcon,
+  MinusIcon,
+  PlusIcon,
+} from "@heroicons/react/20/solid";
+import PropTypes from "prop-types";
+import { GenreContext } from "../contexts/GenreContext";
 
 const sortSections = [
-  { name: 'Most Popular', href: '#', current: true },
-  { name: 'Best Rating', href: '#', current: false },
-  { name: 'Newest', href: '#', current: false },
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
-]
+  { name: "Most Popular", href: "#", current: true },
+  { name: "Best Rating", href: "#", current: false },
+  { name: "Newest", href: "#", current: false },
+  { name: "Price: Low to High", href: "#", current: false },
+  { name: "Price: High to Low", href: "#", current: false },
+];
 const subCategories = [
-  { name: 'Totes', href: '#' },
-  { name: 'Backpacks', href: '#' },
-  { name: 'Travel Bags', href: '#' },
-  { name: 'Hip Bags', href: '#' },
-  { name: 'Laptop Sleeves', href: '#' },
-]
+  { name: "Totes", href: "#" },
+  { name: "Backpacks", href: "#" },
+  { name: "Travel Bags", href: "#" },
+  { name: "Hip Bags", href: "#" },
+  { name: "Laptop Sleeves", href: "#" },
+];
 
 //Sidebar filter
 const filters = [
   {
-    id: 'movies',
-    name: 'Genres',
+    id: "movies",
+    name: "Genres",
     genres: [],
     sections: [
-      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-      { value: 'sale', label: 'Sale', checked: false },
-      { value: 'travel', label: 'Travel', checked: true },
-      { value: 'organization', label: 'Organization', checked: false },
-      { value: 'accessories', label: 'Accessories', checked: false },
+      { value: "new-arrivals", label: "New Arrivals", checked: false },
+      { value: "sale", label: "Sale", checked: false },
+      { value: "travel", label: "Travel", checked: true },
+      { value: "organization", label: "Organization", checked: false },
+      { value: "accessories", label: "Accessories", checked: false },
     ],
   },
   {
-    id: 'tv',
-    name: 'Genres',
+    id: "tv",
+    name: "Genres",
     genres: [],
     sections: [
-      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-      { value: 'sale', label: 'Sale', checked: false },
-      { value: 'travel', label: 'Travel', checked: true },
-      { value: 'organization', label: 'Organization', checked: false },
-      { value: 'accessories', label: 'Accessories', checked: false },
+      { value: "new-arrivals", label: "New Arrivals", checked: false },
+      { value: "sale", label: "Sale", checked: false },
+      { value: "travel", label: "Travel", checked: true },
+      { value: "organization", label: "Organization", checked: false },
+      { value: "accessories", label: "Accessories", checked: false },
     ],
   },
-]
-
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
-
-
 export default function FilterProvider({ children, type, setSearchQuery }) {
-
-  const { tvGenres, movieGenres, selectedGenres, setSelectedGenres } = useContext(GenreContext);
+  const { tvGenres, movieGenres, selectedGenres, setSelectedGenres } =
+    useContext(GenreContext);
   // const [selectedGenres, setSelectedGenres] = useState([]);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filter, setFilter] = useState(filters);
 
-
-
   useEffect(() => {
-    if (type === 'movies') {
-      setFilter((prevFilter) => prevFilter.map((filt) => {
-        if (filt.id === 'movies') {
-          return {
-            ...filt,
-            genres: movieGenres,
+    if (type === "movies") {
+      setFilter((prevFilter) =>
+        prevFilter.map((filt) => {
+          if (filt.id === "movies") {
+            return {
+              ...filt,
+              genres: movieGenres,
+            };
           }
-        }
-        return filt
-      }))
+          return filt;
+        }),
+      );
     }
   }, [type, movieGenres]);
 
@@ -97,16 +99,25 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
     const genreId = parseInt(e.target.id);
 
     if (e.target.checked) {
-      setSelectedGenres((prevSelectedGenres) => [...prevSelectedGenres, genreId]);
+      setSelectedGenres((prevSelectedGenres) => [
+        ...prevSelectedGenres,
+        genreId,
+      ]);
     } else {
-      setSelectedGenres((prevSelectedGenres) => prevSelectedGenres.filter(id => id !== genreId));
+      setSelectedGenres((prevSelectedGenres) =>
+        prevSelectedGenres.filter((id) => id !== genreId),
+      );
     }
   };
 
   return (
     <div className="bg-white">
       {/* Mobile filter dialog */}
-      <Dialog open={mobileFiltersOpen} onClose={setMobileFiltersOpen} className="relative z-40 lg:hidden">
+      <Dialog
+        open={mobileFiltersOpen}
+        onClose={setMobileFiltersOpen}
+        className="relative z-40 lg:hidden"
+      >
         <DialogBackdrop
           transition
           className="fixed inset-0 bg-black bg-opacity-25 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
@@ -143,13 +154,25 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
               </ul>
 
               {filters.map((section) => (
-                <Disclosure key={section.id} as="div" className="border-t border-gray-200 px-4 py-6">
+                <Disclosure
+                  key={section.id}
+                  as="div"
+                  className="border-t border-gray-200 px-4 py-6"
+                >
                   <h3 className="-mx-2 -my-3 flow-root">
                     <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                      <span className="font-medium text-gray-900">{section.name}</span>
+                      <span className="font-medium text-gray-900">
+                        {section.name}
+                      </span>
                       <span className="ml-6 flex items-center">
-                        <PlusIcon aria-hidden="true" className="h-5 w-5 group-data-[open]:hidden" />
-                        <MinusIcon aria-hidden="true" className="h-5 w-5 [.group:not([data-open])_&]:hidden" />
+                        <PlusIcon
+                          aria-hidden="true"
+                          className="h-5 w-5 group-data-[open]:hidden"
+                        />
+                        <MinusIcon
+                          aria-hidden="true"
+                          className="h-5 w-5 [.group:not([data-open])_&]:hidden"
+                        />
                       </span>
                     </DisclosureButton>
                   </h3>
@@ -182,12 +205,21 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
         </div>
       </Dialog>
 
-      <main className="mx-auto max-w-[95rem] px-4 sm:px-6 lg:px-8"> {/*//Main container starts */}
+      <main className="mx-auto max-w-[95rem] px-4 sm:px-6 lg:px-8">
+        {" "}
+        {/*//Main container starts */}
         <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
-          <h1 className="text-xl md:text-3xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+          <h1 className="text-xl md:text-3xl font-bold tracking-tight text-gray-900">
+            New Arrivals
+          </h1>
 
-          <input type="text" placeholder="Search" id="search" className="bg-transparent text-slate-800 border border-slate-800 focus:border-blue-600 focus:outline-none px-6 py-2 rounded-full text-sm md:text-base w-3/5" onChange={(e) => setSearchQuery(e.target.value)} />
-          
+          <input
+            type="text"
+            placeholder="Search"
+            id="search"
+            className="bg-transparent text-slate-800 border border-slate-800 focus:border-blue-600 focus:outline-none px-6 py-2 rounded-full text-sm md:text-base w-3/5"
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
 
           <div className="flex items-center">
             <Menu as="div" className="relative inline-block text-left">
@@ -211,8 +243,10 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
                       <a
                         href={section.href}
                         className={classNames(
-                          section.current ? 'font-medium text-gray-900' : 'text-gray-500',
-                          'block px-4 py-2 text-sm data-[focus]:bg-gray-100',
+                          section.current
+                            ? "font-medium text-gray-900"
+                            : "text-gray-500",
+                          "block px-4 py-2 text-sm data-[focus]:bg-gray-100",
                         )}
                       >
                         {section.name}
@@ -223,80 +257,89 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
               </MenuItems>
             </Menu>
 
-
             <button
               type="button"
               onClick={() => setMobileFiltersOpen(true)}
               className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
             >
               <span className="no-sr-only">Filters</span>
-              <FunnelIcon aria-hidden="true" className="h-5 w-5 text-slate-900" />
+              <FunnelIcon
+                aria-hidden="true"
+                className="h-5 w-5 text-slate-900"
+              />
             </button>
           </div>
         </div>
-
         {/* =================================== Sidebar =================================== */}
         <section aria-labelledby="products-heading" className="pb-24">
           <div className="grid gap-x-[2%] lg:grid-cols-[16%_82%]">
-
             {/* Sidebar Filters */}
             <form className="hidden lg:block">
               {/* =========================== Categories ======================== */}
-
 
               <Disclosure as="div" className="border-b border-gray-200 py-6">
                 <h3 className="-my-3 flow-root">
                   <DisclosureButton className="group flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
                     <span className="font-medium text-gray-900">Genres</span>
                     <span className="ml-6 flex items-center">
-                      <PlusIcon aria-hidden="true" className="h-5 w-5 group-data-[open]:hidden" />
-                      <MinusIcon aria-hidden="true" className="h-5 w-5 [.group:not([data-open])_&]:hidden" />
+                      <PlusIcon
+                        aria-hidden="true"
+                        className="h-5 w-5 group-data-[open]:hidden"
+                      />
+                      <MinusIcon
+                        aria-hidden="true"
+                        className="h-5 w-5 [.group:not([data-open])_&]:hidden"
+                      />
                     </span>
                   </DisclosureButton>
                 </h3>
 
-                {type === 'movies' ?
-                  movieGenres.map((section, sectionIdx) => (
-                    <DisclosurePanel className="pt-6" key={section.id}>
-                      <div className="space-y-4">
-                        <div className="flex items-center">
-                          <input
-                            defaultValue={section.value}
-                            checked={selectedGenres.includes(section.id)}
-                            id={section.id}
-                            name={section.name}
-                            type="checkbox"
-                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            onChange={handleSelected}
-                          />
-                          <label htmlFor={`filter-${section.id}-${sectionIdx}`} className="ml-3 text-sm text-gray-600">
-                            {section.name}
-                          </label>
+                {type === "movies"
+                  ? movieGenres.map((section, sectionIdx) => (
+                      <DisclosurePanel className="pt-6" key={section.id}>
+                        <div className="space-y-4">
+                          <div className="flex items-center">
+                            <input
+                              defaultValue={section.value}
+                              checked={selectedGenres.includes(section.id)}
+                              id={section.id}
+                              name={section.name}
+                              type="checkbox"
+                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                              onChange={handleSelected}
+                            />
+                            <label
+                              htmlFor={`filter-${section.id}-${sectionIdx}`}
+                              className="ml-3 text-sm text-gray-600"
+                            >
+                              {section.name}
+                            </label>
+                          </div>
                         </div>
-                      </div>
-                    </DisclosurePanel>
-                  ))
-                  :
-                  tvGenres.map((section, sectionIdx) => (
-                    <DisclosurePanel className="pt-6" key={section.id}>
-                      <div className="space-y-4">
-                        <div className="flex items-center">
-                          <input
-                            defaultValue={section.value}
-
-                            id={section.id}
-                            name={`${section.id}[]`}
-                            type="checkbox"
-                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            onChange={handleSelected}
-                          />
-                          <label htmlFor={`filter-${section.id}-${sectionIdx}`} className="ml-3 text-sm text-gray-600">
-                            {section.name}
-                          </label>
+                      </DisclosurePanel>
+                    ))
+                  : tvGenres.map((section, sectionIdx) => (
+                      <DisclosurePanel className="pt-6" key={section.id}>
+                        <div className="space-y-4">
+                          <div className="flex items-center">
+                            <input
+                              defaultValue={section.value}
+                              id={section.id}
+                              name={`${section.id}[]`}
+                              type="checkbox"
+                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                              onChange={handleSelected}
+                            />
+                            <label
+                              htmlFor={`filter-${section.id}-${sectionIdx}`}
+                              className="ml-3 text-sm text-gray-600"
+                            >
+                              {section.name}
+                            </label>
+                          </div>
                         </div>
-                      </div>
-                    </DisclosurePanel>
-                  ))}
+                      </DisclosurePanel>
+                    ))}
               </Disclosure>
             </form>
 
@@ -308,11 +351,11 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
         </section>
       </main>
     </div>
-  )
-};
+  );
+}
 
 FilterProvider.propTypes = {
   children: PropTypes.node,
   type: PropTypes.string,
-  setSearchQuery: PropTypes.func
-}
+  setSearchQuery: PropTypes.func,
+};

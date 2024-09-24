@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types'
-import axios from 'axios'
-import { useEffect } from "react"
-import { Chip } from '@mui/material';
+import PropTypes from "prop-types";
+import axios from "axios";
+import { useEffect } from "react";
+import { Chip } from "@mui/material";
 
 const Genres = ({
   type,
@@ -9,14 +9,15 @@ const Genres = ({
   setSelectedGenres,
   genres,
   setGenres,
-  setCurrentPage
+  setCurrentPage,
 }) => {
-
   //FETCHES GENRES from the api
   useEffect(() => {
     const fetchGenres = async () => {
       const apiKey = import.meta.env.VITE_API_KEY;
-      const { data } = await axios.get(`https://api.themoviedb.org/3/genre/${type}/list?api_key=${apiKey}&language=en-US`);
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/genre/${type}/list?api_key=${apiKey}&language=en-US`,
+      );
       // console.log(data);
       setGenres(data.genres);
     };
@@ -25,7 +26,7 @@ const Genres = ({
     return () => {
       setGenres([]);
     };
-  }, [setGenres, type])
+  }, [setGenres, type]);
 
   const handleGenreSelect = (genre) => {
     setSelectedGenres([...selectedGenres, genre]);
@@ -35,34 +36,37 @@ const Genres = ({
 
   const handleGenreRemove = (genre) => {
     setSelectedGenres(
-      selectedGenres.filter((selected) => selected.id !== genre.id));
+      selectedGenres.filter((selected) => selected.id !== genre.id),
+    );
     setGenres([...genres, genre]);
     setCurrentPage(1);
   };
 
   return (
-    <div className='py-1 flex flex-wrap gap-2'>
-      {selectedGenres && selectedGenres.map((genre) => (
-        <Chip
-          key={genre.id}
-          size='small'
-          label={genre.name}
-          clickable
-          color='primary'
-          onDelete={() => handleGenreRemove(genre)}
-        />
-      ))}
-      {genres && genres.map((genre) => (
-        <Chip
-          key={genre.id}
-          size='small'
-          label={genre.name}
-          clickable
-          onClick={() => handleGenreSelect(genre)}
-        />
-      ))}
+    <div className="py-1 flex flex-wrap gap-2">
+      {selectedGenres &&
+        selectedGenres.map((genre) => (
+          <Chip
+            key={genre.id}
+            size="small"
+            label={genre.name}
+            clickable
+            color="primary"
+            onDelete={() => handleGenreRemove(genre)}
+          />
+        ))}
+      {genres &&
+        genres.map((genre) => (
+          <Chip
+            key={genre.id}
+            size="small"
+            label={genre.name}
+            clickable
+            onClick={() => handleGenreSelect(genre)}
+          />
+        ))}
     </div>
-  )
+  );
 };
 
 Genres.propTypes = {
@@ -71,7 +75,7 @@ Genres.propTypes = {
   setSelectedGenres: PropTypes.func,
   genres: PropTypes.array,
   setGenres: PropTypes.func,
-  setCurrentPage: PropTypes.func
-}
+  setCurrentPage: PropTypes.func,
+};
 
-export default Genres
+export default Genres;

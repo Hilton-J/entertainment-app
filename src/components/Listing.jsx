@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { IoStar } from 'react-icons/io5';
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { IoStar } from "react-icons/io5";
 // import { useState, useRef } from 'react';
 
 const Listing = ({ list, type }) => {
@@ -28,24 +28,35 @@ const Listing = ({ list, type }) => {
   let textColor;
   const rating = list.vote_average.toFixed(2);
 
-  if (rating > 8) textColor = '#57e32c';
-  else if (rating > 6) textColor = '#b7dd29';
-  else if (rating > 4) textColor = '#ffe234';
-  else if (rating > 2) textColor = '#ffa534';
-  else textColor = '#ff4545';
+  if (rating > 8) textColor = "#57e32c";
+  else if (rating > 6) textColor = "#b7dd29";
+  else if (rating > 4) textColor = "#ffe234";
+  else if (rating > 2) textColor = "#ffa534";
+  else textColor = "#ff4545";
 
   return (
-    <div key={list.id} className='  rounded-lg overflow-hidden shadow-2xl h-full  max-w-xs'>
-      <div className='relative'>
-        <Link to={`/${type}/${list.id}`} className='transition ease-in-out duration-700'>
+    <div
+      key={list.id}
+      className="  rounded-lg overflow-hidden shadow-2xl h-full  max-w-xs"
+    >
+      <div className="relative">
+        <Link
+          to={`/${type}/${list.id}`}
+          className="transition ease-in-out duration-700"
+        >
           <img
-            src={list.poster_path ? `https://image.tmdb.org/t/p/w300${list.poster_path}` : 'https://www.movienewz.com/img/films/poster-holder.jpg'}
+            src={
+              list.poster_path
+                ? `https://image.tmdb.org/t/p/w300${list.poster_path}`
+                : "https://www.movienewz.com/img/films/poster-holder.jpg"
+            }
             alt={list.title || list.name}
-            className='object-cover rounded-lg size-full'
+            className="object-cover rounded-lg size-full"
           />
         </Link>
-        
-        <div className='flex gap-1 items-center rounded-r-full px-3 py-1 text-xs font-semibold mr-2 absolute top-5 left-0 bg-slate-900 bg-opacity-[0.86]'
+
+        <div
+          className="flex gap-1 items-center rounded-r-full px-3 py-1 text-xs font-semibold mr-2 absolute top-5 left-0 bg-slate-900 bg-opacity-[0.86]"
           style={{ color: textColor }}
         >
           <IoStar />
@@ -78,23 +89,28 @@ Listing.propTypes = {
 
 export default Listing;
 
-{/* {isHovered && <div
+{
+  /* {isHovered && <div
         ref={cardRef}
         className="absolute p-4 bg-white rounded-lg shadow-lg z-50 w-80 h-20"
         style={{ transform: 'translate(20px, 20px)' }}
       >
         <h3 className="text-lg font-bold">{list.title || list.name}</h3>
         <p>{list.overview}</p>
-      </div>} */}
+      </div>} */
+}
 
-{/* ============ RATING DIV========== */ }
+{
+  /* ============ RATING DIV========== */
+}
 
-
-{/* <div className="flex flex-col justify-between">
+{
+  /* <div className="flex flex-col justify-between">
         <span className="flex justify-between py-1 text-l font-semibold">
           {type === 'tv' ? 'TV Show' : 'Movie'}
           <span className="flex justify-between">
             {list.release_date || list.first_air_date}
           </span>
         </span>
-      </div> */}
+      </div> */
+}

@@ -9,8 +9,9 @@ export const getMovies = async () => {
 };
 
 export const getGenres = async (type) => {
-
-  const { data } = await axios.get(`https://api.themoviedb.org/3/genre/${type}/list?api_key=${apiKey}&language=en-US`);
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/genre/${type}/list?api_key=${apiKey}&language=en-US`,
+  );
 
   return data;
-}
+};

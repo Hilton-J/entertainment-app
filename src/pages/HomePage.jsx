@@ -1,6 +1,6 @@
 // import Movies from '../components/Movies'
 // import TVShows from '../components/TVShows'
-import Trending from '../components/Trending'
+import Trending from "../components/Trending";
 
 const HomePage = () => {
   return (
@@ -9,7 +9,7 @@ const HomePage = () => {
       <TVShows isHome={true} /> */}
       <Trending />
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

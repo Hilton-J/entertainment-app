@@ -34,6 +34,7 @@ This project uses the following main packages:
 - **MATERIAL UI for Pagination** : npm i @mui/material @emotion/react @emotion/styled
 - **@TAILWIND/FORMS** : npm i @tailwindcss/forms@latest
 - **@heroicons/react** : npm i @heroicons/react@latest
+- **TailwindcssPrettier** : npm install -D prettier prettier-plugin-tailwindcss
 
   .
 
