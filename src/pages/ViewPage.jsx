@@ -7,6 +7,7 @@ import country from '../data/country.json'
 const ViewPage = () => {
   const { type, id } = useParams()
   const [item, setItem] = useState([])
+  const [genres, setGenres] = useState([])
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -14,8 +15,8 @@ const ViewPage = () => {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}&language=en-US`,
       )
-      const gnr = data.genres.map((g) => g.name).join(', ');
-      console.log(gnr);
+
+      setGenres(data.genres.map((g) => g.name).join(', '));
       setItem(data)
     }
 
@@ -45,7 +46,7 @@ const ViewPage = () => {
           className=' object-cover rounded-lg w-full h-full' /> */}
 
         <div className="top-0 flex h-full w-full flex-wrap p-10">
-          <div className="flex gap-20">
+          <div className="flex items-center gap-10 flex-col sm:flex-row md:gap-20">
             <div className="h-fit w-72">
               <div className=''>
                 <img
@@ -62,10 +63,15 @@ const ViewPage = () => {
 
             <div className="flex w-full max-w-lg flex-col">
               <div>
-                <h1 className="mb-6 text-3xl font-bold md:text-4xl">
+                <h1 className="text-3xl font-bold md:text-4xl">
                   {item.name || item.original_title}
                 </h1>
-                <span></span>
+                <div className='flex gap-2'>
+                  {item.vote}
+                  {/* <span>{Math.trunc(item.runtime / 60)}h&nbsp;{item.runtime % 60}m</span> */}
+                  <span>{item.runtime} min</span>
+                  {genres}
+                </div>
               </div>
 
               <p className="text-justify text-xs">{item.overview}</p>
