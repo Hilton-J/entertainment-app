@@ -39,7 +39,7 @@ export const GenreProvider = ({ children }) => {
         tvGenres,
         movieGenres,
         setSelectedGenres,
-        selectedGenres,
+        selectedGenres
       }}
     >
       {children}
