@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import country from '../data/country.json'
+import logo from '../assets/tmdb.svg'
 
 const ViewPage = () => {
   const { type, id } = useParams()
@@ -23,19 +24,20 @@ const ViewPage = () => {
     fetchItem()
   }, [type, id])
 
+
   const backgroundImageUrl = item.backdrop_path
     ? `https://image.tmdb.org/t/p/w300${item.backdrop_path}`
-    : 'https://www.movienewz.com/img/films/poster-holder.jpg'
+    : 'https://www.movienewz.com/img/films/poster-holder.jpg';
 
   return (
     <section className="min-h-screen bg-blue-50 text-white">
       <div
         className="relative mx-auto h-fit bg-black/30"
-      // style={{
-      //   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(${backgroundImageUrl})`,
-      //   backgroundSize: 'cover',
-      //   backgroundPosition: 'center',
-      // }}
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImageUrl})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
       >
         {/* <img
           src={item.backdrop_path ?
@@ -45,9 +47,9 @@ const ViewPage = () => {
           alt={item.title || item.name}
           className=' object-cover rounded-lg w-full h-full' /> */}
 
-        <div className="top-0 flex h-full w-full flex-wrap p-10">
-          <div className="flex items-center gap-10 flex-col sm:flex-row md:gap-20">
-            <div className="h-fit w-72">
+        <div className="container mx-auto top-0 flex h-full w-full flex-wrap px-4 py-10">
+          <div className="flex items-center sm:items-start gap-10 flex-col sm:flex-row md:gap-20">
+            <div className="w-72">
               <div className=''>
                 <img
                   src={
@@ -61,15 +63,18 @@ const ViewPage = () => {
               </div>
             </div>
 
-            <div className="flex w-full max-w-lg flex-col">
-              <div>
+            <div className="flex w-full max-w-lg flex-col gap-4">
+              <div className='space-y-5'>
                 <h1 className="text-3xl font-bold md:text-4xl">
-                  {item.name || item.original_title}
+                  <a href={item.homepage} target='_blank'>{item.name || item.original_title}&nbsp;()</a>
                 </h1>
+
                 <div className='flex gap-2'>
-                  {item.vote}
-                  {/* <span>{Math.trunc(item.runtime / 60)}h&nbsp;{item.runtime % 60}m</span> */}
-                  <span>{item.runtime} min</span>
+                  <img src={logo} alt='TMDB Logo' className='w-12 h-6' />
+                  {parseFloat(item.vote_average).toFixed(1)}
+                  <span>&middot;</span>
+                  {type === 'tv' ? <span>{item.number_of_seasons} seasons</span> : <span>{item.runtime} min</span>}
+                  <span>&middot;</span>
                   {genres}
                 </div>
               </div>
