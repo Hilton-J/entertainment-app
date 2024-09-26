@@ -93,8 +93,6 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
     }
   }, [type, movieGenres])
 
-  console.log(filter)
-
   const handleSelected = (e) => {
     const genreId = parseInt(e.target.id)
 
@@ -296,50 +294,50 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
 
                 {type === 'movies'
                   ? movieGenres.map((section, sectionIdx) => (
-                      <DisclosurePanel className="pt-6" key={section.id}>
-                        <div className="space-y-4">
-                          <div className="flex items-center">
-                            <input
-                              defaultValue={section.value}
-                              checked={selectedGenres.includes(section.id)}
-                              id={section.id}
-                              name={section.name}
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                              onChange={handleSelected}
-                            />
-                            <label
-                              htmlFor={`filter-${section.id}-${sectionIdx}`}
-                              className="ml-3 text-sm text-gray-600"
-                            >
-                              {section.name}
-                            </label>
-                          </div>
+                    <DisclosurePanel className="pt-6" key={section.id}>
+                      <div className="space-y-4">
+                        <div className="flex items-center">
+                          <input
+                            defaultValue={section.value}
+                            checked={selectedGenres.includes(section.id)}
+                            id={section.id}
+                            name={section.name}
+                            type="checkbox"
+                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            onChange={handleSelected}
+                          />
+                          <label
+                            htmlFor={`filter-${section.id}-${sectionIdx}`}
+                            className="ml-3 text-sm text-gray-600"
+                          >
+                            {section.name}
+                          </label>
                         </div>
-                      </DisclosurePanel>
-                    ))
+                      </div>
+                    </DisclosurePanel>
+                  ))
                   : tvGenres.map((section, sectionIdx) => (
-                      <DisclosurePanel className="pt-6" key={section.id}>
-                        <div className="space-y-4">
-                          <div className="flex items-center">
-                            <input
-                              defaultValue={section.value}
-                              id={section.id}
-                              name={`${section.id}[]`}
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                              onChange={handleSelected}
-                            />
-                            <label
-                              htmlFor={`filter-${section.id}-${sectionIdx}`}
-                              className="ml-3 text-sm text-gray-600"
-                            >
-                              {section.name}
-                            </label>
-                          </div>
+                    <DisclosurePanel className="pt-6" key={section.id}>
+                      <div className="space-y-4">
+                        <div className="flex items-center">
+                          <input
+                            defaultValue={section.value}
+                            id={section.id}
+                            name={`${section.id}[]`}
+                            type="checkbox"
+                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            onChange={handleSelected}
+                          />
+                          <label
+                            htmlFor={`filter-${section.id}-${sectionIdx}`}
+                            className="ml-3 text-sm text-gray-600"
+                          >
+                            {section.name}
+                          </label>
                         </div>
-                      </DisclosurePanel>
-                    ))}
+                      </div>
+                    </DisclosurePanel>
+                  ))}
               </Disclosure>
             </form>
 

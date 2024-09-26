@@ -2,9 +2,14 @@ import axios from 'axios'
 
 const apiKey = import.meta.env.VITE_API_KEY
 export const getMovies = async () => {
-  const url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}`
-  const res = await fetch(url)
-  const data = await res.json()
+  const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}`)
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error =>
+      console.error('Error fetching data:', error)
+    );
+  console.log(data);
   return data
 }
 

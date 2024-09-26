@@ -34,7 +34,7 @@ const Movies = () => {
 
   return (
     <section className="px-4 py-10">
-      <div className="m-auto flex w-full flex-col justify-center">
+      <div className="m-auto flex w-full flex-col justify-center min-h-screen">
         <h2 className="mb-5 text-center text-2xl font-bold md:text-4xl">
           LATEST MOVIES
         </h2>

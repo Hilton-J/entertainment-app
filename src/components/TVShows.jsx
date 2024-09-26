@@ -24,24 +24,26 @@ const TVShows = () => {
   useEffect(() => {
     const fetchTVShows = async () => {
       const apiKey = import.meta.env.VITE_API_KEY
-      const { data } = await axios.get(
-        `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${currentPage}&with_genres=${genreURL}&query=${searchQuery}`,
-      )
-      console.log(data)
+      const apiURL = !searchQuery
+        ? `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&include_adult=false&page=${currentPage}&with_genres=${selectedGenres}`
+        : `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${currentPage}&include_adult=false`
+
+      const { data } = await axios.get(apiURL)
+
       setTVShowList(data.results)
       setLoading(false)
     }
     fetchTVShows()
-  }, [currentPage, genreURL])
+  }, [currentPage, genreURL, searchQuery])
 
+  console.log(searchQuery);
   return (
     <section className="px-4 py-10">
-      <div className="container m-auto flex justify-center">
-        <div className="w-[70%]">
-          <h2 className="mb-5 text-center text-2xl font-bold md:text-4xl">
-            LATEST TV SHOWS
-          </h2>
-          {/* <Genres
+      <div className="m-auto flex w-full flex-col justify-center min-h-screen">
+        <h2 className="mb-5 text-center text-2xl font-bold md:text-4xl">
+          LATEST TV SHOWS
+        </h2>
+        {/* <Genres
             type='tv'
             selectedGenres={selectedGenres}
             setSelectedGenres={setSelectedGenres}
@@ -50,17 +52,16 @@ const TVShows = () => {
             setCurrentPage={setCurrentPage}
           /> */}
 
-          {loading ? (
-            <Spinner />
-          ) : (
-            <FilterProvider type={'tv'} setSearchQuery={setSearchQuery}>
-              {tvShowList.map((tvShow) => (
-                <Listing key={tvShow.id} list={tvShow} type={'TV Show'} />
-              ))}
-            </FilterProvider>
-          )}
-          <Paginate setCurrentPage={setCurrentPage} />
-        </div>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <FilterProvider type={'tv'} setSearchQuery={setSearchQuery}>
+            {tvShowList.map((tvShow) => (
+              <Listing key={tvShow.id} list={tvShow} type={'TV Show'} />
+            ))}
+          </FilterProvider>
+        )}
+        <Paginate setCurrentPage={setCurrentPage} />
       </div>
     </section>
   )
