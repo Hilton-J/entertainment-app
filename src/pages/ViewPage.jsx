@@ -32,11 +32,12 @@ const ViewPage = () => {
   return (
     <section className="min-h-screen bg-blue-50 text-white">
       <div
-        className="relative mx-auto h-fit bg-black/30"
+        className={`relative mx-auto h-fit backdrop-blur-md bg-black/30 bg-cover bg-left`}
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImageUrl})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundImage: ` url(${backgroundImageUrl})`,
+          backgroundSize: '',
+          backgroundPosition: '',
+          backgroundRepeat: 'no-repeat'
         }}
       >
         {/* <img
