@@ -2,7 +2,7 @@ import ReactPaginate from 'react-paginate'
 // import { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const Paginate = ({ setCurrentPage, pageCount = 50 }) => {
+const Paginate = ({ setCurrentPage, pageCount }) => {
   const handlePageClick = (event) => {
     window.scroll(0, 0)
     console.log(event.selected)

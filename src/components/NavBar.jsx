@@ -13,7 +13,7 @@ const NavBar = () => {
 
   return (
     <header className="bg-slate-900">
-      <nav className="container mx-auto flex items-center justify-between p-4">
+      <nav className="container mx-auto flex items-center justify-between py-4">
         <NavLink
           to={'/'}
           className="w-fit text-xl font-bold text-blue-600 hover:text-blue-500 sm:text-2xl"
@@ -34,7 +34,7 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink
-                to={'/tv-shows'}
+                to={'/tv'}
                 className={({ isActive }) =>
                   `${linkClass({ isActive })} hover:text-blue-500`
                 }

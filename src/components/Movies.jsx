@@ -12,7 +12,7 @@ const Movies = () => {
   const [movieList, setMovieList] = useState([])
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
-  const [pageCount, setPageCount] = useState()
+  const [pageCount, setPageCount] = useState(50)
   const [searchQuery, setSearchQuery] = useState('')
   // const genreURL = useGenres(selectedGenres);
 
@@ -24,7 +24,7 @@ const Movies = () => {
         : `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${currentPage}&include_adult=false`
 
       const { data } = await axios.get(apiURL)
-      data.total_pages > 50 ? setPageCount(50) : setPageCount(data.total_pages)
+      data.total_pages < 50 && setPageCount(data.total_pages)
       setMovieList(data.results)
 
       setLoading(false)

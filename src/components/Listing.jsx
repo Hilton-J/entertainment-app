@@ -1,29 +1,8 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { IoStar } from 'react-icons/io5'
-// import { useState, useRef } from 'react';
 
 const Listing = ({ list, type }) => {
-  // const [isHovered, setIsHovered] = useState(false);
-  // const cardRef = useRef(null);
-
-  // const handleMouseEnter = () => setIsHovered(true);
-
-  // const handleMouseLeave = () => setIsHovered(false);
-
-  // const handleMouseMove = (e) => {
-  //   if (isHovered) {
-  //     const card = cardRef.current;
-  //     const rect = card.getBoundingClientRect();
-
-  //     const x = e.nativeEvent.offsetX; // Offset for positioning at bottom right
-  //     const y = e.nativeEvent.offsetY; // Offset for positioning at bottom right
-
-  //     console.log(x, y);
-  //     card.style.left = `${x}px`;
-  //     card.style.top = `${y}px`;
-  //   }
-  // }
 
   let textColor
   const rating = list.vote_average.toFixed(2)
@@ -88,29 +67,3 @@ Listing.propTypes = {
 }
 
 export default Listing
-
-{
-  /* {isHovered && <div
-        ref={cardRef}
-        className="absolute p-4 bg-white rounded-lg shadow-lg z-50 w-80 h-20"
-        style={{ transform: 'translate(20px, 20px)' }}
-      >
-        <h3 className="text-lg font-bold">{list.title || list.name}</h3>
-        <p>{list.overview}</p>
-      </div>} */
-}
-
-{
-  /* ============ RATING DIV========== */
-}
-
-{
-  /* <div className="flex flex-col justify-between">
-        <span className="flex justify-between py-1 text-l font-semibold">
-          {type === 'tv' ? 'TV Show' : 'Movie'}
-          <span className="flex justify-between">
-            {list.release_date || list.first_air_date}
-          </span>
-        </span>
-      </div> */
-}

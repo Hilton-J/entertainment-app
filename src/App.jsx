@@ -19,7 +19,7 @@ const App = () => {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
         <Route path="/movies" element={<MoviesPage />} />
-        <Route path="/tv-shows" element={<TVShowsPage />} />
+        <Route path="/tv" element={<TVShowsPage />} />
         {/* <Route path='/search' element={<SearchPage />} /> */}
         <Route path="/:type/:id" element={<ViewPage />} />
         <Route path="*" element={<NotFoundPage />} />
