@@ -98,7 +98,7 @@ const ViewPage = () => {
       </div>
       <div className='text-black container mx-auto'>
         <h3>{item.number_of_seasons} Seasons</h3>
-        <div className='flex'>
+        <div className='flex gap-10'>
           {seasons.map((season) => (
             <SeasonsListing key={season.id} list={season} />
           ))}

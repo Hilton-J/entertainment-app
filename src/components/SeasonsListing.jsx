@@ -6,7 +6,7 @@ const SeasonsListing = ({ list }) => {
   return (
     <div
       key={list.id}
-      className=" max-w-xs overflow-hidden rounded-lg"
+      className=" w-fit overflow-hidden rounded-lg"
     >
       <img
         src={
@@ -15,7 +15,7 @@ const SeasonsListing = ({ list }) => {
             : 'https://www.movienewz.com/img/films/poster-holder.jpg'
         }
         alt={list.title || list.name}
-        className="h-80 rounded-lg object-cover"
+        className="h-96 w-full rounded-lg object-fit"
       />
       <p>{list.name}</p>
       <p>{list.episode_count} Episodes</p>
