@@ -26,11 +26,10 @@ const Movies = () => {
       const { data } = await axios.get(apiURL)
       data.total_pages < 50 && setPageCount(data.total_pages)
       setMovieList(data.results)
-
       setLoading(false)
     }
     fetchMovies()
-  }, [currentPage, selectedGenres, pageCount, searchQuery])
+  }, [currentPage, selectedGenres, searchQuery])
 
   return (
     <section className="px-4 py-10">

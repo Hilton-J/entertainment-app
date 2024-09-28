@@ -15,7 +15,7 @@ const SeasonsListing = ({ list }) => {
             : 'https://www.movienewz.com/img/films/poster-holder.jpg'
         }
         alt={list.title || list.name}
-        className="h-96 w-full rounded-lg object-fit"
+        className="max-h-60 w-full rounded-lg object-fit"
       />
       <p>{list.name}</p>
       <p>{list.episode_count} Episodes</p>

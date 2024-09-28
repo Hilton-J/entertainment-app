@@ -8,6 +8,7 @@ const Trending = () => {
   const [loading, setLoading] = useState(true)
   const [content, setContent] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
+  const [pageCount, setPageCount] = useState(50)
 
   useEffect(() => {
     const fetchTrending = async () => {
@@ -15,7 +16,8 @@ const Trending = () => {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}&page=${currentPage}`,
       )
-      console.log(data)
+
+      data.total_pages < 50 && setPageCount(data.total_pages)
       setContent(data.results)
       setLoading(false)
     }
@@ -39,7 +41,7 @@ const Trending = () => {
             </div>
           )}
 
-          <Paginate setCurrentPage={setCurrentPage} />
+          <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />
         </div>
       </div>
     </section>
