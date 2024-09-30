@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import country from '../data/country.json'
 import logo from '../assets/tmdb.svg'
 import SeasonsListing from '../components/SeasonsListing'
+// import MultiCarousel from '../components/MultiCarousel'
 import Cast from '../components/Cast'
-import Swiper from '../components/Swiper'
 
 const ViewPage = () => {
   const { type, id } = useParams()
@@ -14,7 +14,7 @@ const ViewPage = () => {
   const [genres, setGenres] = useState([])
   const [releaseDate, setReleaseDate] = useState('')
   const [seasons, setSeasons] = useState([])
-  const [cast, setCast] = useState([])
+  const [listCast, setListCast] = useState([])
 
   useEffect(() => {
     const apiKey = import.meta.env.VITE_API_KEY
@@ -33,11 +33,12 @@ const ViewPage = () => {
         `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}`,
       )
 
-      setCast(data.cast);
+      setListCast(data.cast);
     }
 
-    fetchCrew();
     fetchItem();
+    fetchCrew();
+
   }, [type, id])
 
   useEffect(() => {
@@ -125,13 +126,17 @@ const ViewPage = () => {
         </div>
       }
 
-      <div className='text-black'>
-        <h3 className='text-2xl mb-5 container mx-auto'>Cast of {item.name || item.original_title}</h3>
-        <div className='flex gap-4'>
-          {/* {cast.map((casts) => (
-            <Cast list={casts} />
-          ))} */}
-          <Swiper list={cast} />
+      <div className='text-black '>
+        <h3 className='text-2xl mb-5 container mx-auto '>Cast of {item.name || item.original_title}</h3>
+        <div className='carousel-container'>
+          <div className=''>
+            <ul className='flex gap-4 overflow-x-scroll xl:px-[4.5rem]'>
+              {listCast.map((casts, index) => (
+                <Cast key={index} list={casts} />
+              ))}
+              {/* <MultiCarousel /> */}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
