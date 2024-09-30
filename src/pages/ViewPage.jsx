@@ -6,6 +6,7 @@ import country from '../data/country.json'
 import logo from '../assets/tmdb.svg'
 import SeasonsListing from '../components/SeasonsListing'
 import Cast from '../components/Cast'
+import Swiper from '../components/Swiper'
 
 const ViewPage = () => {
   const { type, id } = useParams()
@@ -127,9 +128,10 @@ const ViewPage = () => {
       <div className='text-black'>
         <h3 className='text-2xl mb-5 container mx-auto'>Cast of {item.name || item.original_title}</h3>
         <div className='flex gap-4'>
-          {cast.map((casts) => (
+          {/* {cast.map((casts) => (
             <Cast list={casts} />
-          ))}
+          ))} */}
+          <Swiper list={cast} />
         </div>
       </div>
     </section>

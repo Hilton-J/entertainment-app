@@ -35,6 +35,8 @@ This project uses the following main packages:
 - **@TAILWIND/FORMS** : npm i @tailwindcss/forms@latest
 - **@heroicons/react** : npm i @heroicons/react@latest
 - **TailwindcssPrettier** : npm install -D prettier prettier-plugin-tailwindcss
+- **react-responsive-carousel** : npm i react-responsive-carousel
+- **Swiper** : npm i swiper
 
   .
 
