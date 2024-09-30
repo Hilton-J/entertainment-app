@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import country from '../data/country.json'
 import logo from '../assets/tmdb.svg'
 import SeasonsListing from '../components/SeasonsListing'
+import Cast from '../components/Cast'
 
 const ViewPage = () => {
   const { type, id } = useParams()
@@ -12,10 +13,11 @@ const ViewPage = () => {
   const [genres, setGenres] = useState([])
   const [releaseDate, setReleaseDate] = useState('')
   const [seasons, setSeasons] = useState([])
+  const [cast, setCast] = useState([])
 
   useEffect(() => {
+    const apiKey = import.meta.env.VITE_API_KEY
     const fetchItem = async () => {
-      const apiKey = import.meta.env.VITE_API_KEY
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}&language=en-US`,
       )
@@ -25,8 +27,21 @@ const ViewPage = () => {
       setItem(data)
     }
 
+    const fetchCrew = async () => {
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}`,
+      )
+
+      setCast(data.cast);
+    }
+
+    fetchCrew();
     fetchItem();
   }, [type, id])
+
+  useEffect(() => {
+
+  }, [id, type])
 
   const backgroundImageUrl = item.backdrop_path
     ? `https://image.tmdb.org/t/p/w300${item.backdrop_path}`
@@ -35,9 +50,9 @@ const ViewPage = () => {
   const releaseYear = releaseDate.split('-')[0];
 
   return (
-    <section className="min-h-screen bg-blue-50 text-white space-y-5">
+    <section className="min-h-screen bg-blue-50 text-white flex flex-col gap-12">
       <div
-        className='relative mx-auto h-fit bg-cover bg-center bg-no-repeat'
+        className='relative mx-auto h-fit bg-cover bg-center bg-no-repeat w-full'
         style={{
           backgroundImage: `url(${backgroundImageUrl})`,
         }}
@@ -60,7 +75,7 @@ const ViewPage = () => {
                       : 'https://www.movienewz.com/img/films/poster-holder.jpg'
                   }
                   alt={item.title || item.name}
-                  className="h-full w-96 rounded-lg object-fit"
+                  className="h-full rounded-lg object-fit"
                 />
               </div>
 
@@ -71,13 +86,12 @@ const ViewPage = () => {
                   </h1>
 
                   <div className='flex flex-col gap-2'>
+
+                    <div>{releaseYear}{item.episode_run_time && <span>{item.episode_run_time}m</span>}</div>
                     <div>{genres}</div>
-                    <div>{releaseYear} {item.episode_run_time && <span>{item.episode_run_time}m</span>}</div>
                     <div className='flex gap-3'>
                       <img src={logo} alt='TMDB Logo' className='w-12 h-6' />{parseFloat(item.vote_average).toFixed(1)}
                     </div>
-                    {type === 'tv' ? <span>{item.number_of_seasons} seasons</span> : <span>{item.runtime} min</span>}
-
                   </div>
                 </div>
 
@@ -96,10 +110,10 @@ const ViewPage = () => {
           </div>
         </div>
       </div>
-      {type === 'tv' &&
 
+      {type === 'tv' &&
         <div className='text-black container mx-auto'>
-          <h3 className='text-2xl'>{item.number_of_seasons}
+          <h3 className='text-2xl mb-5'>{item.number_of_seasons}
             {item.number_of_seasons > 1 ? ' Seasons' : ' Season'}</h3>
           <div className='flex gap-10'>
             {seasons.map((season) => (
@@ -107,10 +121,20 @@ const ViewPage = () => {
             ))}
 
           </div>
-        </div>}
+        </div>
+      }
+
+      <div className='text-black'>
+        <h3 className='text-2xl mb-5 container mx-auto'>Cast of {item.name || item.original_title}</h3>
+        <div className='flex gap-2'>
+          {cast.map((casts) => (
+            <Cast list={casts} />
+          ))}
+        </div>
+      </div>
     </section>
   )
-}
+};
 
 ViewPage.propTypes = {
   deleteItem: PropTypes.func,
