@@ -126,7 +126,7 @@ const ViewPage = () => {
 
       <div className='text-black'>
         <h3 className='text-2xl mb-5 container mx-auto'>Cast of {item.name || item.original_title}</h3>
-        <div className='flex gap-2'>
+        <div className='flex gap-4'>
           {cast.map((casts) => (
             <Cast list={casts} />
           ))}
