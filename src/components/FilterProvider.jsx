@@ -78,7 +78,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
   const [filter, setFilter] = useState(filters)
 
   useEffect(() => {
-    if (type === 'movies') {
+    type === 'movies' ?
       setFilter((prevFilter) =>
         prevFilter.map((filt) => {
           if (filt.id === 'movies') {
@@ -90,8 +90,21 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
           return filt
         }),
       )
-    }
-  }, [type, movieGenres])
+      :
+      setFilter((prevFilter) =>
+        prevFilter.map((filt) => {
+          if (filt.id === 'tv') {
+            return {
+              ...filt,
+              genres: tvGenres,
+            }
+          }
+          return filt
+        }),
+      )
+  }, [type])
+
+  console.log(filter);
 
   const handleSelected = (e) => {
     const genreId = parseInt(e.target.id)
@@ -205,7 +218,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
 
       <main className="mx-auto max-w-[95rem] px-4 sm:px-6 lg:px-8">
         {' '}
-        {/*//Main container starts */}
+        {/* Main container starts */}
         <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
           <h1 className="text-xl font-bold tracking-tight text-gray-900 md:text-3xl">
             New Arrivals
@@ -268,12 +281,13 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
             </button>
           </div>
         </div>
-        {/* =================================== Sidebar =================================== */}
+
+        {/* Sidebar  */}
         <section aria-labelledby="products-heading" className="pb-24">
           <div className="grid gap-x-[2%] lg:grid-cols-[16%_82%]">
             {/* Sidebar Filters */}
             <form className="hidden lg:block">
-              {/* =========================== Categories ======================== */}
+              {/* Categories */}
 
               <Disclosure as="div" className="border-b border-gray-200 py-6">
                 <h3 className="-my-3 flow-root">
@@ -341,8 +355,8 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
               </Disclosure>
             </form>
 
-            {/* Product grid */}
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
+            {/* Shows grid */}
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
               {children}
             </div>
           </div>

@@ -34,7 +34,8 @@ const TVShows = () => {
       setLoading(false)
     }
     fetchTVShows()
-  }, [currentPage, selectedGenres, searchQuery, pageCount])
+  }, [currentPage, selectedGenres, searchQuery])
+
 
   return (
     <section className="px-4 py-10">
