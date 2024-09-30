@@ -6,7 +6,7 @@ const SeasonsListing = ({ list }) => {
   return (
     <div
       key={list.id}
-      className=" w-fit overflow-hidden rounded-lg"
+      className="w-56 overflow-hidden rounded-lg"
     >
       <img
         src={
@@ -15,13 +15,13 @@ const SeasonsListing = ({ list }) => {
             : 'https://www.movienewz.com/img/films/poster-holder.jpg'
         }
         alt={list.title || list.name}
-        className="h-96 w-full rounded-lg object-fit"
+        className="rounded-lg object-fit"
       />
       <p>{list.name}</p>
-      <p>{list.episode_count} Episodes</p>
+      <p className='mt-auto'>{list.episode_count} Episodes</p>
     </div>
   )
-}
+};
 
 SeasonsListing.propTypes = {
   list: PropTypes.shape({
@@ -34,6 +34,6 @@ SeasonsListing.propTypes = {
     season_number: PropTypes.number,
     vote_average: PropTypes.number,
   }).isRequired,
-}
+};
 
 export default SeasonsListing

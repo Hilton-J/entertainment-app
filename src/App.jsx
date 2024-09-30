@@ -23,7 +23,7 @@ const App = () => {
         {/* <Route path='/search' element={<SearchPage />} /> */}
         <Route path="/:type/:id" element={<ViewPage />} />
         <Route path="*" element={<NotFoundPage />} />
-      </Route>,
+      </Route>
     ),
   )
 

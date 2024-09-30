@@ -84,10 +84,10 @@ const ViewPage = () => {
                 <p className="text-justify text-xs">{item.overview}</p>
                 <div className="text-xs">
                   <p>
-                    <strong>Country</strong>: {country.find(({ code }) => item.origin_country == code)?.name || 'N/A'}
+                    <strong>Country:</strong> {country.find(({ code }) => item.origin_country == code)?.name || 'N/A'}
                   </p>
                   <p>
-                    <strong>Type</strong>: {type === 'tv' ? 'TV Show' : 'Movie'}
+                    <strong>Type:</strong> {type === 'tv' ? 'TV Show' : 'Movie'}
                   </p>
                 </div>
 
@@ -96,8 +96,10 @@ const ViewPage = () => {
           </div>
         </div>
       </div>
+
       <div className='text-black container mx-auto'>
-        <h3>{item.number_of_seasons} Seasons</h3>
+        <h3 className='text-2xl'>{item.number_of_seasons}
+          {item.number_of_seasons > 1 ? ' Seasons' : ' Season'}</h3>
         <div className='flex gap-10'>
           {seasons.map((season) => (
             <SeasonsListing key={season.id} list={season} />
