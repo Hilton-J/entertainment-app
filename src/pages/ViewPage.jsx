@@ -7,6 +7,7 @@ import logo from '../assets/tmdb.svg'
 import SeasonsListing from '../components/SeasonsListing'
 // import MultiCarousel from '../components/MultiCarousel'
 import Cast from '../components/Cast'
+import DetailsHero from '../components/DetailsHero'
 
 const ViewPage = () => {
   const { type, id } = useParams()
@@ -23,7 +24,7 @@ const ViewPage = () => {
         `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}&language=en-US`,
       )
       setSeasons(() => data.seasons)
-      setReleaseDate(data.release_date || data.first_air_date)
+      // setReleaseDate(data.release_date || data.first_air_date)
       setGenres(data.genres.map((g) => g.name).join(', '));
       setItem(data)
     }
@@ -41,15 +42,13 @@ const ViewPage = () => {
 
   }, [type, id])
 
-  useEffect(() => {
-
-  }, [id, type])
-
   const backgroundImageUrl = item.backdrop_path
     ? `https://image.tmdb.org/t/p/w300${item.backdrop_path}`
     : 'https://www.movienewz.com/img/films/poster-holder.jpg';
 
   const releaseYear = releaseDate.split('-')[0];
+
+
 
   return (
     <section className="min-h-screen bg-blue-50 text-white flex flex-col gap-12">
@@ -111,6 +110,8 @@ const ViewPage = () => {
             </div>
           </div>
         </div>
+
+        {/* <DetailsHero item={item} genres={genres} /> */}
       </div>
 
       {type === 'tv' &&
@@ -126,19 +127,19 @@ const ViewPage = () => {
         </div>
       }
 
-      <div className='text-black '>
-        <h3 className='text-2xl mb-5 container mx-auto '>Cast of {item.name || item.original_title}</h3>
+      <div className='text-black container mx-auto'>
+        <h3 className='text-2xl mb-5'>Cast of {item.name || item.original_title}</h3>
         <div className='carousel-container'>
-          <div className=''>
-            <ul className='flex gap-4 overflow-x-scroll xl:px-[4.5rem]'>
-              {listCast.map((casts, index) => (
-                <Cast key={index} list={casts} />
-              ))}
-              {/* <MultiCarousel /> */}
-            </ul>
-          </div>
+          <ul className='flex gap-4 overflow-x-scroll'>
+            {listCast.map((casts, index) => (
+              <Cast key={index} list={casts} />
+            ))}
+            {/* <MultiCarousel /> */}
+          </ul>
         </div>
       </div>
+
+
     </section>
   )
 };
@@ -146,6 +147,6 @@ const ViewPage = () => {
 ViewPage.propTypes = {
   deleteItem: PropTypes.func,
   editItem: PropTypes.func,
-}
+};
 
 export default ViewPage
