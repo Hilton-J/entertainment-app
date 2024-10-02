@@ -1,19 +1,19 @@
 import { useParams } from 'react-router-dom'
+import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import country from '../data/country.json'
 import logo from '../assets/tmdb.svg'
 import SeasonsListing from '../components/SeasonsListing'
-// import MultiCarousel from '../components/MultiCarousel'
 import Cast from '../components/Cast'
-import DetailsHero from '../components/DetailsHero'
+// import DetailsHero from '../components/DetailsHero'
 
 const ViewPage = () => {
   const { type, id } = useParams()
   const [item, setItem] = useState([])
   const [genres, setGenres] = useState([])
-  const [releaseDate, setReleaseDate] = useState('')
+  const [releaseYear, setReleaseYear] = useState('')
   const [seasons, setSeasons] = useState([])
   const [listCast, setListCast] = useState([])
 
@@ -23,9 +23,12 @@ const ViewPage = () => {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}&language=en-US`,
       )
+
+      const releaseDate = data.release_date || data.first_air_date;
+
       setSeasons(() => data.seasons)
-      // setReleaseDate(data.release_date || data.first_air_date)
-      setGenres(data.genres.map((g) => g.name).join(', '));
+      setReleaseYear(releaseDate.split('-')[0])
+      setGenres(() => data.genres.map((g) => g.name).join(', '));
       setItem(data)
     }
 
@@ -33,7 +36,7 @@ const ViewPage = () => {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}`,
       )
-
+      // setReleaseDate()
       setListCast(data.cast);
     }
 
@@ -46,9 +49,7 @@ const ViewPage = () => {
     ? `https://image.tmdb.org/t/p/w300${item.backdrop_path}`
     : 'https://www.movienewz.com/img/films/poster-holder.jpg';
 
-  const releaseYear = releaseDate.split('-')[0];
-
-
+  // const releaseYear = releaseDate.split('-')[0];
 
   return (
     <section className="min-h-screen bg-blue-50 text-white flex flex-col gap-12">
@@ -83,12 +84,13 @@ const ViewPage = () => {
               <div className="flex w-full max-w-3xl flex-col gap-4">
                 <div className='space-y-5'>
                   <h1 className="text-3xl font-bold md:text-4xl">
-                    <a href={item.homepage} target='_blank'>{item.name || item.original_title}</a>
+                    <a href={item.homepage} target='_blank' rel="noreferrer">{item.name || item.original_title}</a>
                   </h1>
 
                   <div className='flex flex-col gap-2'>
 
-                    <div>{releaseYear}{item.episode_run_time && <span>{item.episode_run_time}m</span>}</div>
+                    <div>{releaseYear}
+                      {item.episode_run_time && <span>{item.episode_run_time}m</span>}</div>
                     <div>{genres}</div>
                     <div className='flex gap-3'>
                       <img src={logo} alt='TMDB Logo' className='w-12 h-6' />{parseFloat(item.vote_average).toFixed(1)}

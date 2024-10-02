@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react'
@@ -39,7 +40,7 @@ const DetailsHero = ({ item, genres }) => {
           <div className="flex w-full max-w-3xl flex-col gap-4">
             <div className='space-y-5'>
               <h1 className="text-3xl font-bold md:text-4xl">
-                <a href={item.homepage} target='_blank'>{item.name || item.original_title}</a>
+                <a href={item.homepage} target='_blank' rel='noreferrer'>{item.name || item.original_title}</a>
               </h1>
 
               <div className='flex flex-col gap-2'>

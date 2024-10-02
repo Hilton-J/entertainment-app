@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactPaginate from 'react-paginate'
 // import { useState } from 'react'
 import PropTypes from 'prop-types'

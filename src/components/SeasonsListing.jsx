@@ -1,5 +1,6 @@
+import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const SeasonsListing = ({ list }) => {
 
@@ -33,6 +34,7 @@ SeasonsListing.propTypes = {
     poster_path: PropTypes.string,
     season_number: PropTypes.number,
     vote_average: PropTypes.number,
+    title: PropTypes.string
   }).isRequired,
 };
 

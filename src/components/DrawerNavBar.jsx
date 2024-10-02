@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'

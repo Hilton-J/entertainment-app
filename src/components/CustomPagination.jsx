@@ -1,3 +1,4 @@
+import React from 'react'
 import { Pagination } from '@mui/material'
 import PropTypes from 'prop-types'
 

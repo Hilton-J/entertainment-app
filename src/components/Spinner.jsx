@@ -1,3 +1,4 @@
+import React from 'react'
 import PropType from 'prop-types'
 import ClipLoader from 'react-spinners/ClipLoader'
 

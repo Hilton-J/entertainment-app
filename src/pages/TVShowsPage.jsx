@@ -1,3 +1,4 @@
+import React from 'react'
 import TVShows from '../components/TVShows'
 
 const TVShowsPage = () => {

@@ -1,10 +1,11 @@
 // import PropTypes from 'prop-types';
+import React from 'react'
 import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 import Listing from './Listing'
 import Spinner from './Spinner'
-import Genres from './Genres'
-import useGenres from '../Hooks/useGenres'
+// import Genres from './Genres'
+// import useGenres from '../Hooks/useGenres'
 import Paginate from './Paginate'
 import FilterProvider from './FilterProvider'
 import { GenreContext } from '../contexts/GenreContext'
