@@ -20,9 +20,7 @@ const ViewPage = () => {
   useEffect(() => {
     // const apiKey = import.meta.env.VITE_API_KEY
     const fetchItem = async () => {
-      const { data } = await axios.get(
-        `/api/${type}/${id}`,
-      )
+      const { data } = await axios.get(`/api/${type}/${id}`)
       // console.log(data);
       const releaseDate = data.release_date || data.first_air_date;
 

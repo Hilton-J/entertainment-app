@@ -9,19 +9,16 @@ const Trending = () => {
   const [loading, setLoading] = useState(true)
   const [content, setContent] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
-  const [pageCount, setPageCount] = useState(50)
+  const [pageCount, setPageCount] = useState(0)
 
   useEffect(() => {
     const fetchTrending = async () => {
       // const apiKey = import.meta.env.VITE_API_KEY
-      const { data } = await axios.get(
-        `/api/trending`
-      )
-      console.log(data);
-      data.total_pages < 50 && setPageCount(data.total_pages)
+      const { data } = await axios.get('/api/trending')
+      data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
       setContent(data.results)
 
-      data > 0 && setLoading(false)
+      setLoading(false)
     }
     fetchTrending()
   }, [currentPage])
@@ -42,7 +39,7 @@ const Trending = () => {
           ) : (
             <p>No trending content available</p>
           )} */}
-          {loading && content.length < 0 ? (
+          {loading ? (
             <Spinner />
           ) : (
             <div className="grid justify-center gap-3 sm:grid-cols-3 lg:grid-cols-4">
@@ -52,7 +49,7 @@ const Trending = () => {
             </div>
           )}
 
-          <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />
+          {pageCount > 2 && <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />}
         </div>
       </div>
     </section>

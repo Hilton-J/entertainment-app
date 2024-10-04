@@ -105,8 +105,6 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
       )
   }, [type])
 
-  console.log(filter);
-
   const handleSelected = (e) => {
     const genreId = parseInt(e.target.id)
 

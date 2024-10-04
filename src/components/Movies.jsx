@@ -13,19 +13,19 @@ const Movies = () => {
   const [movieList, setMovieList] = useState([])
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
-  const [pageCount, setPageCount] = useState(50)
+  const [pageCount, setPageCount] = useState(0)
   const [searchQuery, setSearchQuery] = useState('')
   // const genreURL = useGenres(selectedGenres);
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const apiKey = import.meta.env.VITE_API_KEY
+      // const apiKey = import.meta.env.VITE_API_KEY
       const apiURL = !searchQuery
-        ? `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${currentPage}&with_genres=${selectedGenres}`
-        : `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${currentPage}&include_adult=false`
+        ? `/api/discover/movie?page=${currentPage}&with_genres=${selectedGenres}`
+        : `/api/search/movie?query=${searchQuery}&page=${currentPage}`
 
       const { data } = await axios.get(apiURL)
-      data.total_pages < 50 && setPageCount(data.total_pages)
+      data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
       setMovieList(data.results)
       setLoading(false)
     }
@@ -49,7 +49,7 @@ const Movies = () => {
           </FilterProvider>
         )}
 
-        <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />
+        {pageCount > 2 && <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />}
       </div>
     </section>
   )

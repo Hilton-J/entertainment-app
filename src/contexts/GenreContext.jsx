@@ -10,29 +10,22 @@ export const GenreProvider = ({ children }) => {
   const [movieGenres, setMovieGenres] = useState([])
   const [selectedGenres, setSelectedGenres] = useState([])
 
-  const apiKey = import.meta.env.VITE_API_KEY
+  // const apiKey = import.meta.env.VITE_API_KEY
 
   // Fetch Genres on Initial Render
   useEffect(() => {
     const fetchMovieGenres = async () => {
-      const { data } = await axios.get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`,
-      )
+      const { data } = await axios.get('/api/movie');
       setMovieGenres(data.genres)
     }
 
-    fetchMovieGenres()
-  }, [apiKey])
-
-  useEffect(() => {
     const fetchTvGenres = async () => {
-      const { data } = await axios.get(
-        `https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}`,
-      )
-      setTvGenres(data.genres)
+      const { data } = await axios.get('/api/tv/genre');
+      setTvGenres(data.genres);
     }
     fetchTvGenres()
-  }, [apiKey])
+    fetchMovieGenres()
+  }, [])
 
   return (
     <GenreContext.Provider
