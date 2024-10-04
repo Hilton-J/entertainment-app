@@ -18,15 +18,15 @@ const ViewPage = () => {
   const [listCast, setListCast] = useState([])
 
   useEffect(() => {
-    const apiKey = import.meta.env.VITE_API_KEY
+    // const apiKey = import.meta.env.VITE_API_KEY
     const fetchItem = async () => {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}&language=en-US`,
+        `/api/${type}/${id}`,
       )
-
+      // console.log(data);
       const releaseDate = data.release_date || data.first_air_date;
 
-      setSeasons(() => data.seasons)
+      setSeasons(data.seasons)
       setReleaseYear(releaseDate.split('-')[0])
       setGenres(() => data.genres.map((g) => g.name).join(', '));
       setItem(data)
@@ -34,7 +34,7 @@ const ViewPage = () => {
 
     const fetchCrew = async () => {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}`,
+        `/api/${type}/${id}/credits`,
       )
       // setReleaseDate()
       setListCast(data.cast);

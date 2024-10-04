@@ -13,14 +13,15 @@ const Trending = () => {
 
   useEffect(() => {
     const fetchTrending = async () => {
-      const apiKey = import.meta.env.VITE_API_KEY
+      // const apiKey = import.meta.env.VITE_API_KEY
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}&page=${currentPage}`,
+        `/api/trending`
       )
-
+      console.log(data);
       data.total_pages < 50 && setPageCount(data.total_pages)
       setContent(data.results)
-      setLoading(false)
+
+      data > 0 && setLoading(false)
     }
     fetchTrending()
   }, [currentPage])
@@ -32,7 +33,16 @@ const Trending = () => {
           <h2 className="mb-5 text-center text-2xl font-bold md:text-4xl">
             TRENDING
           </h2>
-          {loading ? (
+          {/* {!loading && content.length > 0 ? (
+            <div className="grid justify-center gap-3 sm:grid-cols-3 lg:grid-cols-4">
+              {content.map((movie) => (
+                <Listing key={movie.id} list={movie} type={movie.media_type} />
+              ))}
+            </div>
+          ) : (
+            <p>No trending content available</p>
+          )} */}
+          {loading && content.length < 0 ? (
             <Spinner />
           ) : (
             <div className="grid justify-center gap-3 sm:grid-cols-3 lg:grid-cols-4">

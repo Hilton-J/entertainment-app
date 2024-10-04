@@ -35,7 +35,7 @@ const DrawerNavBar = ({ isMenuOpen, toggleMenu, linkClass }) => {
           </li>
           <li>
             <NavLink
-              to={'/tv-shows'}
+              to={'/tv'}
               onClick={toggleMenu}
               className={({ isActive }) =>
                 `${linkClass({ isActive })} hover:text-blue-500`

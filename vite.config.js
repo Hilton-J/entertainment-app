@@ -7,14 +7,20 @@ export default defineConfig({
   server: {
     port: 3002,
     proxy: {
-      '/api': {
-        target: 'https://api.themoviedb.org/3/',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      }
-    }
+      '/api': 'http://localhost:5000', // Ensure that Vite forwards `/api` to your backend
+    },
   },
   optimizeDeps: {
     include: ['react-multi-carousel'],
   },
 })
+// server: {
+//   port: 3002,
+//     proxy: {
+//     '/api': {
+//       target: 'http://localhost:8080',
+//         changeOrigin: true,
+//           rewrite: (path) => path.replace(/^\/api/, ''),
+//       }
+//   }
+// },
