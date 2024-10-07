@@ -1,17 +1,21 @@
 import express from 'express';
 import axios from 'axios';
-// import cors from 'cors';
+import cors from 'cors';
 import dotenv from 'dotenv';
-// import trendingRouter from './routes/route.mjs'
+import trendingRouter from './routes/trendingRoute.mjs'
 
 dotenv.config(); // Loads environment variables from .env file
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000
+const BASE_URL = 'https://api.themoviedb.org/3';
 
 const apiKey = process.env.TMDB_API_KEY;
 
-//app.use(cors()); // Enable Cross-Origin Resource Sharing for the frontend
+//Middleware
+app.use(cors()); // Enable Cross-Origin Resource Sharing for the frontend
+app.use(express.json());
+
 
 // Route to handle TMDB API requests
 app.get('/api/:type/:id', async (req, res) => {
@@ -38,21 +42,22 @@ app.get('/api/:type/:id/credits', async (req, res) => {
   }
 });
 
-app.get('/api/trending', async (req, res) => {
-  try {
-    const { data } = await axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}`);
-    res.json(data);
-  } catch (error) {
-    console.error('Error fetching trending data: ', error);
-    res.status(500).send('Error fetching trending data');
-  }
-});
+app.use('/api/trending', trendingRouter);
+
+// app.get('/api/trending', async (req, res) => {
+//   try {
+//     const { data } = await axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}`);
+//     res.json(data);
+//   } catch (error) {
+//     console.error('Error fetching trending data: ', error);
+//     res.status(500).send('Error fetching trending data');
+//   }
+// });
 
 app.get('/api/movie', async (req, res) => {
   try {
-    const { data } = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`);
+    const { data } = await axios.get(`${BASE_URL}/genre/movie/list?api_key=${apiKey}`);
     res.json(data);
-    console.log(data);
   } catch (error) {
     console.error('Error fetching trending data: ', error);
     res.status(500).send('Error fetching trending data');
@@ -63,13 +68,14 @@ app.get('/api/discover/movie', async (req, res) => {
   const { page, with_genres } = req.query;
 
   try {
-    const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&page=${page}&with_genres=${with_genres}`);
+    const { data } = await axios.get(`${BASE_URL}/discover/movie?api_key=${apiKey}&include_adult=false&page=${page}&with_genres=${with_genres}`);
     res.json(data);
   } catch (error) {
     console.error('Error fetching trending data: ', error);
     res.status(500).send('Error fetching trending data');
   }
 });
+
 app.get('/api/search/movie', async (req, res) => {
   const { query, page } = req.query;
 
@@ -83,11 +89,10 @@ app.get('/api/search/movie', async (req, res) => {
 });
 
 
-app.get('/api/tv/genre', async (req, res) => {
+app.get('/api/tv', async (req, res) => {
   try {
     const { data } = await axios.get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}`);
     res.json(data);
-    console.log(data);
   } catch (error) {
     console.error('Error fetching trending data: ', error);
     res.status(500).send('Error fetching trending data');

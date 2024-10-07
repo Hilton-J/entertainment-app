@@ -20,7 +20,7 @@ export const GenreProvider = ({ children }) => {
     }
 
     const fetchTvGenres = async () => {
-      const { data } = await axios.get('/api/tv/genre');
+      const { data } = await axios.get('/api/tv');
       setTvGenres(data.genres);
     }
     fetchTvGenres()
