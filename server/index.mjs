@@ -3,6 +3,7 @@ import axios from 'axios';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import trendingRouter from './routes/trendingRoute.mjs'
+// import movieRouter from './routes/movieRoute.mjs'
 
 dotenv.config(); // Loads environment variables from .env file
 
@@ -63,6 +64,8 @@ app.get('/api/movie', async (req, res) => {
     res.status(500).send('Error fetching trending data');
   }
 });
+
+// app.use('/api/discover/movie', movieRouter);
 
 app.get('/api/discover/movie', async (req, res) => {
   const { page, with_genres } = req.query;
