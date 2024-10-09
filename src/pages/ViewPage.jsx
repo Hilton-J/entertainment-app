@@ -20,8 +20,7 @@ const ViewPage = () => {
   useEffect(() => {
     // const apiKey = import.meta.env.VITE_API_KEY
     const fetchItem = async () => {
-      const { data } = await axios.get(`/api/${type}/${id}`)
-      // console.log(data);
+      const { data } = await axios.get(`/api/${type}/${id}`);
       const releaseDate = data.release_date || data.first_air_date;
 
       setSeasons(data.seasons)
@@ -110,7 +109,6 @@ const ViewPage = () => {
             </div>
           </div>
         </div>
-
         {/* <DetailsHero item={item} genres={genres} /> */}
       </div>
 
@@ -122,7 +120,6 @@ const ViewPage = () => {
             {seasons.map((season) => (
               <SeasonsListing key={season.id} list={season} />
             ))}
-
           </div>
         </div>
       }

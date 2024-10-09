@@ -65,13 +65,23 @@ app.get('/api/movie', async (req, res) => {
   }
 });
 
+//=============================================================================================================================
+
 // app.use('/api/discover/movie', movieRouter);
 
 app.get('/api/discover/movie', async (req, res) => {
   const { page, with_genres } = req.query;
 
   try {
-    const { data } = await axios.get(`${BASE_URL}/discover/movie?api_key=${apiKey}&include_adult=false&page=${page}&with_genres=${with_genres}`);
+    const { data } = await axios.get(`${BASE_URL}/discover/movie`, {
+      params: {
+        api_key: apiKey,
+        include_adult: false,
+        page,
+        with_genres,
+      },
+    });
+
     res.json(data);
   } catch (error) {
     console.error('Error fetching trending data: ', error);
@@ -83,13 +93,27 @@ app.get('/api/search/movie', async (req, res) => {
   const { query, page } = req.query;
 
   try {
-    const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=${page}&include_adult=false`);
+    const { data } = await axios.get(`${BASE_URL}/search/movie`, {
+      params: {
+        api_key: apiKey,
+        language: 'en-US',
+        query,
+        page,
+        include_adult: false,
+      },
+    });
+    console.log(data);
     res.json(data);
   } catch (error) {
     console.error('Error fetching trending data: ', error);
     res.status(500).send('Error fetching trending data');
   }
 });
+
+//=============================================================================================================================
+
+
+
 
 
 app.get('/api/tv', async (req, res) => {

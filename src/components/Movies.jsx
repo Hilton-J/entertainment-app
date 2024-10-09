@@ -20,14 +20,20 @@ const Movies = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       // const apiKey = import.meta.env.VITE_API_KEY
-      const apiURL = !searchQuery
-        ? `/api/discover/movie?page=${currentPage}&with_genres=${selectedGenres}`
-        : `/api/search/movie?query=${searchQuery}&page=${currentPage}`
+      try {
+        const apiURL = !searchQuery
+          ? `/api/discover/movie?page=${currentPage}&with_genres=${selectedGenres}`
+          : `/api/search/movie?query=${searchQuery}&page=${currentPage}`;
 
-      const { data } = await axios.get(apiURL)
-      data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
-      setMovieList(data.results)
-      setLoading(false)
+        const { data } = await axios.get(apiURL)
+        data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
+        console.log(data);
+        setMovieList(data.results)
+      } catch (error) {
+        console.error('Error fetching movie data: ', error);
+      } finally {
+        setLoading(false)
+      }
     }
     fetchMovies()
   }, [currentPage, selectedGenres, searchQuery])
