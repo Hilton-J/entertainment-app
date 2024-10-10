@@ -15,15 +15,16 @@ export const GenreProvider = ({ children }) => {
   // Fetch Genres on Initial Render
   useEffect(() => {
     const fetchMovieGenres = async () => {
-      const { data } = await axios.get('/api/movie');
-      setMovieGenres(data.genres)
+      const { data } = await axios.get('/api/discover/movie/genre');
+      setMovieGenres(data.genres);
+      console.log(data);
     }
 
     const fetchTvGenres = async () => {
       const { data } = await axios.get('/api/tv');
       setTvGenres(data.genres);
     }
-    
+
     fetchTvGenres()
     fetchMovieGenres()
   }, [])

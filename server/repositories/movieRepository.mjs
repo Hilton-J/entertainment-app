@@ -8,4 +8,12 @@ export class MovieRepository {
   async discoverMovies(page, with_genres) {
     return this.service.discoverMovies(page, with_genres);
   }
+
+  async discoverMovies1(page) {
+    return this.service.discoverMovies(page);
+  }
+
+  async movieGenres() {
+    return this.service.movieGenres();
+  }
 }

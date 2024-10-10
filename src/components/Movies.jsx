@@ -26,13 +26,11 @@ const Movies = () => {
       // if (selectedGenres) moviesURL += `/${selectedGenres}`
 
       try {
-        const apiURL = !searchQuery
-          ? `/api/discover/movie/${currentPage}/${selectedGenres}`
-          : `/api/search/movie/${searchQuery}/${currentPage}`;
+        const apiURL = searchQuery
+          ? `/api/search/movie/${searchQuery}/${currentPage}` : `/api/discover/movie/${currentPage}${selectedGenres ? '/' + selectedGenres : ''}`;
 
         const { data } = await axios.get(apiURL)
         data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
-        console.log(data);
         setMovieList(data.results)
       } catch (error) {
         console.error('Error fetching movie data: ', error);

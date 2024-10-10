@@ -3,7 +3,7 @@ import axios from 'axios';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import trendingRouter from './routes/trendingRoute.mjs'
-// import movieRouter from './routes/movieRoute.mjs'
+import movieRouter from './routes/movieRoute.mjs'
 
 dotenv.config(); // Loads environment variables from .env file
 
@@ -67,27 +67,27 @@ app.get('/api/movie', async (req, res) => {
 
 //=============================================================================================================================
 
-// app.use('/api/discover/movie', movieRouter);
+app.use('/api/discover/movie', movieRouter);
 
-app.get('/api/discover/movie/:page/:genres', async (req, res) => {
-  const { page, genres } = req.params;
-  console.log(genres);
-  try {
-    const { data } = await axios.get(`${BASE_URL}/discover/movie`, {
-      params: {
-        api_key: apiKey,
-        include_adult: false,
-        page,
-        with_genres: genres,
-      },
-    });
+// app.get('/api/discover/movie/:page/:genres', async (req, res) => {
+//   const { page, genres } = req.params;
+//   console.log(genres);
+//   try {
+//     const { data } = await axios.get(`${BASE_URL}/discover/movie`, {
+//       params: {
+//         api_key: apiKey,
+//         include_adult: false,
+//         page,
+//         with_genres: genres,
+//       },
+//     });
 
-    res.status(200).json(data);
-  } catch (error) {
-    console.error('Error fetching trending data: ', error);
-    res.status(500).send('Error fetching trending data');
-  }
-});
+//     res.status(200).json(data);
+//   } catch (error) {
+//     console.error('Error fetching trending data: ', error);
+//     res.status(500).send('Error fetching trending data');
+//   }
+// });
 
 app.get('/api/search/movie/:query/:page', async (req, res) => {
   const { query, page } = req.params;

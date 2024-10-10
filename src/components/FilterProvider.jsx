@@ -282,7 +282,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
         </div>
 
         {/* Sidebar  */}
-        <section aria-labelledby="products-heading" className="pb-24">
+        <section aria-labelledby="products-heading" className="pb-24 h-screen">
           <div className="grid gap-x-[2%] lg:grid-cols-[16%_82%]">
             {/* Sidebar Filters */}
             <form className="hidden lg:block">

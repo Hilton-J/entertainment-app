@@ -9,6 +9,13 @@ const controller = new MovieController();
 router.get('/:page/:genres',
   controller.discoverMovies.bind(controller)
 );
+router.get('/:page',
+  controller.discoverMovies1.bind(controller)
+);
+router.get('/genre',
+  controller.movieGenres.bind(controller)
+);
+
 
 // router.get('/', async (req, res) => {
 //   try {
