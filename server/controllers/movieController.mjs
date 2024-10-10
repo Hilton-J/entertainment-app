@@ -32,6 +32,7 @@ export class MovieController {
   async movieGenres(req, res) {
     try {
       const genres = await this.repository.movieGenres();
+      console.log(req);
       res.json(genres);
       // res.status(200).json(movies); //with status(200), you're explicitly setting the OK responce code to 200
     } catch (error) {

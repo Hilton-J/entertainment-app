@@ -9,11 +9,10 @@ const api_key = process.env.TMDB_API_KEY;
 export class MovieService {
   async movieGenres() {
     try {
-
       const { data } = await axios.get(`${baseUrl}/genre/movie/list?api_key=${api_key}`);
       return data;
     } catch (error) {
-      console.error('Error fetching trending data from TMDB:', error);
+      console.error('Error fetching movie genres data from TMDB:', error);
       throw error;
     }
   }

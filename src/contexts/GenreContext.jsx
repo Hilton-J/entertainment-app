@@ -17,7 +17,6 @@ export const GenreProvider = ({ children }) => {
     const fetchMovieGenres = async () => {
       const { data } = await axios.get('/api/discover/movie/genre');
       setMovieGenres(data.genres);
-      console.log(data);
     }
 
     const fetchTvGenres = async () => {

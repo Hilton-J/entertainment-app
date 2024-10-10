@@ -26,8 +26,13 @@ const Movies = () => {
       // if (selectedGenres) moviesURL += `/${selectedGenres}`
 
       try {
+
+        let url = `/api/discover/movie/${currentPage}`;
+
+        if (selectedGenres) url += `/${selectedGenres}`
+
         const apiURL = searchQuery
-          ? `/api/search/movie/${searchQuery}/${currentPage}` : `/api/discover/movie/${currentPage}${selectedGenres ? '/' + selectedGenres : ''}`;
+          ? `/api/search/movie/${searchQuery}/${currentPage}` : url;
 
         const { data } = await axios.get(apiURL)
         data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
