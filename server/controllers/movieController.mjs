@@ -6,10 +6,10 @@ export class MovieController {
   }
 
   async discoverMovies(req, res) {
-    const { page, with_genres } = req.query;
-
+    const { page, genres } = req.params;
+    
     try {
-      const movies = await this.repository.discoverMovies(page, with_genres);
+      const movies = await this.repository.discoverMovies(page, genres);
       res.json(movies);
       // res.status(200).json(movies);
     } catch (error) {

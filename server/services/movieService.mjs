@@ -8,15 +8,17 @@ const apiKey = process.env.TMDB_API_KEY;
 
 export class MovieService {
   async discoverMovies(pageNum, genres) {
+    const page = pageNum;      // Default to page 1
+
     try {
       const params = {
         api_key: apiKey,
-        page: pageNum,
+        page,
         with_genres: genres,
-        include_adult: false,
-      };
+        include_adul: false,
+      }
 
-      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie`, { params });
+      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?`, { params });
       console.log(data);
       return data;
     } catch (error) {

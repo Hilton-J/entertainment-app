@@ -20,10 +20,15 @@ const Movies = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       // const apiKey = import.meta.env.VITE_API_KEY
+
+      // let moviesURL = `/api/discover/movie/${currentPage}`;
+
+      // if (selectedGenres) moviesURL += `/${selectedGenres}`
+
       try {
         const apiURL = !searchQuery
-          ? `/api/discover/movie?page=${currentPage}&with_genres=${selectedGenres}`
-          : `/api/search/movie?query=${searchQuery}&page=${currentPage}`;
+          ? `/api/discover/movie/${currentPage}/${selectedGenres}`
+          : `/api/search/movie/${searchQuery}/${currentPage}`;
 
         const { data } = await axios.get(apiURL)
         data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
