@@ -24,10 +24,15 @@ const TVShows = () => {
 
   useEffect(() => {
     const fetchTVShows = async () => {
-      const apiKey = import.meta.env.VITE_API_KEY
+      // const apiKey = import.meta.env.VITE_API_KEY
+
+      let moviesURL = `/api/discover/tv/${currentPage}`;
+
+      if (selectedGenres) moviesURL += `/${selectedGenres}`;
+
       const apiURL = !searchQuery
-        ? `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&include_adult=false&page=${currentPage}&with_genres=${selectedGenres}`
-        : `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${currentPage}&include_adult=false`
+        ? moviesURL
+        : `/api/search/movie/${searchQuery}/${currentPage}`
 
       const { data } = await axios.get(apiURL)
       data.total_pages < 50 && setPageCount(data.total_pages)

@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import trendingRouter from './routes/trendingRoute.mjs'
 import movieRouter from './routes/movieRoute.mjs'
+import tvRouter from './routes/tvShowRoute.mjs'
 
 dotenv.config(); // Loads environment variables from .env file
 
@@ -68,6 +69,8 @@ app.get('/api/movie', async (req, res) => {
 //=============================================================================================================================
 
 app.use('/api/discover/movie', movieRouter);
+
+app.use('/api/discover/tv', tvRouter);
 
 // app.get('/api/discover/movie/:page/:genres', async (req, res) => {
 //   const { page, genres } = req.params;

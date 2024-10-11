@@ -23,4 +23,20 @@ export class TVShowService {
       throw error;
     }
   }
+
+  async dicoverTVShow1(page) {
+    try {
+      let params = {
+        api_key,
+        page,
+        include_adult: false
+      };
+
+      const { data } = await axios.get(`${baseUrl}/discover/tv`, { params });
+      return data;
+    } catch (error) {
+      console.error('Error fetching trending data from TMDB:', error);
+      throw error;
+    }
+  }
 }
