@@ -43,7 +43,7 @@ app.get('/api/:type/:id/credits', async (req, res) => {
   }
 });
 
-app.use('/api/trending', trendingRouter);
+app.use('/api/trending', trendingRouter); // This mounts trending router to the app. /api/trending is my entry point to the router, like a baseURL
 
 // app.get('/api/trending', async (req, res) => {
 //   try {

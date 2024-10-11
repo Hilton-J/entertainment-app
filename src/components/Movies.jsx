@@ -21,22 +21,19 @@ const Movies = () => {
     const fetchMovies = async () => {
       // const apiKey = import.meta.env.VITE_API_KEY
 
-      // let moviesURL = `/api/discover/movie/${currentPage}`;
+      let moviesURL = `/api/discover/movie/${currentPage}`;
 
-      // if (selectedGenres) moviesURL += `/${selectedGenres}`
+      if (selectedGenres) moviesURL += `/${selectedGenres}`
 
+      console.log(selectedGenres);
       try {
-
-        let url = `/api/discover/movie/${currentPage}`;
-
-        if (selectedGenres) url += `/${selectedGenres}`
-
         const apiURL = searchQuery
-          ? `/api/search/movie/${searchQuery}/${currentPage}` : url;
+          ? `/api/search/movie/${searchQuery}/${currentPage}` : moviesURL;
 
-        const { data } = await axios.get(apiURL)
-        data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
-        setMovieList(data.results)
+        const { data } = await axios.get(apiURL);
+        data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50);
+        setMovieList(data.results);
+
       } catch (error) {
         console.error('Error fetching movie data: ', error);
       } finally {
@@ -63,7 +60,7 @@ const Movies = () => {
           </FilterProvider>
         )}
 
-        {pageCount > 2 && <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />}
+        {pageCount > 2 ? <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} /> : ''}
       </div>
     </section>
   )

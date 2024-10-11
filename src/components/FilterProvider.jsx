@@ -152,7 +152,6 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
 
             {/* Filters */}
             <form className="mt-4 border-t border-gray-200">
-              <h3 className="sr-only">Categories</h3>
               <ul role="list" className="px-2 py-3 font-medium text-gray-900">
                 {subCategories.map((category) => (
                   <li key={category.name}>
@@ -282,7 +281,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
         </div>
 
         {/* Sidebar  */}
-        <section aria-labelledby="products-heading" className="pb-24 h-screen">
+        <section aria-labelledby="products-heading" className="pb-24 min-h-screen">
           <div className="grid gap-x-[2%] lg:grid-cols-[16%_82%]">
             {/* Sidebar Filters */}
             <form className="hidden lg:block">

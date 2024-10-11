@@ -5,13 +5,12 @@ import { MovieController } from '../controllers/movieController.mjs'
 const router = express.Router();
 
 const controller = new MovieController();
+router.get('/:page',
+  controller.discoverMovies1.bind(controller)
+);
 
 router.get('/:page/:genres',
   controller.discoverMovies.bind(controller)
-);
-
-router.get('/:page',
-  controller.discoverMovies1.bind(controller)
 );
 
 router.get('/genre',

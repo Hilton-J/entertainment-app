@@ -33,15 +33,15 @@ export class MovieService {
     }
   }
 
-  async discoverMovies(page, genres) {
+  async discoverMovies(page, with_genres) {
     // Default to page 1
 
     try {
-      const params = {
+      let params = {
         api_key,
         page,
-        with_genres: genres,
         include_adult: false,
+        with_genres
       };
 
       const { data } = await axios.get(`${baseUrl}/discover/movie`, { params });
