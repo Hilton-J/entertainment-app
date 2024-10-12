@@ -1,21 +1,13 @@
-import express from 'express'
-import { MovieController } from '../controllers/movieController.mjs'
-// import axios from 'axios'
+import express from 'express';
+import { MovieController } from '../controllers/movieController.mjs';
 
 const router = express.Router();
-
 const controller = new MovieController();
 
-router.get('/:page',
-  controller.discoverMovies1.bind(controller)
-);
-
-router.get('/:page/:genres',
-  controller.discoverMovies.bind(controller)
-);
-
-router.get('/',
-  controller.movieGenres.bind(controller)
-);
+router.get('/genre', controller.movieGenres.bind(controller));
+router.get('/movies/:page', controller.discoverMovies.bind(controller));
+router.get('/dicover/:page/:genres', controller.discoverMoviesWithGenres.bind(controller));
+router.get('/movie-id/:id', (req, res) => controller.fetchMovieByID(req, res));
+router.get('/credits/:id', (req, res) => controller.fetchMovieCast(req, res));
 
 export default router;

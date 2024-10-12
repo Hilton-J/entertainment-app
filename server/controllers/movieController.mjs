@@ -5,18 +5,17 @@ export class MovieController {
     this.repository = new MovieRepository();
   }
 
-  async discoverMovies(req, res) {
-    const { page, genres } = req.params;
-
+  async movieGenres(req, res) {
     try {
-      const movies = await this.repository.discoverMovies(page, genres);
-      res.json(movies);
+      const genres = await this.repository.movieGenres();
+      res.json(genres);
+      // res.status(200).json(movies); //with status(200), you're explicitly setting the OK responce code to 200
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch movies' });
     }
   }
 
-  async discoverMovies1(req, res) {
+  async discoverMovies(req, res) {
     const { page } = req.params;
 
     try {
@@ -28,12 +27,34 @@ export class MovieController {
     }
   }
 
-  async movieGenres(req, res) {
+  async discoverMoviesWithGenres(req, res) {
+    const { page, genres } = req.params;
+
     try {
-      const genres = await this.repository.movieGenres();
-      console.log(req);
-      res.json(genres);
-      // res.status(200).json(movies); //with status(200), you're explicitly setting the OK responce code to 200
+      const movies = await this.repository.discoverMoviesWithGenres(page, genres);
+      res.json(movies);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch movies' });
+    }
+  }
+
+  async fetchMovieByID(req, res) {
+    const { id } = req.params;
+
+    try {
+      const movie = await this.repository.fetchMovieByID(id);
+      res.json(movie);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch movies' });
+    }
+  }
+
+  async fetchMovieCast(req, res) {
+    const { id } = req.params;
+
+    try {
+      const cast = await this.repository.fetchMovieCast(id);
+      res.json(cast);
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch movies' });
     }

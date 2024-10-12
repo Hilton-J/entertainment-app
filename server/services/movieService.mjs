@@ -17,7 +17,7 @@ export class MovieService {
     }
   }
 
-  async discoverMovies1(page) {
+  async discoverMovies(page) {
     try {
       const params = {
         api_key,
@@ -28,14 +28,12 @@ export class MovieService {
       const { data } = await axios.get(`${baseUrl}/discover/movie`, { params });
       return data;
     } catch (error) {
-      console.error('Error fetching trending data from TMDB:', error);
+      console.error('Error fetching Movie data W/O Params from TMDB:', error);
       throw error;
     }
   }
 
-  async discoverMovies(page, with_genres) {
-    // Default to page 1
-
+  async discoverMoviesWithGenres(page, with_genres) {
     try {
       let params = {
         api_key,
@@ -47,7 +45,27 @@ export class MovieService {
       const { data } = await axios.get(`${baseUrl}/discover/movie`, { params });
       return data;
     } catch (error) {
-      console.error('Error fetching trending data from TMDB:', error);
+      console.error('Error fetching movie data with PARAMS from TMDB:', error);
+      throw error;
+    }
+  }
+
+  async fetchMovieByID(id) {
+    try {
+      const { data } = await axios.get(`${baseUrl}/movie/${id}?api_key=${api_key}&language=en-US`);
+      return data;
+    } catch (error) {
+      console.error('Error fetching movie data by ID from TMDB:', error);
+      throw error;
+    }
+  }
+
+  async fetchMovieCast(id) {
+    try {
+      const { data } = await axios.get(`${baseUrl}/movie/${id}/credits?api_key=${api_key}`);
+      return data;
+    } catch (error) {
+      console.error('Error fetching movie cast from TMDB:', error);
       throw error;
     }
   }

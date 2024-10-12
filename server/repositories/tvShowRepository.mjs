@@ -1,7 +1,7 @@
 import { TVShowService } from "../services/tvSHowService.mjs";
 
 export class TVShowRepository {
-  contructor() {
+  constructor() {
     this.service = new TVShowService();
   }
 

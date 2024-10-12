@@ -1,7 +1,7 @@
 import { TVShowRepository } from "../repositories/tvShowRepository.mjs";
 
 export class TVShowController {
-  contructor() {
+  constructor() {
     this.repository = new TVShowRepository();
   }
 

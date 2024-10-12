@@ -5,15 +5,23 @@ export class MovieRepository {
     this.service = new MovieService();
   }
 
-  async discoverMovies(page, with_genres) {
-    return this.service.discoverMovies(page, with_genres);
+  async movieGenres() {
+    return this.service.movieGenres();
   }
 
-  async discoverMovies1(page) {
+  async discoverMovies(page) {
     return this.service.discoverMovies(page);
   }
 
-  async movieGenres() {
-    return this.service.movieGenres();
+  async discoverMoviesWithGenres(page, with_genres) {
+    return this.service.discoverMoviesWithGenres(page, with_genres);
+  }
+
+  async fetchMovieByID(id) {
+    return this.service.fetchMovieByID(id);
+  }
+
+  async fetchMovieCast(id) {
+    return this.service.fetchMovieCast(id);
   }
 }

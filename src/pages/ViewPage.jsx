@@ -18,9 +18,8 @@ const ViewPage = () => {
   const [listCast, setListCast] = useState([])
 
   useEffect(() => {
-    // const apiKey = import.meta.env.VITE_API_KEY
     const fetchItem = async () => {
-      const { data } = await axios.get(`/api/${type}/${id}`);
+      const { data } = await axios.get(`/api/movie/movie-id/${id}`);
       const releaseDate = data.release_date || data.first_air_date;
 
       setSeasons(data.seasons)
@@ -30,10 +29,7 @@ const ViewPage = () => {
     }
 
     const fetchCrew = async () => {
-      const { data } = await axios.get(
-        `/api/${type}/${id}/credits`,
-      )
-      // setReleaseDate()
+      const { data } = await axios.get(`/api/movie/credits/${id}`);
       setListCast(data.cast);
     }
 
@@ -45,8 +41,6 @@ const ViewPage = () => {
   const backgroundImageUrl = item.backdrop_path
     ? `https://image.tmdb.org/t/p/w300${item.backdrop_path}`
     : 'https://www.movienewz.com/img/films/poster-holder.jpg';
-
-  // const releaseYear = releaseDate.split('-')[0];
 
   return (
     <section className="min-h-screen bg-blue-50 text-white flex flex-col gap-12">

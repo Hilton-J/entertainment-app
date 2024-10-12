@@ -19,13 +19,8 @@ const Movies = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      // const apiKey = import.meta.env.VITE_API_KEY
+      const moviesURL = selectedGenres.length > 0 ? `/api/movie/dicover/${currentPage}/${selectedGenres}` : `/api/movie/movies/${currentPage}`;
 
-      let moviesURL = `/api/discover/movie/${currentPage}`;
-
-      if (selectedGenres) moviesURL += `/${selectedGenres}`
-
-      console.log(selectedGenres);
       try {
         const apiURL = searchQuery
           ? `/api/search/movie/${searchQuery}/${currentPage}` : moviesURL;
@@ -37,10 +32,10 @@ const Movies = () => {
       } catch (error) {
         console.error('Error fetching movie data: ', error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     }
-    fetchMovies()
+    fetchMovies();
   }, [currentPage, selectedGenres, searchQuery])
 
   return (

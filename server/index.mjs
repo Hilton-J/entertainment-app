@@ -5,26 +5,32 @@ import dotenv from 'dotenv';
 import trendingRouter from './routes/trendingRoute.mjs'
 import movieRouter from './routes/movieRoute.mjs'
 import tvRouter from './routes/tvShowRoute.mjs'
+import searchRouter from './routes/searchRoute.mjs'
 
 dotenv.config(); // Loads environment variables from .env file
 
 const app = express();
 const port = process.env.PORT || 5000
-const BASE_URL = 'https://api.themoviedb.org/3';
+const BASE_URL = process.env.TMDB_API_KEY;;
 
 const apiKey = process.env.TMDB_API_KEY;
 
 //Middleware
-app.use(cors()); // Enable Cross-Origin Resource Sharing for the frontend
+app.use(cors());
 app.use(express.json());
 
 
 // Route to handle TMDB API requests
+app.use('/api/trending', trendingRouter); // This mounts trending router to the app. /api/trending is my entry point to the router, like a baseURL
+app.use('/api/movie', movieRouter);
+app.use('/api/discover/tv', tvRouter);
+app.use('/api/search', searchRouter);
+
 app.get('/api/:type/:id', async (req, res) => {
   const { type, id } = req.params;
   try {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}&language=en-US`
+      `${BASE_URL}/${type}/${id}?api_key=${apiKey}&language=en-US`
     );
     res.json(data);
   } catch (error) {
@@ -44,81 +50,6 @@ app.get('/api/:type/:id/credits', async (req, res) => {
   }
 });
 
-app.use('/api/trending', trendingRouter); // This mounts trending router to the app. /api/trending is my entry point to the router, like a baseURL
-
-// app.get('/api/trending', async (req, res) => {
-//   try {
-//     const { data } = await axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}`);
-//     res.json(data);
-//   } catch (error) {
-//     console.error('Error fetching trending data: ', error);
-//     res.status(500).send('Error fetching trending data');
-//   }
-// });
-
-app.get('/api/movie', async (req, res) => {
-  try {
-    const { data } = await axios.get(`${BASE_URL}/genre/movie/list?api_key=${apiKey}`);
-    res.json(data);
-  } catch (error) {
-    console.error('Error fetching trending data: ', error);
-    res.status(500).send('Error fetching trending data');
-  }
-});
-
-//=============================================================================================================================
-
-app.use('/api/discover/movie', movieRouter);
-
-app.use('/api/discover/tv', tvRouter);
-
-// app.get('/api/discover/movie/:page/:genres', async (req, res) => {
-//   const { page, genres } = req.params;
-//   console.log(genres);
-//   try {
-//     const { data } = await axios.get(`${BASE_URL}/discover/movie`, {
-//       params: {
-//         api_key: apiKey,
-//         include_adult: false,
-//         page,
-//         with_genres: genres,
-//       },
-//     });
-
-//     res.status(200).json(data);
-//   } catch (error) {
-//     console.error('Error fetching trending data: ', error);
-//     res.status(500).send('Error fetching trending data');
-//   }
-// });
-
-app.get('/api/search/movie/:query/:page', async (req, res) => {
-  const { query, page } = req.params;
-
-  try {
-    const { data } = await axios.get(`${BASE_URL}/search/movie`, {
-      params: {
-        api_key: apiKey,
-        language: 'en-US',
-        query,
-        page,
-        include_adult: false,
-      },
-    });
-
-    res.json(data);
-  } catch (error) {
-    console.error('Error fetching trending data: ', error);
-    res.status(500).send('Error fetching trending data');
-  }
-});
-
-//=============================================================================================================================
-
-
-
-
-
 app.get('/api/tv', async (req, res) => {
   try {
     const { data } = await axios.get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}`);
@@ -128,9 +59,6 @@ app.get('/api/tv', async (req, res) => {
     res.status(500).send('Error fetching trending data');
   }
 });
-
-
-
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

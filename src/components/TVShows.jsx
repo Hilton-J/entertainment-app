@@ -1,11 +1,8 @@
-// import PropTypes from 'prop-types';
 import React from 'react'
 import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 import Listing from './Listing'
 import Spinner from './Spinner'
-// import Genres from './Genres'
-// import useGenres from '../Hooks/useGenres'
 import Paginate from './Paginate'
 import FilterProvider from './FilterProvider'
 import { GenreContext } from '../contexts/GenreContext'
@@ -24,15 +21,12 @@ const TVShows = () => {
 
   useEffect(() => {
     const fetchTVShows = async () => {
-      // const apiKey = import.meta.env.VITE_API_KEY
+      let tvURL = `/api/discover/tv/${currentPage}`;
 
-      let moviesURL = `/api/discover/tv/${currentPage}`;
+      if (selectedGenres.length > 0) tvURL += `/${selectedGenres}`;
 
-      if (selectedGenres) moviesURL += `/${selectedGenres}`;
-
-      const apiURL = !searchQuery
-        ? moviesURL
-        : `/api/search/movie/${searchQuery}/${currentPage}`
+      const apiURL = searchQuery
+        ? `/api/search/movie/${searchQuery}/${currentPage}` : tvURL;
 
       const { data } = await axios.get(apiURL)
       data.total_pages < 50 && setPageCount(data.total_pages)
