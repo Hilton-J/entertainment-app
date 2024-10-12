@@ -21,17 +21,24 @@ const TVShows = () => {
 
   useEffect(() => {
     const fetchTVShows = async () => {
-      let tvURL = `/api/discover/tv/${currentPage}`;
+      const tvURL = selectedGenres.length > 0 ?
+        `/api/tvshow/discover/${currentPage}/genres/${selectedGenres}` : `/api/tvshow/show/${currentPage}`;
 
-      if (selectedGenres.length > 0) tvURL += `/${selectedGenres}`;
+      const apiURL = !searchQuery
+        ? `/api/search/tv/${searchQuery}/${currentPage}` : tvURL;
 
-      const apiURL = searchQuery
-        ? `/api/search/movie/${searchQuery}/${currentPage}` : tvURL;
+      console.log(!searchQuery);
+      try {
+        const { data } = await axios.get(apiURL);
+        data.total_pages < 50 && setPageCount(data.total_pages);
+        setTVShowList(data.results);
+      } catch (error) {
+        console.log('Error fetching data', error);
+      } finally {
+        setLoading(false);
+      }
 
-      const { data } = await axios.get(apiURL)
-      data.total_pages < 50 && setPageCount(data.total_pages)
-      setTVShowList(data.results)
-      setLoading(false)
+
     }
     fetchTVShows()
   }, [currentPage, selectedGenres, searchQuery])

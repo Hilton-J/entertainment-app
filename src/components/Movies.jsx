@@ -19,10 +19,11 @@ const Movies = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const moviesURL = selectedGenres.length > 0 ? `/api/movie/dicover/${currentPage}/${selectedGenres}` : `/api/movie/movies/${currentPage}`;
+      const moviesURL = selectedGenres.length > 0 ?
+        `/api/movie/dicover/${currentPage}/genres/${selectedGenres}` : `/api/movie/movies/${currentPage}`;
 
       try {
-        const apiURL = searchQuery
+        const apiURL = !searchQuery
           ? `/api/search/movie/${searchQuery}/${currentPage}` : moviesURL;
 
         const { data } = await axios.get(apiURL);

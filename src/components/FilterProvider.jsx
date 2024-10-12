@@ -105,6 +105,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
       )
   }, [type])
 
+
   const handleSelected = (e) => {
     const genreId = parseInt(e.target.id)
 
@@ -123,6 +124,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
   return (
     <div className="bg-white">
       {/* Mobile filter dialog */}
+      {/* ================================================== MOBILE FILTER START ================================================= */}
       <Dialog
         open={mobileFiltersOpen}
         onClose={setMobileFiltersOpen}
@@ -214,6 +216,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
         </div>
       </Dialog>
 
+      {/* ================================================== MOBILE FILTER END ================================================= */}
       <main className="mx-auto max-w-[95rem] px-4 sm:px-6 lg:px-8">
         {' '}
         {/* Main container starts */}

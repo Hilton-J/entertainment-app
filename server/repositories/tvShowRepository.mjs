@@ -5,11 +5,23 @@ export class TVShowRepository {
     this.service = new TVShowService();
   }
 
-  async dicoverTVShow(page, with_genres) {
-    return this.service.dicoverTVShow(page, with_genres);
+  async tvShowGenres() {
+    return this.service.tvShowGenres();
   }
 
-  async dicoverTVShow1(page) {
-    return this.service.dicoverTVShow1(page);
+  async dicoverTVShow(page) {
+    return this.service.dicoverTVShow(page);
+  }
+
+  async dicoverTVShowWithGenres(page, with_genres) {
+    return this.service.dicoverTVShowWithGenres(page, with_genres);
+  }
+
+  async fetchTVShowByID(id) {
+    return this.service.fetchTVShowByID(id);
+  }
+
+  async fetchTVShowCast(id) {
+    return this.service.fetchTVShowCast(id);
   }
 }
