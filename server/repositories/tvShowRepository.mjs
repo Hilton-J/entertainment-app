@@ -1,4 +1,4 @@
-import { TVShowService } from "../services/tvSHowService.mjs";
+import { TVShowService } from "../services/tvShowService.mjs";
 
 export class TVShowRepository {
   constructor() {

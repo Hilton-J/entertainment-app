@@ -24,10 +24,9 @@ const TVShows = () => {
       const tvURL = selectedGenres.length > 0 ?
         `/api/tvshow/discover/${currentPage}/genres/${selectedGenres}` : `/api/tvshow/show/${currentPage}`;
 
-      const apiURL = !searchQuery
+      const apiURL = searchQuery
         ? `/api/search/tv/${searchQuery}/${currentPage}` : tvURL;
 
-      console.log(!searchQuery);
       try {
         const { data } = await axios.get(apiURL);
         data.total_pages < 50 && setPageCount(data.total_pages);

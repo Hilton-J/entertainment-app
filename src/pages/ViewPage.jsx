@@ -19,7 +19,8 @@ const ViewPage = () => {
 
   useEffect(() => {
     const fetchItem = async () => {
-      const { data } = await axios.get(`/api/movie/movie-id/${id}`);
+      const url = type === 'tv' ? `/api/tvshow/tv-id/${id}` : `/api/movie/movie-id/${id}`;
+      const { data } = await axios.get(url);
       const releaseDate = data.release_date || data.first_air_date;
 
       setSeasons(data.seasons)
@@ -29,7 +30,8 @@ const ViewPage = () => {
     }
 
     const fetchCrew = async () => {
-      const { data } = await axios.get(`/api/movie/credits/${id}`);
+      const url = type === 'tv' ? `/api/tvshow/credits/${id}` : `/api/movie/credits/${id}`;
+      const { data } = await axios.get(url);
       setListCast(data.cast);
     }
 

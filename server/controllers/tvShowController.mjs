@@ -28,7 +28,7 @@ export class TVShowController {
     const { page, genres } = req.params;
 
     try {
-      const tv = await this.repository.dicoverTVShow(page, genres);
+      const tv = await this.repository.dicoverTVShowWithGenres(page, genres);
       res.json(tv);
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch Tndw' });

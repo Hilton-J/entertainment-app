@@ -15,19 +15,29 @@ export const GenreProvider = ({ children }) => {
   // Fetch Genres on Initial Render
   useEffect(() => {
     const fetchMovieGenres = async () => {
-      const { data } = await axios.get('/api/movie/genre');
-      setMovieGenres(data.genres);
-    }
+      try {
+        const { data } = await axios.get('/api/movie/genre');
+        setMovieGenres(data.genres);
+      } catch (error) {
+        console.error('Error fetching movie data: ', error);
+      }
+    };
 
+    fetchMovieGenres();
+  }, []);
+
+  useEffect(() => {
     const fetchTvGenres = async () => {
-      const { data } = await axios.get('/api/tv/genre');
+      try {
+        const { data } = await axios.get('/api/tvshow/genre');
+        setTvGenres(data.genres);
+      } catch (error) {
+        console.error('Error fetching movie data: ', error);
+      }
+    };
 
-      setTvGenres(data.genres);
-    }
-
-    fetchTvGenres()
-    fetchMovieGenres()
-  }, [])
+    fetchTvGenres();
+  }, []);
 
   return (
     <GenreContext.Provider
