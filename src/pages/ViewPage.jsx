@@ -17,22 +17,26 @@ const ViewPage = () => {
   const [seasons, setSeasons] = useState([])
   const [listCast, setListCast] = useState([])
 
+
   useEffect(() => {
     const fetchItem = async () => {
       const url = type === 'tv' ? `/api/tvshow/tv-id/${id}` : `/api/movie/movie-id/${id}`;
       const { data } = await axios.get(url);
       const releaseDate = data.release_date || data.first_air_date;
 
-      setSeasons(data.seasons)
-      setReleaseYear(releaseDate.split('-')[0])
+      setSeasons(data.seasons);
+      setReleaseYear(releaseDate.split('-')[0]);
       setGenres(() => data.genres.map((g) => g.name).join(', '));
-      setItem(data)
+      setItem(data);
+
     }
 
     const fetchCrew = async () => {
       const url = type === 'tv' ? `/api/tvshow/credits/${id}` : `/api/movie/credits/${id}`;
       const { data } = await axios.get(url);
+
       setListCast(data.cast);
+
     }
 
     fetchItem();
@@ -46,19 +50,9 @@ const ViewPage = () => {
 
   return (
     <section className="min-h-screen bg-blue-50 text-white flex flex-col gap-12">
-      <div
-        className='relative mx-auto h-fit bg-cover bg-center bg-no-repeat w-full'
-        style={{
-          backgroundImage: `url(${backgroundImageUrl})`,
-        }}
+      <div className='relative mx-auto h-fit bg-cover bg-center bg-no-repeat w-full'
+        style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       >
-        {/* <img
-          src={item.backdrop_path ?
-            `https://image.tmdb.org/t/p/w300${item.backdrop_path}`
-            :
-            'https://www.movienewz.com/img/films/poster-holder.jpg'}
-          alt={item.title || item.name}
-          className=' object-cover rounded-lg w-full h-full' /> */}
         <div className='backdrop-blur-md bg-black/30'>
           <div className="container mx-auto top-0 flex h-full w-full flex-wrap py-10">
             <div className="flex items-center sm:items-start gap-5 flex-col sm:flex-row md:gap-10 w-full ">
@@ -70,7 +64,7 @@ const ViewPage = () => {
                       : 'https://www.movienewz.com/img/films/poster-holder.jpg'
                   }
                   alt={item.title || item.name}
-                  className="h-full rounded-lg object-fit"
+                  className="h-full w-full rounded-lg object-fit"
                 />
               </div>
 
@@ -82,8 +76,12 @@ const ViewPage = () => {
 
                   <div className='flex flex-col gap-2'>
 
-                    <div>{releaseYear}
-                      {item.episode_run_time && <span>{item.episode_run_time}m</span>}</div>
+                    <div className='flex gap-3'>
+                      {releaseYear}
+                      {item.episode_run_time && item.episode_run_time.length > 0 && (
+                        <span>{item.episode_run_time}m</span>
+                      )}
+                    </div>
                     <div>{genres}</div>
                     <div className='flex gap-3'>
                       <img src={logo} alt='TMDB Logo' className='w-12 h-6' />{parseFloat(item.vote_average).toFixed(1)}
@@ -91,8 +89,8 @@ const ViewPage = () => {
                   </div>
                 </div>
 
-                <p className="text-justify text-xs">{item.overview}</p>
-                <div className="text-xs">
+                <p className="text-justify">{item.overview}</p>
+                <div className="">
                   <p>
                     <strong>Country:</strong> {country.find(({ code }) => item.origin_country == code)?.name || 'N/A'}
                   </p>
@@ -100,39 +98,14 @@ const ViewPage = () => {
                     <strong>Type:</strong> {type === 'tv' ? 'TV Show' : 'Movie'}
                   </p>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
-        {/* <DetailsHero item={item} genres={genres} /> */}
       </div>
 
-      {type === 'tv' &&
-        <div className='text-black container mx-auto'>
-          <h3 className='text-2xl mb-5'>{item.number_of_seasons}
-            {item.number_of_seasons > 1 ? ' Seasons' : ' Season'}</h3>
-          <div className='flex gap-10'>
-            {seasons.map((season) => (
-              <SeasonsListing key={season.id} list={season} />
-            ))}
-          </div>
-        </div>
-      }
-
-      <div className='text-black container mx-auto'>
-        <h3 className='text-2xl mb-5'>Cast of {item.name || item.original_title}</h3>
-        <div className='carousel-container'>
-          <ul className='flex gap-4 overflow-x-scroll'>
-            {listCast.map((casts, index) => (
-              <Cast key={index} list={casts} />
-            ))}
-            {/* <MultiCarousel /> */}
-          </ul>
-        </div>
-      </div>
-
-
+      {seasons !== undefined && <SeasonsListing numSeason={item.number_of_seasons} list={seasons} />}
+      {listCast.length > 0 && <Cast list={listCast} title={item.name || item.original_title} />}
     </section>
   )
 };

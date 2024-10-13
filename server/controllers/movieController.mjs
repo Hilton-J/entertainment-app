@@ -7,6 +7,7 @@ export class MovieController {
 
   async movieGenres(req, res) {
     try {
+      console.log('Get User: ', req.ip);
       const genres = await this.repository.movieGenres();
       res.json(genres);
       // res.status(200).json(movies); //with status(200), you're explicitly setting the OK responce code to 200

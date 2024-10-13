@@ -13,7 +13,7 @@ const TVShows = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
-  const [pageCount, setPageCount] = useState(50)
+  const [pageCount, setPageCount] = useState(0)
   // const [selectedGenres, setSelectedGenres] = useState([]);
   // const [genres, setGenres] = useState([])
   // const genreURL = useGenres(selectedGenres)
@@ -21,16 +21,17 @@ const TVShows = () => {
 
   useEffect(() => {
     const fetchTVShows = async () => {
-      const tvURL = selectedGenres.length > 0 ?
-        `/api/tvshow/discover/${currentPage}/genres/${selectedGenres}` : `/api/tvshow/show/${currentPage}`;
-
-      const apiURL = searchQuery
-        ? `/api/search/tv/${searchQuery}/${currentPage}` : tvURL;
-
       try {
+        const tvURL = selectedGenres.length > 0 ?
+          `/api/tvshow/discover/${currentPage}/genres/${selectedGenres}` : `/api/tvshow/show/${currentPage}`;
+
+        const apiURL = searchQuery
+          ? `/api/search/tv/${searchQuery}/${currentPage}` : tvURL;
+
         const { data } = await axios.get(apiURL);
-        data.total_pages < 50 && setPageCount(data.total_pages);
+        data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50);
         setTVShowList(data.results);
+
       } catch (error) {
         console.log('Error fetching data', error);
       } finally {
@@ -49,14 +50,6 @@ const TVShows = () => {
         <h2 className="mb-5 text-center text-2xl font-bold md:text-4xl">
           LATEST TV SHOWS
         </h2>
-        {/* <Genres
-            type='tv'
-            selectedGenres={selectedGenres}
-            setSelectedGenres={setSelectedGenres}
-            genres={genres}
-            setGenres={setGenres}
-            setCurrentPage={setCurrentPage}
-          /> */}
 
         {loading ? (
           <Spinner />
@@ -67,7 +60,8 @@ const TVShows = () => {
             ))}
           </FilterProvider>
         )}
-        <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />
+
+        {pageCount > 1 && <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />}
       </div>
     </section>
   )

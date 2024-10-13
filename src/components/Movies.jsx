@@ -19,10 +19,9 @@ const Movies = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const moviesURL = selectedGenres.length > 0 ?
-        `/api/movie/dicover/${currentPage}/genres/${selectedGenres}` : `/api/movie/movies/${currentPage}`;
-
       try {
+        const moviesURL = selectedGenres.length > 0 ?
+          `/api/movie/dicover/${currentPage}/genres/${selectedGenres}` : `/api/movie/movies/${currentPage}`;
         const apiURL = searchQuery
           ? `/api/search/movie/${searchQuery}/${currentPage}` : moviesURL;
 
@@ -56,7 +55,7 @@ const Movies = () => {
           </FilterProvider>
         )}
 
-        {pageCount > 2 ? <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} /> : ''}
+        {pageCount > 1 && <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />}
       </div>
     </section>
   )
