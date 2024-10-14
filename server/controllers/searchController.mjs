@@ -15,9 +15,9 @@ export class SearchController {
       console.error('Error fetching TV-Show data: ', error);
     }
   }
+  
   async SearchTVShow(req, res) {
     const { query, page } = req.params;
-    console.log(req);
     try {
       const tvShow = await this.repository.SearchTVShow(query, page);
       res.json(tvShow);
