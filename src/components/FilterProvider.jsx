@@ -50,9 +50,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
           filt
       )
     )
-  }, [type])
-
-  console.log(filter);
+  }, [type]);
 
   const handleSelected = (e) => {
     const genreId = parseInt(e.target.id)
@@ -160,9 +158,9 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
         {' '}
         {/* Main container starts */}
         <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
-          <h1 className="text-xl font-bold tracking-tight text-gray-900 md:text-3xl">
+          {/* <h1 className="text-xl font-bold tracking-tight text-gray-900 md:text-3xl">
             New Arrivals
-          </h1>
+          </h1> */}
 
           <input
             type="text"
@@ -189,7 +187,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
                 transition
                 className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
               >
-                <div className="py-1">
+                <div className="py-1 flex flex-col">
                   {filter.map((fit) => (
                     fit.sort.map((sort, index) =>
                       <MenuItem key={index}>
