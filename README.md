@@ -37,8 +37,7 @@ This project uses the following main packages:
 - **TailwindcssPrettier** : npm install -D prettier prettier-plugin-tailwindcss
 - **react-multi-carousel** : npm i react-multi-carousel --save
 - **Swiper** : npm i swiper
-- **NODEMON** : npm install nodemon --save-dev  this will detect changes in server and restarts it and to use add "start": "node server/index.mjs",
-    "dev": "nodemon server/index.mjs"
+- **NODEMON** : npm install nodemon --save-dev
 
   .
 

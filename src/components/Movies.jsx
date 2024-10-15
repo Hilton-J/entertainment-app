@@ -15,6 +15,7 @@ const Movies = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pageCount, setPageCount] = useState(0)
   const [searchQuery, setSearchQuery] = useState('')
+  const [sort, setSort] = useState('polularity.desc');
   // const genreURL = useGenres(selectedGenres);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const Movies = () => {
         {loading ? (
           <Spinner />
         ) : (
-          <FilterProvider type={'movies'} setSearchQuery={setSearchQuery}>
+          <FilterProvider type={'movies'} setSearchQuery={setSearchQuery} selected={sort} setSelected={setSort}>
             {movieList.map((movie) => (
               <Listing key={movie.id} list={movie} type={'movie'} />
             ))}
