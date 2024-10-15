@@ -15,61 +15,22 @@ import {
   MenuItems,
 } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-} from '@heroicons/react/20/solid'
+import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
 import PropTypes from 'prop-types'
 import { GenreContext } from '../contexts/GenreContext'
+import { filters } from '../data/objects'
 
-const sortSections = [
-  { name: 'Most Popular', href: '#', current: true },
-  { name: 'Best Rating', href: '#', current: false },
-  { name: 'Newest', href: '#', current: false },
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
-]
-const subCategories = [
-  { name: 'Totes', href: '#' },
-  { name: 'Backpacks', href: '#' },
-  { name: 'Travel Bags', href: '#' },
-  { name: 'Hip Bags', href: '#' },
-  { name: 'Laptop Sleeves', href: '#' },
-]
+// const sortSections = [
+//   { name: 'Most Popular', href: '#', current: true },
+//   { name: 'Best Rating', href: '#', current: false },
+//   { name: 'Newest', href: '#', current: false },
+//   { name: 'Price: Low to High', href: '#', current: false },
+//   { name: 'Price: High to Low', href: '#', current: false },
+// ]
 
-//Sidebar filter
-const filters = [
-  {
-    id: 'movies',
-    name: 'Genres',
-    genres: [],
-    sections: [
-      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-      { value: 'sale', label: 'Sale', checked: false },
-      { value: 'travel', label: 'Travel', checked: true },
-      { value: 'organization', label: 'Organization', checked: false },
-      { value: 'accessories', label: 'Accessories', checked: false },
-    ],
-  },
-  {
-    id: 'tv',
-    name: 'Genres',
-    genres: [],
-    sections: [
-      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-      { value: 'sale', label: 'Sale', checked: false },
-      { value: 'travel', label: 'Travel', checked: true },
-      { value: 'organization', label: 'Organization', checked: false },
-      { value: 'accessories', label: 'Accessories', checked: false },
-    ],
-  },
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(' ')
+// }
 
 export default function FilterProvider({ children, type, setSearchQuery }) {
   const { tvGenres, movieGenres, selectedGenres, setSelectedGenres } =
@@ -79,32 +40,19 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
   const [filter, setFilter] = useState(filters)
 
   useEffect(() => {
-    type === 'movies' ?
-      setFilter((prevFilter) =>
-        prevFilter.map((filt) => {
-          if (filt.id === 'movies') {
-            return {
-              ...filt,
-              genres: movieGenres,
-            }
-          }
-          return filt
-        }),
+    setFilter((prevFilter) =>
+      prevFilter.map((filt) =>
+        filt.id === type ?
+          {
+            ...filt,
+            genres: type === 'movies' ? movieGenres : tvGenres,
+          } :
+          filt
       )
-      :
-      setFilter((prevFilter) =>
-        prevFilter.map((filt) => {
-          if (filt.id === 'tv') {
-            return {
-              ...filt,
-              genres: tvGenres,
-            }
-          }
-          return filt
-        }),
-      )
+    )
   }, [type])
 
+  console.log(filter);
 
   const handleSelected = (e) => {
     const genreId = parseInt(e.target.id)
@@ -154,16 +102,6 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
 
             {/* Filters */}
             <form className="mt-4 border-t border-gray-200">
-              <ul role="list" className="px-2 py-3 font-medium text-gray-900">
-                {subCategories.map((category) => (
-                  <li key={category.name}>
-                    <a href={category.href} className="block px-2 py-3">
-                      {category.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-
               {filters.map((section) => (
                 <Disclosure
                   key={section.id}
@@ -189,7 +127,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
                   </h3>
                   <DisclosurePanel className="pt-6">
                     <div className="space-y-6">
-                      {section.sections.map((section, sectionIdx) => (
+                      {/* {section.sections.map((section, sectionIdx) => (
                         <div key={section.value} className="flex items-center">
                           <input
                             defaultValue={section.value}
@@ -206,7 +144,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
                             {section.label}
                           </label>
                         </div>
-                      ))}
+                      ))} */}
                     </div>
                   </DisclosurePanel>
                 </Disclosure>
@@ -215,8 +153,9 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
           </DialogPanel>
         </div>
       </Dialog>
-
       {/* ================================================== MOBILE FILTER END ================================================= */}
+
+
       <main className="mx-auto max-w-[95rem] px-4 sm:px-6 lg:px-8">
         {' '}
         {/* Main container starts */}
@@ -234,6 +173,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
           />
 
           <div className="flex items-center">
+
             <Menu as="div" className="relative inline-block text-left">
               <div>
                 <MenuButton className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
@@ -250,20 +190,22 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
                 className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
               >
                 <div className="py-1">
-                  {sortSections.map((section) => (
-                    <MenuItem key={section.name}>
-                      <a
-                        href={section.href}
-                        className={classNames(
-                          section.current
-                            ? 'font-medium text-gray-900'
-                            : 'text-gray-500',
-                          'block px-4 py-2 text-sm data-[focus]:bg-gray-100',
-                        )}
-                      >
-                        {section.name}
-                      </a>
-                    </MenuItem>
+                  {filter.map((fit) => (
+                    fit.sort.map((sort, index) =>
+                      <MenuItem key={index}>
+                        <a
+                          href={''}
+                        // className={classNames(
+                        //   sort.current
+                        //     ? 'font-medium text-gray-900'
+                        //     : 'text-gray-500',
+                        //   'block px-4 py-2 text-sm data-[focus]:bg-gray-100',
+                        // )}
+
+                        >
+                          {sort.label}
+                        </a>
+                      </MenuItem>)
                   ))}
                 </div>
               </MenuItems>
@@ -274,7 +216,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
               onClick={() => setMobileFiltersOpen(true)}
               className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
             >
-              <span className="no-sr-only">Filters</span>
+              <span className="sr-only">Filters</span>
               <FunnelIcon
                 aria-hidden="true"
                 className="h-5 w-5 text-slate-900"
