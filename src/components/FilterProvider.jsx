@@ -2,23 +2,13 @@
 
 import React from 'react'
 import { useState, useContext, useEffect } from 'react'
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from '@headlessui/react'
+import { Dialog, DialogBackdrop, DialogPanel, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
+import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
 import PropTypes from 'prop-types'
 import { GenreContext } from '../contexts/GenreContext'
 import { filters } from '../data/objects'
+import FilterProviderHeader from './FilterProviderHeader'
 
 // const sortSections = [
 //   { name: 'Most Popular', href: '#', current: true },
@@ -35,6 +25,7 @@ import { filters } from '../data/objects'
 export default function FilterProvider({ children, type, setSearchQuery }) {
   const { tvGenres, movieGenres, selectedGenres, setSelectedGenres } =
     useContext(GenreContext)
+  const [selected, setSelected] = useState('polularity.desc');
   // const [selectedGenres, setSelectedGenres] = useState([]);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [filter, setFilter] = useState(filters)
@@ -157,11 +148,8 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
       <main className="mx-auto max-w-[95rem] px-4 sm:px-6 lg:px-8">
         {' '}
         {/* Main container starts */}
-        <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
-          {/* <h1 className="text-xl font-bold tracking-tight text-gray-900 md:text-3xl">
-            New Arrivals
-          </h1> */}
-
+        <FilterProviderHeader type={type} filter={filter} setSearchQuery={setSearchQuery} selected={selected} setSelected={setSelected} />
+        {/* <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
           <input
             type="text"
             placeholder="Search"
@@ -171,7 +159,6 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
           />
 
           <div className="flex items-center">
-
             <Menu as="div" className="relative inline-block text-left">
               <div>
                 <MenuButton className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
@@ -185,27 +172,22 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
 
               <MenuItems
                 transition
-                className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 px-5"
               >
                 <div className="py-1 flex flex-col">
                   {filter.map((fit) => (
+                    fit.id === type && fit.sort.map((sort, index) =>
                     
                     
                     fit.sort.map((sort, index) =>
                       <MenuItem key={index}>
                         <a
                           href={''}
-                        // className={classNames(
-                        //   sort.current
-                        //     ? 'font-medium text-gray-900'
-                        //     : 'text-gray-500',
-                        //   'block px-4 py-2 text-sm data-[focus]:bg-gray-100',
-                        // )}
-
                         >
                           {sort.label}
                         </a>
-                      </MenuItem>)
+                      </MenuItem>
+                    )
                   ))}
                 </div>
               </MenuItems>
@@ -223,7 +205,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
               />
             </button>
           </div>
-        </div>
+        </div> */}
 
         {/* Sidebar  */}
         <section aria-labelledby="products-heading" className="pb-24 min-h-screen">
@@ -299,7 +281,7 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
             </form>
 
             {/* Shows grid */}
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 pt-6">
               {children}
             </div>
           </div>
