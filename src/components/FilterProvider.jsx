@@ -189,6 +189,8 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
               >
                 <div className="py-1 flex flex-col">
                   {filter.map((fit) => (
+                    
+                    
                     fit.sort.map((sort, index) =>
                       <MenuItem key={index}>
                         <a
