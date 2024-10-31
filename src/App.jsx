@@ -16,7 +16,7 @@ import { GenreProvider } from './contexts/GenreContext'
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/" element={<MainLayout />} >
         <Route index element={<HomePage />} />
         <Route path="/movies" element={<MoviesPage />} />
         <Route path="/tv" element={<TVShowsPage />} />

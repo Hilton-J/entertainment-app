@@ -5,8 +5,6 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const FilterProviderHeader = ({ type, filter, setSearchQuery, selected, setSelected }) => {
 
-
-  console.log(selected);
   return (
     <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
       {/* <h1 className="text-xl font-bold tracking-tight text-gray-900 md:text-3xl">

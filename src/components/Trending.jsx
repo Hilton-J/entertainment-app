@@ -21,9 +21,7 @@ const Trending = () => {
       setLoading(false)
     }
     fetchTrending()
-    console.log('UseEffect');
   }, [currentPage])
-  console.log('Render Before');
 
   return (
     <section className="px-4 py-10">

@@ -9,7 +9,6 @@ export const GenreProvider = ({ children }) => {
   const [tvGenres, setTvGenres] = useState([])
   const [movieGenres, setMovieGenres] = useState([])
   const [selectedGenres, setSelectedGenres] = useState([])
-
   // const apiKey = import.meta.env.VITE_API_KEY
 
   // Fetch Genres on Initial Render
