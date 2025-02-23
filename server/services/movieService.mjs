@@ -18,7 +18,7 @@ export class MovieService {
   }
 
   async discoverMovies(page) {
-    try {
+    try { 
       const params = {
         api_key,
         page,

@@ -19,34 +19,11 @@ const port = process.env.PORT || 5000
 app.use(cors());
 app.use(express.json());
 
-
 // Route to handle TMDB API requests
 app.use('/api/trending', trendingRouter); // This mounts trending router to the app. /api/trending is my entry point to the router or rather a baseURL to trending router endpoints
 app.use('/api/movie', movieRouter);
 app.use('/api/tvshow', tvRouter);
 app.use('/api/search', searchRouter);
-
-// app.get('/api/:type/:id', async (req, res) => {
-//   const { type, id } = req.params;
-//   try {
-//     const { data } = await axios.get(
-//       `${BASE_URL}/${type}/${id}?api_key=${apiKey}&language=en-US`
-//     );
-//     res.json(data);
-//   } catch (error) {
-//     res.status(500).send('Error fetching data');
-//   }
-// });
-
-// app.get('/api/tv', async (req, res) => {
-//   try {
-//     const { data } = await axios.get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}`);
-//     res.json(data);
-//   } catch (error) {
-//     console.error('Error fetching trending data: ', error);
-//     res.status(500).send('Error fetching trending data');
-//   }
-// });
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

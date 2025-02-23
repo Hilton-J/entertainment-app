@@ -13,8 +13,8 @@ const NavBar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   return (
-    <header className="bg-slate-900">
-      <nav className="container mx-auto flex items-center justify-between py-4">
+    <header className="bg-slate-900 p-4">
+      <nav className="container mx-auto flex items-center justify-between ">
         <NavLink
           to={'/'}
           className="w-fit text-xl font-bold text-blue-600 hover:text-blue-500 sm:text-2xl"
@@ -44,9 +44,9 @@ const NavBar = () => {
               </NavLink>
             </li>
           </ul>
-          <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-500 md:text-base">
+          {/* <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-500 md:text-base">
             LOG IN
-          </button>
+          </button> */}
         </div>
 
         <div className="flex items-center gap-4 md:hidden">

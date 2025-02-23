@@ -17,11 +17,15 @@ const Trending = () => {
       const { data } = await axios.get('/api/trending')
       data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
       setContent(data.results)
+      console.log(data);
 
       setLoading(false)
     }
     fetchTrending()
   }, [currentPage])
+
+  console.log(content);
+
 
   return (
     <section className="px-4 py-10">
@@ -31,6 +35,7 @@ const Trending = () => {
             TRENDING
           </h2>
           {/* {!loading && content.length > 0 ? (
+
             <div className="grid justify-center gap-3 sm:grid-cols-3 lg:grid-cols-4">
               {content.map((movie) => (
                 <Listing key={movie.id} list={movie} type={movie.media_type} />
@@ -43,7 +48,7 @@ const Trending = () => {
             <Spinner />
           ) : (
             <div className="grid justify-center gap-3 sm:grid-cols-3 lg:grid-cols-4">
-              {content.map((movie) => (
+              {content && content.map((movie) => (
                 <Listing key={movie.id} list={movie} type={movie.media_type} />
               ))}
             </div>

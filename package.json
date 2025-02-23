@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "backend": "npm run server --prefix server",
+    "app": "concurrently \"npm run backend\" \"npm run dev\""
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -17,7 +19,8 @@
     "@mui/material": "^5.16.7",
     "@tailwindcss/forms": "^0.5.7",
     "axios": "^1.7.5",
-    "nodemon": "^3.1.7",
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9",
     "npm": "^10.8.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     port: 3002,
     proxy: {
-      '/api': 'http://localhost:5000', // Ensure that Vite forwards `/api` to your backend
+      '/api': 'http://localhost:9001', // Ensure that Vite forwards `/api` to your backend
     },
   },
   optimizeDeps: {

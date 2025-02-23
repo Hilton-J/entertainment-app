@@ -37,7 +37,9 @@ This project uses the following main packages:
 - **TailwindcssPrettier** : npm install -D prettier prettier-plugin-tailwindcss
 - **react-multi-carousel** : npm i react-multi-carousel --save
 - **Swiper** : npm i swiper
-- **NODEMON** : npm install nodemon --save-dev
+- **NODEMON** : npm i nodemon --save-dev
+- **CONCURRENTLY** : npm i concurrently
+- **ZUSTAND** : npm i zustand
 
   .
 
