@@ -146,7 +146,6 @@ export default function FilterProvider({ children, type, setSearchQuery }) {
 
 
       <main className="mx-auto max-w-[95rem] px-4 sm:px-6 lg:px-8">
-        {' '}
         {/* Main container starts */}
         <FilterProviderHeader type={type} filter={filter} setSearchQuery={setSearchQuery} selected={selected} setSelected={setSelected} />
         {/* <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">

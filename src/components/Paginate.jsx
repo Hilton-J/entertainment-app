@@ -13,21 +13,34 @@ const Paginate = ({ setCurrentPage, pageCount }) => {
   return (
     <ReactPaginate
       // breakLabel='...'
+
+      // Next Button
       nextLabel="next >"
-      nextLinkClassName=" px-3 py-2 rounded-lg hover:bg-blue-400 hover:text-white"
-      nextClassName=" hidden sm:block"
+      nextLinkClassName=" px-3 py-2 rounded-lg hover:bg-blue-400 hover:text-white border border-blue-600 "
+      // nextClassName="hidden sm:block"
+
+
       onPageChange={handlePageClick}
       pageRangeDisplayed={5}
       marginPagesDisplayed={1}
       pageCount={pageCount}
+
+      // Previous Button
       previousLabel="< previous"
-      previousLinkClassName="px-3 py-2 rounded-lg hover:bg-blue-400 hover:text-white"
+      previousLinkClassName="px-3 py-2 rounded-lg hover:bg-blue-400 hover:text-white border border-blue-600 "
       previousClassName="hidden sm:block"
-      containerClassName="flex justify-center my-6 gap-3"
-      pageLinkClassName="hover:bg-blue-400 hover:text-white px-3 py-2 rounded-lg"
+
+      //Pagination container
+      containerClassName="flex justify-center my-6 gap-3 text-blue-600"
+
+
+      //Pages
       activeLinkClassName="bg-blue-400 px-3 py-2 rounded-lg text-white"
+      pageLinkClassName="hover:text-white px-3 py-2 rounded-lg border border-blue-600 hover:bg-blue-400"
+
+      // Previous nand next button
       disabledLinkClassName={
-        'hover:cursor-not-allowed hover:bg-white hover:text-black'
+        'hover:cursor-not-allowed border border-transparent text-blue-900'
       }
     />
   )

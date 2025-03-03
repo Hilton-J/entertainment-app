@@ -13,11 +13,11 @@ const NavBar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   return (
-    <header className="bg-slate-900 p-4">
-      <nav className="container mx-auto flex items-center justify-between ">
+    <header className="bg-slate-900 p-4 shadow-2xl">
+      <nav className="w-[90%] mx-auto flex items-center justify-between text-lg">
         <NavLink
           to={'/'}
-          className="w-fit text-xl font-bold text-blue-600 hover:text-blue-500 sm:text-2xl"
+          className="w-fit text-2xl font-bold bg-blue-600 hover:text-blue-600 sm:text-3xl text-white px-2 py-1 rounded-lg border border-transparent hover:border-blue-600 hover:bg-transparent transition-all duration-300"
         >
           Steam-Trends
         </NavLink>

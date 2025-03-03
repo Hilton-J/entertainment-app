@@ -5,11 +5,11 @@ import { ToastContainer } from 'react-toastify'
 
 const MainLayout = () => {
   return (
-    <>
+    <section className='bg-slate-900'>
       <NavBar />
       <Outlet />
       <ToastContainer />
-    </>
+    </section>
   )
 }
 
