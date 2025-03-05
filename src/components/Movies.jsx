@@ -8,6 +8,7 @@ import Spinner from './Spinner'
 import Paginate from './Paginate'
 import { GenreContext } from '../contexts/GenreContext'
 import { motion } from "framer-motion";
+import { filters } from '../data/objects'
 
 const Movies = () => {
   const { selectedGenres } = useContext(GenreContext)
@@ -28,9 +29,9 @@ const Movies = () => {
         const apiURL = searchQuery
           ? `/api/search/movie/${searchQuery}/${currentPage}` : moviesURL;
 
-        const { data } = await axios.get(apiURL);
-        data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50);
-        setMovieList(data.results);
+        const { data: movies } = await axios.get(apiURL);
+        movies.total_pages < 50 ? setPageCount(movies.total_pages) : setPageCount(50);
+        setMovieList(movies.results);
 
       } catch (error) {
         console.error('Error fetching movie data: ', error);
@@ -81,7 +82,7 @@ const Movies = () => {
         <div className="flex justify-between">
           <h2 className="text-2xl font-bold text-blue-600">LATEST MOVIES</h2>
           <button
-            className="bg-blue-600 text-white hover:text-blue-600 px-5 rounded-lg border border-transparent hover:border-blue-600 hover:bg-transparent transition-all duration-300"
+            className="bg-blue-600 text-white hover:text-blue-600 px-5 rounded-lg border border-transparent hover:border-blue-600 hover:bg-transparent transition-all duration-700"
             onClick={toggleFilter}
           >
             FILTERS
@@ -97,6 +98,14 @@ const Movies = () => {
         >
           <div className='border col-span-2'>
             <h1>Sort By</h1>
+            {filters.map((filter) =>
+              filter.sort.map((sort, index) => <button
+                key={index}
+                className="bg-blue-600 text-white hover:text-blue-600 px-5 rounded-lg border border-transparent hover:border-blue-600 hover:bg-transparent transition-all duration-700"
+              >
+                {sort.label}
+              </button>)
+            )}
           </div>
           <div className='col-span-8 flex flex-col gap-4'>
             <div className='border border-red-500'>

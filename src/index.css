@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-.carousel-container{
-  mask-image: linear-gradient(90deg,transparent 0,#ffffff 2rem,#c31414 calc(100% - 4rem),transparent 100%);
+.carousel-container {
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #ffffff 2rem,
+    #c31414 calc(100% - 4rem),
+    transparent 100%
+  );
+}
+
+@layer base {
+  body {
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }

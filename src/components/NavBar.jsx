@@ -17,7 +17,7 @@ const NavBar = () => {
       <nav className="w-[90%] mx-auto flex items-center justify-between text-lg">
         <NavLink
           to={'/'}
-          className="w-fit text-2xl font-bold bg-blue-600 hover:text-blue-600 sm:text-3xl text-white px-2 py-1 rounded-lg border border-transparent hover:border-blue-600 hover:bg-transparent transition-all duration-300"
+          className="w-fit text-2xl font-bold bg-blue-600 hover:text-blue-600 sm:text-3xl text-white px-2 py-1 rounded-lg border border-transparent hover:border-blue-600 hover:bg-transparent transition-all duration-700"
         >
           Steam-Trends
         </NavLink>
