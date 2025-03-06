@@ -13,30 +13,44 @@ export const GenreProvider = ({ children }) => {
 
   // Fetch Genres on Initial Render
   useEffect(() => {
-    const fetchMovieGenres = async () => {
+    const fetchGenres = async () => {
       try {
-        const { data } = await axios.get('/api/movie/genre');
-        setMovieGenres(data.genres);
+        const { data: movieGenres } = await axios.get('/api/movie/genre');
+        const { data: tvGenres } = await axios.get('/api/movie/genre');
+        setMovieGenres(movieGenres.genres);
+        setTvGenres(tvGenres.genres);
       } catch (error) {
         console.error('Error fetching movie data: ', error);
       }
     };
 
-    fetchMovieGenres();
+    fetchGenres();
   }, []);
+  // useEffect(() => {
+  //   const fetchMovieGenres = async () => {
+  //     try {
+  //       const { data } = await axios.get('/api/movie/genre');
+  //       setMovieGenres(data.genres);
+  //     } catch (error) {
+  //       console.error('Error fetching movie data: ', error);
+  //     }
+  //   };
 
-  useEffect(() => {
-    const fetchTvGenres = async () => {
-      try {
-        const { data } = await axios.get('/api/tvshow/genre');
-        setTvGenres(data.genres);
-      } catch (error) {
-        console.error('Error fetching movie data: ', error);
-      }
-    };
+  //   fetchMovieGenres();
+  // }, []);
 
-    fetchTvGenres();
-  }, []);
+  // useEffect(() => {
+  //   const fetchTvGenres = async () => {
+  //     try {
+  //       const { data } = await axios.get('/api/tvshow/genre');
+  //       setTvGenres(data.genres);
+  //     } catch (error) {
+  //       console.error('Error fetching movie data: ', error);
+  //     }
+  //   };
+
+  //   fetchTvGenres();
+  // }, []);
 
   return (
     <GenreContext.Provider

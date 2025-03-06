@@ -18,11 +18,11 @@ export class MovieService {
   }
 
   async discoverMovies(page) {
-    try { 
+    try {
       const params = {
         api_key,
         page,
-        include_adul: false,
+        include_adult: false,
       };
 
       const { data } = await axios.get(`${baseUrl}/discover/movie`, { params });

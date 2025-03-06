@@ -16,7 +16,7 @@ const Paginate = ({ setCurrentPage, pageCount }) => {
 
       // Next Button
       nextLabel="next >"
-      nextLinkClassName=" px-3 py-2 rounded-lg hover:bg-blue-400 hover:text-white border border-blue-600 "
+      nextLinkClassName=" px-3 py-2 rounded-lg hover:bg-blue-400 hover:text-slate-900 border border-blue-600 "
       // nextClassName="hidden sm:block"
 
 
@@ -27,7 +27,7 @@ const Paginate = ({ setCurrentPage, pageCount }) => {
 
       // Previous Button
       previousLabel="< previous"
-      previousLinkClassName="px-3 py-2 rounded-lg hover:bg-blue-400 hover:text-white border border-blue-600 "
+      previousLinkClassName="px-3 py-2 rounded-lg hover:bg-blue-400 hover:text-slate-900 border border-blue-600 "
       previousClassName="hidden sm:block"
 
       //Pagination container
@@ -35,8 +35,8 @@ const Paginate = ({ setCurrentPage, pageCount }) => {
 
 
       //Pages
-      activeLinkClassName="bg-blue-400 px-3 py-2 rounded-lg text-white"
-      pageLinkClassName="hover:text-white px-3 py-2 rounded-lg border border-blue-600 hover:bg-blue-400"
+      activeLinkClassName="bg-blue-400 px-3 py-2 rounded-lg text-slate-900"
+      pageLinkClassName="hover:text-slate-900 px-3 py-2 rounded-lg border border-blue-600 hover:bg-blue-400"
 
       // Previous nand next button
       disabledLinkClassName={
