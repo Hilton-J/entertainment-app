@@ -14,13 +14,14 @@ const NavBar = () => {
 
   return (
     <header className="bg-slate-900 p-4 shadow-2xl">
-      <nav className="w-[90%] mx-auto flex items-center justify-between text-lg">
+      <nav className="w-[90%] mx-auto flex items-center justify-between">
         <NavLink
           to={'/'}
-          className="w-fit text-2xl font-bold bg-blue-600 hover:text-blue-600 sm:text-3xl text-white px-2 py-1 rounded-lg border border-transparent hover:border-blue-600 hover:bg-transparent transition-all duration-700"
+          className="w-fit text-lg font-bold bg-blue-600 hover:text-blue-600 text-white px-2 py-1 rounded-lg border border-transparent hover:border-blue-600 hover:bg-transparent transition-all duration-700"
         >
           Steam-Trends
         </NavLink>
+
         <div className="hidden items-center gap-4 md:flex lg:gap-8">
           <ul className="flex flex-col items-center gap-4 md:flex-row lg:gap-8">
             <li>
@@ -44,9 +45,6 @@ const NavBar = () => {
               </NavLink>
             </li>
           </ul>
-          {/* <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-500 md:text-base">
-            LOG IN
-          </button> */}
         </div>
 
         <div className="flex items-center gap-4 md:hidden">

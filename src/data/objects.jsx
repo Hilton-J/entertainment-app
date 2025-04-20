@@ -32,12 +32,12 @@ export const filters = [
 ]
 
 export const sortArray = [
-  { value: 'polularity.desc', label: 'Popularity Descending' },
-  { value: 'polularity.asc', label: 'Popularity Ascending' },
-  { value: 'primary_release_date.asc', label: 'Release Date Ascending' },
-  { value: 'primary_release_date.desc', label: 'Release Date Descending' },
-  { value: 'vote_average.desc', label: 'Rating Descending' },
-  { value: 'vote_average.asc', label: 'Rating Ascending' },
+  { value: 'polularity.desc', label: 'Most Popular' },
+  // { value: 'polularity.asc', label: 'Popularity Ascending' },
+  // { value: 'primary_release_date.asc', label: 'Release Date Ascending' },
+  { value: 'primary_release_date.desc', label: 'Latest Release' },
+  { value: 'vote_average.desc', label: 'Most Rating' },
+  // { value: 'vote_average.asc', label: 'Rating Ascending' },
   { value: 'title.asc', label: 'Title (A-Z)' },
   { value: 'title.desc', label: 'Title (Z-A)' },
 ]
