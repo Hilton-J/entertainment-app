@@ -1,13 +1,10 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const baseUrl = process.env.TMDB_BASE_URL;
 const api_key = process.env.TMDB_API_KEY;
 
 export class SearchService {
-  async SearchMovie(query, page) {
+  async SearchMovie(query, page, releaseYear) {
     try {
       const params = {
         api_key,
@@ -15,6 +12,7 @@ export class SearchService {
         query,
         page,
         include_adult: false,
+        primary_release_year: releaseYear
       }
       const { data } = await axios.get(`${baseUrl}/search/movie`, { params });
       return data;
@@ -23,7 +21,7 @@ export class SearchService {
     }
   }
 
-  async SearchTVShow(query, page) {
+  async SearchTVShow(query, page, releaseYear) {
     try {
       const params = {
         api_key,
@@ -31,6 +29,7 @@ export class SearchService {
         query,
         page,
         include_adult: false,
+        primary_release_year: releaseYear
       }
       const { data } = await axios.get(`${baseUrl}/search/tv`, { params });
       return data;

@@ -7,15 +7,16 @@ export class SearchController {
 
   async SearchMovie(req, res) {
     const { query, page } = req.params;
+    const { releaseYear } = req.query;
 
     try {
-      const tvShow = await this.repository.SearchMovie(query, page);
+      const tvShow = await this.repository.SearchMovie(query, page, releaseYear);
       res.json(tvShow);
     } catch (error) {
       console.error('Error fetching TV-Show data: ', error);
     }
   }
-  
+
   async SearchTVShow(req, res) {
     const { query, page } = req.params;
     try {

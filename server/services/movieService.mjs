@@ -1,7 +1,4 @@
 import axios from 'axios'
-import dotenv from 'dotenv'
-
-dotenv.config();
 
 const baseUrl = process.env.TMDB_BASE_URL;
 const api_key = process.env.TMDB_API_KEY;
@@ -17,36 +14,21 @@ export class MovieService {
     }
   }
 
-  async discoverMovies(page, sort) {
+  async discoverMovies(page, sort, with_genres, releaseYear) {
     try {
       const params = {
         api_key,
         page,
         include_adult: false,
-        sort_by: sort
+        sort_by: sort,
+        with_genres,
+        primary_release_year: releaseYear
       };
 
       const { data } = await axios.get(`${baseUrl}/discover/movie`, { params });
       return data;
     } catch (error) {
       console.error('Error fetching Movie data W/O Params from TMDB:', error);
-      throw error;
-    }
-  }
-
-  async discoverMoviesWithGenres(page, with_genres) {
-    try {
-      let params = {
-        api_key,
-        page,
-        include_adult: false,
-        with_genres
-      };
-
-      const { data } = await axios.get(`${baseUrl}/discover/movie`, { params });
-      return data;
-    } catch (error) {
-      console.error('Error fetching movie data with PARAMS from TMDB:', error);
       throw error;
     }
   }

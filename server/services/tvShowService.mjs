@@ -1,7 +1,4 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const baseUrl = process.env.TMDB_BASE_URL;
 const api_key = process.env.TMDB_API_KEY;

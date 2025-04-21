@@ -1,8 +1,5 @@
 //This is where you make your API call that are rela
 import axios from 'axios'
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const baseUrl = process.env.TMDB_BASE_URL;
 const apiKey = process.env.TMDB_API_KEY;

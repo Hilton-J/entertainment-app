@@ -5,11 +5,11 @@ export class SearchRepository {
     this.service = new SearchService();
   }
 
-  async SearchMovie(query, page) {
-    return this.service.SearchMovie(query, page);
+  async SearchMovie(query, page, releaseYear) {
+    return this.service.SearchMovie(query, page, releaseYear);
   }
 
-  async SearchTVShow(query, page) {
-    return this.service.SearchTVShow(query, page);
+  async SearchTVShow(query, page, releaseYear) {
+    return this.service.SearchTVShow(query, page, releaseYear);
   }
 }

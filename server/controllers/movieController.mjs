@@ -17,23 +17,12 @@ export class MovieController {
 
   async discoverMovies(req, res) {
     const { page } = req.params;
-    const { sort } = req.query;
+    const { sort, with_genres, releaseYear } = req.query;
 
     try {
-      const movies = await this.repository.discoverMovies(page, sort);
+      const movies = await this.repository.discoverMovies(page, sort, with_genres, releaseYear);
       res.json(movies);
       // res.status(200).json(movies); //with status(200), you're explicitly setting the OK responce code to 200
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch movies' });
-    }
-  }
-
-  async discoverMoviesWithGenres(req, res) {
-    const { page, genres } = req.params;
-
-    try {
-      const movies = await this.repository.discoverMoviesWithGenres(page, genres);
-      res.json(movies);
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch movies' });
     }

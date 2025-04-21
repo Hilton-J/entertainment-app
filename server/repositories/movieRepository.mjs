@@ -9,12 +9,8 @@ export class MovieRepository {
     return this.service.movieGenres();
   }
 
-  async discoverMovies(page, sort) {
-    return this.service.discoverMovies(page, sort);
-  }
-
-  async discoverMoviesWithGenres(page, with_genres) {
-    return this.service.discoverMoviesWithGenres(page, with_genres);
+  async discoverMovies(page, sort, with_genres, releaseYear) {
+    return this.service.discoverMovies(page, sort, with_genres, releaseYear);
   }
 
   async fetchMovieByID(id) {
