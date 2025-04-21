@@ -15,6 +15,7 @@ const Movies = () => {
   const [movieList, setMovieList] = useState([]);
   const [releaseYear, setReleaseYear] = useState();
   const [countries, setCountries] = useState([]);
+  const [languages, setLanguages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [movieGenres, setMovieGenres] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -30,11 +31,14 @@ const Movies = () => {
         const { data: movies } = await axios.get(apiURL);
         const { data: movieGenres } = await axios.get('/api/movie/genre');
         const { data: countriesData } = await axios.get('api/filter/countries');
+        const { data: languagesData } = await axios.get('api/filter/languages');
 
         movies.total_pages < 50 ? setPageCount(movies.total_pages) : setPageCount(50);
+
+        setCountries(countriesData);
+        setLanguages(languagesData);
         setMovieList(movies.results);
         setMovieGenres(movieGenres.genres);
-        setCountries(countriesData);
       } catch (error) {
         console.error('Error fetching movie data: ', error);
       } finally {
@@ -58,7 +62,7 @@ const Movies = () => {
     );
   }
 
-  console.log(countries);
+  console.log(languages);
 
   return (
     <section className="px-4 py-10">
@@ -116,7 +120,7 @@ const Movies = () => {
               <h1 className='text-lg'>Country</h1>
               <div className='border border-green-500 p-3'>
                 {countries.sort().map((country) => <label key={country.iso_3166_1} className='inline-flex items-center gap-2 mr-4'>
-                  <input type='checkbox' value={country.id} className='accent-blue-600 focus:ring-0 focus:ring-offset-0 rounded' onChange={handleGenreSelection} />
+                  <input type='radio' value={country.iso_3166_1} className='accent-blue-600 focus:ring-0 focus:ring-offset-0 rounded' onChange={handleGenreSelection} />
                   {country.english_name}
                 </label>
                 )}
@@ -124,6 +128,21 @@ const Movies = () => {
             </div>
             <div className='border border-lime-500'>
               <h1 className='text-lg'>Language</h1>
+              <div className='border border-green-500 p-3'>
+                {languages.sort((a, b) => {
+                  if (a.english_name < b.english_name) {
+                    return -1; // a comes before b
+                  }
+                  if (a.english_name > b.english_name) {
+                    return 1;  // a comes after b
+                  }
+                  return 0;    // a and b are equal
+                }).map((language) => <label key={language.iso_639_1} className='inline-flex items-center gap-2 mr-4'>
+                  <input type='radio' value={language.iso_639_1} className='accent-blue-600 focus:ring-0 focus:ring-offset-0 rounded' onChange={handleGenreSelection} />
+                  {language.english_name}
+                </label>
+                )}
+              </div>
             </div>
           </div>
         </motion.div>
