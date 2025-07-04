@@ -15,8 +15,27 @@
 @layer base {
   body {
     scroll-behavior: smooth;
-    /* &::-webkit-scrollbar {
+    &::-webkit-scrollbar {
       display: none;
-    } */
+    }
   }
 }
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #3b82f6;
+  border-radius: 9999px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 transparent;
+}
+

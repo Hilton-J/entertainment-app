@@ -14,7 +14,7 @@ export class MovieService {
     }
   }
 
-  async discoverMovies(page, sort, with_genres, releaseYear) {
+  async discoverMovies(page, sort, with_genres, releaseYear, country, language, fromDate, toDate) {
     try {
       const params = {
         api_key,
@@ -22,7 +22,11 @@ export class MovieService {
         include_adult: false,
         sort_by: sort,
         with_genres,
-        primary_release_year: releaseYear
+        with_origin_country: country,
+        with_original_language: language,
+        primary_release_year: releaseYear,
+        "primary_release_date.gte": fromDate,
+        "primary_release_date.lte": toDate,
       };
 
       const { data } = await axios.get(`${baseUrl}/discover/movie`, { params });

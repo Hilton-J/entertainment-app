@@ -9,8 +9,8 @@ export class MovieRepository {
     return this.service.movieGenres();
   }
 
-  async discoverMovies(page, sort, with_genres, releaseYear) {
-    return this.service.discoverMovies(page, sort, with_genres, releaseYear);
+  async discoverMovies(page, sort, with_genres, releaseYear, country, language, fromDate, toDate) {
+    return this.service.discoverMovies(page, sort, with_genres, releaseYear, country, language, fromDate, toDate);
   }
 
   async fetchMovieByID(id) {

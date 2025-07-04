@@ -17,10 +17,10 @@ export class MovieController {
 
   async discoverMovies(req, res) {
     const { page } = req.params;
-    const { sort, with_genres, releaseYear } = req.query;
+    const { sort, with_genres, releaseYear, country, language, fromDate, toDate } = req.query;
 
     try {
-      const movies = await this.repository.discoverMovies(page, sort, with_genres, releaseYear);
+      const movies = await this.repository.discoverMovies(page, sort, with_genres, releaseYear, country, language, fromDate, toDate);
       res.json(movies);
       // res.status(200).json(movies); //with status(200), you're explicitly setting the OK responce code to 200
     } catch (error) {
