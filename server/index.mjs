@@ -17,8 +17,8 @@ app.use(cors());
 app.use(express.json());
 
 // Route to handle TMDB API requests
-app.use('/api/tvshow', tvRouter);
-app.use('/api/movie', movieRouter);
+app.use('/api/tvshows', tvRouter);
+app.use('/api/movies', movieRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/filter', filterRouter);
 app.use('/api/trending', trendingRouter);

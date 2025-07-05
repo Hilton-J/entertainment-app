@@ -14,10 +14,11 @@ export class TVShowController {
     }
   }
 
-  async dicoverTVShow(req, res) {
+  async dicoverTVShows(req, res) {
     const { page } = req.params;
+    const { sort, with_genres, releaseYear, country, language, fromDate, toDate } = req.query;
     try {
-      const tv = await this.repository.dicoverTVShow(page);
+      const tv = await this.repository.dicoverTVShows(page, sort, with_genres, releaseYear, country, language, fromDate, toDate);
       res.json(tv);
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch movies' });

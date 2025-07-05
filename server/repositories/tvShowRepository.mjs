@@ -9,8 +9,8 @@ export class TVShowRepository {
     return this.service.tvShowGenres();
   }
 
-  async dicoverTVShow(page) {
-    return this.service.dicoverTVShow(page);
+  async dicoverTVShows(page, sort, with_genres, releaseYear, country, language, fromDate, toDate) {
+    return this.service.dicoverTVShows(page, sort, with_genres, releaseYear, country, language, fromDate, toDate);
   }
 
   async dicoverTVShowWithGenres(page, with_genres) {

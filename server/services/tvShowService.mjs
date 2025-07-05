@@ -14,35 +14,25 @@ export class TVShowService {
     }
   }
 
-  async dicoverTVShow(page) {
+  async dicoverTVShows(page, sort, with_genres, releaseYear, country, language, fromDate, toDate) {
     try {
       let params = {
         api_key,
         page,
-        include_adult: false
+        include_adult: false,
+        sort_by: sort,
+        with_genres,
+        with_origin_country: country,
+        with_original_language: language,
+        first_air_date_year: releaseYear,
+        "first_air_date.gte": fromDate,
+        "first_air_date.lte": toDate,
       };
 
       const { data } = await axios.get(`${baseUrl}/discover/tv`, { params });
       return data;
     } catch (error) {
       console.error('Error fetching Tv-Show data W/O PARAMS from TMDB:', error);
-      throw error;
-    }
-  }
-
-  async dicoverTVShowWithGenres(page, with_genres) {
-    try {
-      let params = {
-        api_key,
-        page,
-        include_adult: false,
-        with_genres
-      };
-
-      const { data } = await axios.get(`${baseUrl}/discover/tv`, { params });
-      return data;
-    } catch (error) {
-      console.error('Error fetching Tv-Show data WITH PARAMS from TMDB:', error);
       throw error;
     }
   }
