@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify'
 
 const MainLayout = () => {
   return (
-    <section className='bg-slate-900'>
+    <section className='bg-[#16213C]'>
       <NavBar />
       <Outlet />
       <ToastContainer />

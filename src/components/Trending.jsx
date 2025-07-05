@@ -5,7 +5,7 @@ import Paginate from './Paginate';
 import React, { useState, useEffect } from 'react';
 
 const Trending = () => {
-  const [content, setContent] = useState([]);
+  const [trending, setTrending] = useState([]);
   const [loading, setLoading] = useState(true);
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,45 +14,29 @@ const Trending = () => {
     const fetchTrending = async () => {
       const { data } = await axios.get('/api/trending')
       data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
-      setContent(data.results)
+      setTrending(data.results)
 
       setLoading(false)
     }
     fetchTrending()
   }, [currentPage])
 
-  console.log(content);
-
 
   return (
     <section className="px-4 py-10">
-      <div className="container m-auto flex justify-center">
-        <div className="lg:w-[70%]">
-          <h2 className="mb-5 text-center text-2xl font-bold md:text-4xl">
-            TRENDING
-          </h2>
-          {/* {!loading && content.length > 0 ? (
-
-            <div className="grid justify-center gap-3 sm:grid-cols-3 lg:grid-cols-4">
-              {content.map((movie) => (
-                <Listing key={movie.id} list={movie} type={movie.media_type} />
-              ))}
-            </div>
-          ) : (
-            <p>No trending content available</p>
-          )} */}
+      <div className="m-auto flex w-[90%] flex-col min-h-screen gap-4">
+        <h2 className="text-2xl font-bold text-blue-600">TRENDING</h2>
+        <div className={`grid ${!loading && "grid-cols-4 md:grid-cols-5"}  gap-3 mx-auto flex-1`}>
           {loading ? (
-            <Spinner />
+            <Spinner className='mx-auto' />
           ) : (
-            <div className="grid justify-center gap-3 sm:grid-cols-3 lg:grid-cols-4">
-              {content.map((movie) => (
-                <Listing key={movie.id} list={movie} type={movie.media_type} />
-              ))}
-            </div>
+            trending.map((show) => (
+              <Listing key={show.id} list={show} type={show.media_type} />
+            ))
           )}
-
-          {pageCount > 2 && <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />}
         </div>
+
+        {pageCount > 2 && <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />}
       </div>
     </section>
   )

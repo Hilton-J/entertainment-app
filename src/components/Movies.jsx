@@ -42,7 +42,7 @@ const Movies = () => {
       }
     }
     fetchMovies();
-  }, [currentPage, selectedGenres, searchQuery, sort, selectedCountry, selectedLanguage, toReleaseDate, fromReleaseDate])
+  }, [currentPage, selectedGenres, searchQuery, sort, selectedCountry, selectedLanguage, toReleaseDate, fromReleaseDate]);
 
   const toggleFilter = () => {
     setOpenFilter((prevState) => !prevState)
@@ -52,7 +52,7 @@ const Movies = () => {
     <section className="px-4 py-10">
       <div className="m-auto flex w-[90%] flex-col min-h-screen gap-4">
         <div className="space-y-5">
-          <h2 className="text-2xl font-bold text-blue-600 self-center">LATEST MOVIES</h2>
+          <h2 className="text-2xl font-bold text-blue-600">LATEST MOVIES</h2>
           <div className='flex gap-4'>
             <div className='flex-1'>
               <input type="search" name='search' placeholder='Search' className='rounded-lg w-full' onChange={(e) => setSearchQuery(e.target.value)} />
@@ -71,7 +71,7 @@ const Movies = () => {
           initial={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={openFilter ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
-          className="grid grid-cols-12 bg-[#16213C] overflow-hidden rounded-lg p-3 text-white/50 gap-4"
+          className="grid grid-cols-12 bg-[#1C294A] overflow-hidden rounded-lg p-3 text-white/50 gap-4 shadow-xl"
         >
           <div className='col-span-2'>
             <SortBy sort={sort} setSort={setSort} />
@@ -92,9 +92,11 @@ const Movies = () => {
           className={`grid ${!loading && "grid-cols-4 md:grid-cols-5"}  gap-3 mx-auto flex-1`}
         >
           {loading ? (
-            <Spinner className=' mx-auto border border-red-500' />
+            <Spinner className='mx-auto' />
           ) : (
-            movieList.map((movie) => <Listing key={movie.id} list={movie} type={"movie"} />)
+            movieList.map((movie) =>
+              <Listing key={movie.id} list={movie} type={"movie"} />
+            )
           )}
         </motion.div>
 

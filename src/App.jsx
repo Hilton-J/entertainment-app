@@ -11,7 +11,6 @@ import NotFoundPage from './pages/NotFoundPage'
 import MoviesPage from './pages/MoviesPage'
 import TVShowsPage from './pages/TVShowsPage'
 import ViewPage from './pages/ViewPage'
-import { GenreProvider } from './contexts/GenreContext'
 
 const App = () => {
   const router = createBrowserRouter(
@@ -27,9 +26,7 @@ const App = () => {
   )
 
   return (
-    <GenreProvider>
-      <RouterProvider router={router} />
-    </GenreProvider>
+    <RouterProvider router={router} />
   )
 }
 

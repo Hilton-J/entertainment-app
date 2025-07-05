@@ -73,7 +73,7 @@ const TVShows = () => {
           initial={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={openFilter ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
-          className="grid grid-cols-12 bg-[#16213C] overflow-hidden rounded-lg p-3 text-white/50 gap-4"
+          className="grid grid-cols-12 bg-[#1C294A] overflow-hidden rounded-lg p-3 text-white/50 gap-4 shadow-xl"
         >
           <div className='col-span-2'>
             <SortBy sort={sort} setSort={setSort} />
@@ -94,9 +94,11 @@ const TVShows = () => {
           className={`grid ${!loading && "grid-cols-4 md:grid-cols-5"}  gap-3 mx-auto flex-1`}
         >
           {loading ? (
-            <Spinner className=' mx-auto border border-red-500' />
+            <Spinner className='mx-auto' />
           ) : (
-            tvShowList.map((tvShow) => <Listing key={tvShow.id} list={tvShow} type={"tv"} />)
+            tvShowList.map((tvShow) =>
+              <Listing key={tvShow.id} list={tvShow} type={"tv"} />
+            )
           )}
         </motion.div>
 

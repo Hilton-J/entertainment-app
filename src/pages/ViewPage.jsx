@@ -1,13 +1,11 @@
-import { useParams } from 'react-router-dom'
-import React from 'react'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import PropTypes from 'prop-types'
-import country from '../data/country.json'
-import logo from '../assets/tmdb.svg'
-import SeasonsListing from '../components/SeasonsListing'
-import Cast from '../components/Cast'
-// import DetailsHero from '../components/DetailsHero'
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import logo from '../assets/tmdb.svg';
+import Cast from '../components/Cast';
+import country from '../data/country.json';
+import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import SeasonsListing from '../components/SeasonsListing';
 
 const ViewPage = () => {
   const { type, id } = useParams()
@@ -20,7 +18,7 @@ const ViewPage = () => {
 
   useEffect(() => {
     const fetchItem = async () => {
-      const url = type === 'tv' ? `/api/tvshow/tv-id/${id}` : `/api/movie/movie-id/${id}`;
+      const url = type === 'tv' ? `/api/tvshows/tv-id/${id}` : `/api/movies/movie-id/${id}`;
       const { data } = await axios.get(url);
       const releaseDate = data.release_date || data.first_air_date;
 
@@ -32,11 +30,10 @@ const ViewPage = () => {
     }
 
     const fetchCrew = async () => {
-      const url = type === 'tv' ? `/api/tvshow/credits/${id}` : `/api/movie/credits/${id}`;
+      const url = type === 'tv' ? `/api/tvshows/credits/${id}` : `/api/movies/credits/${id}`;
       const { data } = await axios.get(url);
 
       setListCast(data.cast);
-
     }
 
     fetchItem();
@@ -54,8 +51,8 @@ const ViewPage = () => {
         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       >
         <div className='backdrop-blur-md bg-black/30'>
-          <div className="container mx-auto top-0 flex h-full w-full flex-wrap py-10">
-            <div className="flex items-center sm:items-start gap-5 flex-col sm:flex-row md:gap-10 w-full ">
+          <div className="mx-auto top-0 flex h-full w-[90%] flex-wrap py-10">
+            <div className="flex items-center sm:items-start gap-5 flex-col sm:flex-row md:gap-10 w-full px-4">
               <div className="w-fit">
                 <img
                   src={
@@ -104,8 +101,10 @@ const ViewPage = () => {
         </div>
       </div>
 
-      {seasons !== undefined && <SeasonsListing numSeason={item.number_of_seasons} list={seasons} />}
-      {listCast.length > 0 && <Cast list={listCast} title={item.name || item.original_title} />}
+      <div className='px-4 w-[90%] mx-auto space-y-16'>
+        {seasons !== undefined && <SeasonsListing numSeason={item.number_of_seasons} list={seasons} />}
+        {listCast.length > 0 && <Cast list={listCast} title={item.name || item.original_title} />}
+      </div>
     </section>
   )
 };

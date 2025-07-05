@@ -17,7 +17,7 @@ const Listing = ({ list, type }) => {
   return (
     <div
       key={list.id}
-      className="h-full max-w-xs overflow-hidden rounded-lg shadow-2xl"
+      className="h-full max-w-xs overflow-hidden rounded-lg shadow-xl"
     >
       <div className="relative">
         <Link
