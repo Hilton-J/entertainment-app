@@ -79,7 +79,7 @@ const Movies = () => {
           </div>
 
           <div className='col-span-10 flex flex-col gap-4'>
-            <Genres type='movie' setSelectedGenres={setSelectedGenres} />
+            <Genres type='movies' setSelectedGenres={setSelectedGenres} />
             <Countries setSelectedCountry={setSelectedCountry} />
             <Languages setSelectedLanguage={setSelectedLanguage} />
           </div>

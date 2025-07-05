@@ -49,36 +49,12 @@ const TVShows = () => {
     setOpenFilter((prevState) => !prevState)
   }
 
-  useEffect(() => {
-    const fetchTVShows = async () => {
-      try {
-        const tvURL = selectedGenres.length > 0 ?
-          `/api/tvshow/discover/${currentPage}/genres/${selectedGenres}` : `/api/tvshow/show/${currentPage}`;
-
-        const apiURL = searchQuery
-          ? `/api/search/tv/${searchQuery}/${currentPage}` : tvURL;
-
-        const { data } = await axios.get(apiURL);
-        data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50);
-        setTVShowList(data.results);
-
-      } catch (error) {
-        console.log('Error fetching data', error);
-      } finally {
-        setLoading(false);
-      }
-
-
-    }
-    fetchTVShows()
-  }, [currentPage, selectedGenres, searchQuery])
-
 
   return (
     <section className="px-4 py-10">
       <div className="m-auto flex w-[90%] flex-col min-h-screen gap-4">
         <div className="space-y-5">
-          <h2 className="text-2xl font-bold text-blue-600 self-center">LATEST MOVIES</h2>
+          <h2 className="text-2xl font-bold text-blue-600 self-center">LATEST TV SHOWS</h2>
           <div className='flex gap-4'>
             <div className='flex-1'>
               <input type="search" name='search' placeholder='Search' className='rounded-lg w-full' onChange={(e) => setSearchQuery(e.target.value)} />
@@ -105,7 +81,7 @@ const TVShows = () => {
           </div>
 
           <div className='col-span-10 flex flex-col gap-4'>
-            <Genres type='movie' setSelectedGenres={setSelectedGenres} />
+            <Genres type='tvshows' setSelectedGenres={setSelectedGenres} />
             <Countries setSelectedCountry={setSelectedCountry} />
             <Languages setSelectedLanguage={setSelectedLanguage} />
           </div>
@@ -120,7 +96,7 @@ const TVShows = () => {
           {loading ? (
             <Spinner className=' mx-auto border border-red-500' />
           ) : (
-            tvShowList.map((movie) => <Listing key={movie.id} list={movie} type={"movie"} />)
+            tvShowList.map((tvShow) => <Listing key={tvShow.id} list={tvShow} type={"tv"} />)
           )}
         </motion.div>
 

@@ -1,19 +1,17 @@
-import React from 'react'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
-import Spinner from './Spinner'
-import Listing from './Listing'
-import Paginate from './Paginate'
+import axios from 'axios';
+import Spinner from './Spinner';
+import Listing from './Listing';
+import Paginate from './Paginate';
+import React, { useState, useEffect } from 'react';
 
 const Trending = () => {
-  const [loading, setLoading] = useState(true)
-  const [content, setContent] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageCount, setPageCount] = useState(0)
+  const [content, setContent] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchTrending = async () => {
-      // const apiKey = import.meta.env.VITE_API_KEY
       const { data } = await axios.get('/api/trending')
       data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
       setContent(data.results)
