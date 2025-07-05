@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import DrawerNavBar from './DrawerNavBar';
 import { NavLink } from "react-router-dom";
 import { RiMovie2Line } from "react-icons/ri";
-import { FiTv, FiTrendingUp } from "react-icons/fi";
+import { FiTv, FiTrendingUp, FiYoutube, } from "react-icons/fi";
 import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
 
 const NavBar = () => {
   const linkClass = ({ isActive }) =>
-    isActive ? 'text-blue-600' : 'text-gray-600'
+    isActive ? 'text-blue-600' : 'text-gray-400'
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -18,9 +18,10 @@ const NavBar = () => {
       <nav className=" mx-auto flex items-center justify-between">
         <NavLink
           to={'/'}
-          className="w-fit text-lg font-bold bg-blue-600 hover:text-blue-600 text-white px-2 py-1 rounded-lg border border-transparent hover:border-blue-600 hover:bg-transparent transition-all duration-700"
+          className="flex items-center space-x-2 transition-all duration-700"
         >
-          Steam-Trends
+          <FiYoutube className="h-8 w-8 text-red-500" />
+          <h1 className="text-2xl font-bold text-white hover:text-gray-600">CineScope</h1>
         </NavLink>
 
         <div className="hidden items-center gap-4 md:flex lg:gap-8">
@@ -29,33 +30,33 @@ const NavBar = () => {
               <NavLink
                 to={'/'}
                 className={({ isActive }) =>
-                  `${linkClass({ isActive })} hover:text-blue-600 flex items-center gap-2`
+                  `${linkClass({ isActive })} hover:text-blue-600 flex items-center space-x-2`
                 }
               >
                 <FiTrendingUp />
-                Trending
+                <span>Trending</span>
               </NavLink>
             </li>
             <li>
               <NavLink
                 to={'/movies'}
                 className={({ isActive }) =>
-                  `${linkClass({ isActive })} hover:text-blue-600 flex items-center gap-2`
+                  `${linkClass({ isActive })} hover:text-blue-600 flex items-center space-x-2`
                 }
               >
-                <RiMovie2Line/>
-                Movies
+                <RiMovie2Line />
+                <span>Movies</span>
               </NavLink>
             </li>
             <li>
               <NavLink
                 to={'/tv'}
                 className={({ isActive }) =>
-                  `${linkClass({ isActive })} hover:text-blue-600 flex items-center gap-2`
+                  `${linkClass({ isActive })} hover:text-blue-600 flex items-center space-x-2`
                 }
               >
                 <FiTv />
-                TV Shows
+                <span>TV Shows</span>
               </NavLink>
             </li>
           </ul>

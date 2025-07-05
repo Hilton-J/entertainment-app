@@ -101,7 +101,7 @@ const ViewPage = () => {
         </div>
       </div>
 
-      <div className='px-4 w-[90%] mx-auto space-y-16'>
+      <div className='px-4 w-[90%] mx-auto space-y-10 mb-12'>
         {seasons !== undefined && <SeasonsListing numSeason={item.number_of_seasons} list={seasons} />}
         {listCast.length > 0 && <Cast list={listCast} title={item.name || item.original_title} />}
       </div>
