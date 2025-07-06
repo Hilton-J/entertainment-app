@@ -1,7 +1,7 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { API_URL } from '../../constant/env.const';
+import { BASE_URL } from '../../constant/env.const';
 
 const Genres = ({ setSelectedGenres, type }) => {
   const [genres, setGenres] = useState([]);
@@ -9,7 +9,7 @@ const Genres = ({ setSelectedGenres, type }) => {
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const { data: genres } = await axios.get(`${API_URL}/${type}/genre`);
+        const { data: genres } = await axios.get(`${BASE_URL}/${type}/genre`);
         setGenres(genres.genres)
       } catch (error) {
         console.error('Error fetching movie data: ', error);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { API_URL } from '../../constant/env.const';
+import { BASE_URL } from '../../constant/env.const';
 
 const Countries = ({ setSelectedCountry }) => {
   const [countries, setCountries] = useState([]);
@@ -9,7 +9,7 @@ const Countries = ({ setSelectedCountry }) => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const { data: countriesData } = await axios.get(`${API_URL}/filter/countries`);
+        const { data: countriesData } = await axios.get(`${BASE_URL}/filter/countries`);
         setCountries(countriesData);
       } catch (error) {
         console.error('Error fetching movie data: ', error);
