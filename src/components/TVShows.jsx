@@ -26,20 +26,16 @@ const TVShows = () => {
 
   useEffect(() => {
     const fetchTvShows = async () => {
-      try {
-        const tvShowsURL = `/api/tvshows/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
+      const tvShowsURL = `/api/tvshows/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
 
-        const apiURL = searchQuery ? `/api/search/tvshows/${searchQuery}/${currentPage}` : tvShowsURL;
+      const apiURL = searchQuery ? `/api/search/tvshows/${searchQuery}/${currentPage}` : tvShowsURL;
 
-        const { data: tvShows } = await axios.get(apiURL);
+      const { data: tvShows } = await axios.get(apiURL);
 
-        tvShows.total_pages < 50 ? setPageCount(tvShows.total_pages) : setPageCount(50);
-        setTVShowList(tvShows.results);
-      } catch (error) {
-        console.error('Error fetching TV Shows data: ', error);
-      } finally {
-        setLoading(false);
-      }
+      tvShows.total_pages < 50 ? setPageCount(tvShows.total_pages) : setPageCount(50);
+      setTVShowList(tvShows.results);
+
+      setLoading(false)
     }
     fetchTvShows();
   }, [currentPage, selectedGenres, searchQuery, sort, selectedCountry, selectedLanguage, toReleaseDate, fromReleaseDate])
