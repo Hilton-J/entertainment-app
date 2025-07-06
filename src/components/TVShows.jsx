@@ -26,9 +26,9 @@ const TVShows = () => {
 
   useEffect(() => {
     const fetchTvShows = async () => {
-      const tvShowsURL = `/api/tvshows/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
+      const tvShowsURL = `${import.meta.env.VITE_API_URL}/tvshows/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
 
-      const apiURL = searchQuery ? `/api/search/tvshows/${searchQuery}/${currentPage}` : tvShowsURL;
+      const apiURL = searchQuery ? `${import.meta.env.VITE_API_URL}/search/tvshows/${searchQuery}/${currentPage}` : tvShowsURL;
 
       const { data: tvShows } = await axios.get(apiURL);
 

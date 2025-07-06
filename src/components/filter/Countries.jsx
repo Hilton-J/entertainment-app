@@ -8,7 +8,7 @@ const Countries = ({ setSelectedCountry }) => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const { data: countriesData } = await axios.get('api/filter/countries');
+        const { data: countriesData } = await axios.get(`${import.meta.env.VITE_API_URL}/filter/countries`);
         setCountries(countriesData);
       } catch (error) {
         console.error('Error fetching movie data: ', error);

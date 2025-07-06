@@ -26,9 +26,9 @@ const Movies = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const moviesURL = `/api/movies/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
+      const moviesURL = `${import.meta.env.VITE_API_URL}/movies/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
 
-      const apiURL = searchQuery ? `/api/search/movies/${searchQuery}/${currentPage}` : moviesURL;
+      const apiURL = searchQuery ? `${import.meta.env.VITE_API_URL}/search/movies/${searchQuery}/${currentPage}` : moviesURL;
 
       const { data: movies } = await axios.get(apiURL);
 

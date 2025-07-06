@@ -8,7 +8,7 @@ const Genres = ({ setSelectedGenres, type }) => {
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const { data: genres } = await axios.get(`/api/${type}/genre`);
+        const { data: genres } = await axios.get(`${import.meta.env.VITE_API_URL}/${type}/genre`);
         setGenres(genres.genres)
       } catch (error) {
         console.error('Error fetching movie data: ', error);

@@ -8,7 +8,7 @@ const Languages = ({ setSelectedLanguage }) => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const { data: languagesData } = await axios.get('api/filter/languages');
+        const { data: languagesData } = await axios.get(`${import.meta.env.VITE_API_URL}/filter/languages`);
         setLanguages(languagesData);
       } catch (error) {
         console.error('Error fetching movie data: ', error);
