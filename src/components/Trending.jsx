@@ -12,7 +12,7 @@ const Trending = () => {
 
   useEffect(() => {
     const fetchTrending = async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/trending`)
+      const { data } = await axios.get(`${import.meta.env.EXPRESS_API_URL}/trending`)
       data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
       setTrending(data.results)
 
