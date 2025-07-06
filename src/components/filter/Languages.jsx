@@ -20,7 +20,7 @@ const Languages = ({ setSelectedLanguage }) => {
 
   return (
     <div className='space-y-2'>
-      <h1 className='text-lg'>Language</h1>
+      <h1 className='md:text-lg'>Language</h1>
       <div className='border border-blue-600 p-3 rounded-lg h-80 overflow-y-auto scrollbar-custom'>
         {languages.sort((a, b) => {
           if (a.english_name < b.english_name) {

@@ -14,7 +14,7 @@ const NavBar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   return (
-    <header className="bg-slate-900 py-4 px-6">
+    <header className=" bg-slate-900 py-4 px-6">
       <nav className=" mx-auto flex items-center justify-between">
         <NavLink
           to={'/'}

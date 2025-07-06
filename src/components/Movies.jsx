@@ -52,7 +52,7 @@ const Movies = () => {
     <section className="px-4 py-10">
       <div className="m-auto flex w-[90%] flex-col min-h-screen gap-4">
         <div className="space-y-5">
-          <h2 className="text-2xl font-bold text-blue-600">LATEST MOVIES</h2>
+          <h2 className="text-xl md:text-2xl font-bold text-blue-600">LATEST MOVIES</h2>
           <div className='flex gap-4'>
             <div className='flex-1'>
               <input type="search" name='search' placeholder='Search' className='rounded-lg w-full' onChange={(e) => setSearchQuery(e.target.value)} />
@@ -71,14 +71,14 @@ const Movies = () => {
           initial={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={openFilter ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
-          className="grid grid-cols-12 bg-[#1C294A] overflow-hidden rounded-lg p-3 text-white/50 gap-4 shadow-xl"
+          className="grid md:grid-cols-12 bg-[#1C294A] overflow-hidden rounded-lg p-3 text-white/50 gap-4 shadow-xl"
         >
-          <div className='col-span-2'>
+          <div className='md:col-span-2'>
             <SortBy sort={sort} setSort={setSort} />
             <ReleaseDateForm toDate={toReleaseDate} setToDate={setToReleaseDate} fromDate={fromReleaseDate} setFromDate={setFromReleaseDate} />
           </div>
 
-          <div className='col-span-10 flex flex-col gap-4'>
+          <div className='md:col-span-10 flex flex-col gap-4'>
             <Genres type='movies' setSelectedGenres={setSelectedGenres} />
             <Countries setSelectedCountry={setSelectedCountry} />
             <Languages setSelectedLanguage={setSelectedLanguage} />

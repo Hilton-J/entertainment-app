@@ -25,8 +25,8 @@ const Trending = () => {
   return (
     <section className="px-4 py-10">
       <div className="m-auto flex w-[90%] flex-col min-h-screen gap-4">
-        <h2 className="text-2xl font-bold text-blue-600">TRENDING</h2>
-        <div className={`grid ${!loading && "grid-cols-4 md:grid-cols-5"}  gap-3 mx-auto flex-1`}>
+        <h2 className="text-xl md:text-2xl font-bold text-blue-600">TRENDING</h2>
+        <div className={`grid ${!loading && "grid-cols-2 md:grid-cols-5"}  gap-3 mx-auto flex-1`}>
           {loading ? (
             <Spinner className='mx-auto' />
           ) : (

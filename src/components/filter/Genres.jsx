@@ -30,7 +30,7 @@ const Genres = ({ setSelectedGenres, type }) => {
 
   return (
     <div className='space-y-2'>
-      <h1 className='text-lg'>Genre</h1>
+      <h1 className='md:text-lg'>Genre</h1>
       <div className='border border-blue-600 p-3 rounded-lg'>
         {genres.map((genre) =>
           <label key={genre.id} className='inline-flex items-center gap-2 mr-4 cursor-pointer'>

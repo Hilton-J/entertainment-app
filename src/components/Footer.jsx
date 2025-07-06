@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div className='flex justify-end'>
+          <div className='md:flex md:justify-end'>
             <div>
               <h4 className="text-white font-semibold mb-4">Browse</h4>
               <ul className="space-y-2">

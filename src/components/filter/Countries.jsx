@@ -20,7 +20,7 @@ const Countries = ({ setSelectedCountry }) => {
 
   return (
     <div className='space-y-2'>
-      <h1 className='text-lg'>Country</h1>
+      <h1 className='md:text-lg'>Country</h1>
       <div className='border border-blue-600 p-3 rounded-lg h-80 overflow-y-auto scrollbar-custom'>
         {countries.sort().map((country) =>
           <label key={country.iso_3166_1} className='inline-flex items-center gap-2 mr-4'>

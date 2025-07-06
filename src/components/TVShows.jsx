@@ -52,7 +52,7 @@ const TVShows = () => {
     <section className="px-4 py-10">
       <div className="m-auto flex w-[90%] flex-col min-h-screen gap-4">
         <div className="space-y-5">
-          <h2 className="text-2xl font-bold text-blue-600 self-center">LATEST TV SHOWS</h2>
+          <h2 className="text-xl md:text-2xl font-bold text-blue-600 self-center">LATEST TV SHOWS</h2>
           <div className='flex gap-4'>
             <div className='flex-1'>
               <input type="search" name='search' placeholder='Search' className='rounded-lg w-full' onChange={(e) => setSearchQuery(e.target.value)} />
