@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3002,
     proxy: {
       //'/api': 'http://localhost:9001', // Ensure that Vite forwards `/api` to your backend
-      '/api': 'https://entertainment-app-amber.vercel.app/', // Ensure that Vite forwards `/api` to your backend
+      '/api': 'https://entertainment-app-amber.vercel.app', // Ensure that Vite forwards `/api` to your backend
     },
   },
   optimizeDeps: {

@@ -26,20 +26,15 @@ const Movies = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      try {
-        const moviesURL = `/api/movies/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
+      const moviesURL = `/api/movies/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
 
-        const apiURL = searchQuery ? `/api/search/movies/${searchQuery}/${currentPage}` : moviesURL;
+      const apiURL = searchQuery ? `/api/search/movies/${searchQuery}/${currentPage}` : moviesURL;
 
-        const { data: movies } = await axios.get(apiURL);
+      const { data: movies } = await axios.get(apiURL);
 
-        movies.total_pages < 50 ? setPageCount(movies.total_pages) : setPageCount(50);
-        setMovieList(movies.results);
-      } catch (error) {
-        console.error('Error fetching movie data: ', error);
-      } finally {
-        setLoading(false);
-      }
+      movies.total_pages < 50 ? setPageCount(movies.total_pages) : setPageCount(50);
+      setMovieList(movies.results);
+      setLoading(false);
     }
     fetchMovies();
   }, [currentPage, selectedGenres, searchQuery, sort, selectedCountry, selectedLanguage, toReleaseDate, fromReleaseDate]);
