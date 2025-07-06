@@ -1,5 +1,5 @@
 import React from 'react'
-import Input from './dateInput'
+import Input from './DateInput'
 import PropTypes from 'prop-types'
 
 const ReleaseDateForm = ({ toDate, setToDate, fromDate, setFromDate }) => {
