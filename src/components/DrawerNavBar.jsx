@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { NavLink } from 'react-router-dom'
+import { FiTrendingUp, FiTv, FiYoutube } from 'react-icons/fi'
+import { RiMovie2Line } from 'react-icons/ri'
 
-const DrawerNavBar = ({ isMenuOpen, toggleMenu, linkClass }) => {
+const DrawerNavBar = ({ isMenuOpen, toggleMenu }) => {
   return (
     <Drawer
       open={isMenuOpen}
@@ -15,39 +17,42 @@ const DrawerNavBar = ({ isMenuOpen, toggleMenu, linkClass }) => {
       <div className="border-b-2 border-slate-900 bg-slate-900 p-4">
         <NavLink
           to={'/'}
-          className="w-fit text-xl font-bold text-blue-600 hover:text-blue-500 sm:text-2xl"
+          className="flex items-center space-x-2 transition-all duration-700"
         >
-          Steam-Trends
+          <FiYoutube className="h-8 w-8 text-red-500" />
+          <h1 className="text-2xl font-bold text-white hover:text-gray-600">CineScope</h1>
         </NavLink>
       </div>
       <div className="flex h-full flex-col p-4">
         <ul className="mb-auto flex flex-col items-start gap-4">
           <li>
             <NavLink
-              to={'/movies'}
-              onClick={toggleMenu}
-              className={({ isActive }) =>
-                `${linkClass({ isActive })} hover:text-blue-500`
-              }
+              to={'/'}
+              className='text-gray-400 hover:text-blue-600 flex items-center space-x-2'
             >
-              MOVIES
+              <FiTrendingUp />
+              <span>Trending</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={'/movies'}
+              className='text-gray-400 hover:text-blue-600 flex items-center space-x-2'
+            >
+              <RiMovie2Line />
+              <span>Movies</span>
             </NavLink>
           </li>
           <li>
             <NavLink
               to={'/tv'}
-              onClick={toggleMenu}
-              className={({ isActive }) =>
-                `${linkClass({ isActive })} hover:text-blue-500`
-              }
+              className='text-gray-400 hover:text-blue-600 flex items-center space-x-2'
             >
-              TV SHOWS
+              <FiTv />
+              <span>TV Shows</span>
             </NavLink>
           </li>
         </ul>
-        <button className="mt-auto rounded-lg bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-500 md:text-base">
-          LOG IN
-        </button>
       </div>
     </Drawer>
   )

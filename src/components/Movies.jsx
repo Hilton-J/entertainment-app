@@ -89,7 +89,7 @@ const Movies = () => {
           animate={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className={`grid ${!loading && "grid-cols-4 md:grid-cols-5"}  gap-3 mx-auto flex-1`}
+          className={`grid ${!loading && "grid-cols-2 md:grid-cols-5"}  gap-3 mx-auto flex-1`}
         >
           {loading ? (
             <Spinner className='mx-auto' />

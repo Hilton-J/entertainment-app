@@ -75,7 +75,6 @@ const NavBar = () => {
       <DrawerNavBar
         isMenuOpen={isMenuOpen}
         toggleMenu={toggleMenu}
-        linkClass={linkClass}
       />
     </header>
   )

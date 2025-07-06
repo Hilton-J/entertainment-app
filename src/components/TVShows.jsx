@@ -11,7 +11,6 @@ import React, { useEffect, useState } from 'react';
 import ReleaseDateForm from './filter/ReleaseDateForm';
 
 const TVShows = () => {
-
   const [loading, setLoading] = useState(true);
   const [pageCount, setPageCount] = useState(0);
   const [tvShowList, setTVShowList] = useState([]);
@@ -48,7 +47,6 @@ const TVShows = () => {
   const toggleFilter = () => {
     setOpenFilter((prevState) => !prevState)
   }
-
 
   return (
     <section className="px-4 py-10">
@@ -91,7 +89,7 @@ const TVShows = () => {
           animate={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className={`grid ${!loading && "grid-cols-4 md:grid-cols-5"}  gap-3 mx-auto flex-1`}
+          className={`grid ${!loading && "grid-cols-2 md:grid-cols-5"}  gap-3 mx-auto flex-1`}
         >
           {loading ? (
             <Spinner className='mx-auto' />

@@ -1,12 +1,10 @@
-import React from 'react'
-import ReactPaginate from 'react-paginate'
-// import { useState } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
+import ReactPaginate from 'react-paginate';
 
 const Paginate = ({ setCurrentPage, pageCount }) => {
   const handlePageClick = (event) => {
     window.scroll(0, 0)
-    console.log(event.selected)
     setCurrentPage(event.selected + 1)
   }
 
@@ -16,8 +14,8 @@ const Paginate = ({ setCurrentPage, pageCount }) => {
 
       // Next Button
       nextLabel="next >"
-      nextLinkClassName=" px-3 py-2 rounded-lg hover:bg-blue-600 hover:text-slate-900 border border-blue-600 "
-      // nextClassName="hidden sm:block"
+      nextLinkClassName="px-2 py-1 md:px-3 md:py-2 rounded-lg hover:bg-blue-600 hover:text-slate-900 border border-blue-600"
+      nextClassName="hidden sm:block"
 
 
       onPageChange={handlePageClick}
@@ -27,16 +25,16 @@ const Paginate = ({ setCurrentPage, pageCount }) => {
 
       // Previous Button
       previousLabel="< previous"
-      previousLinkClassName="px-3 py-2 rounded-lg hover:bg-blue-600 hover:text-slate-900 border border-blue-600 "
+      previousLinkClassName="px-2 py-1 md:px-3 md:py-2 rounded-lg hover:bg-blue-600 hover:text-slate-900 border border-blue-600"
       previousClassName="hidden sm:block"
 
       //Pagination container
-      containerClassName="flex justify-center my-6 gap-3 text-blue-600"
+      containerClassName="flex justify-center my-6 gap-3 text-blue-600 text-xs"
 
 
       //Pages
-      activeLinkClassName="bg-blue-600 px-3 py-2 rounded-lg text-slate-900"
-      pageLinkClassName="hover:text-slate-900 px-3 py-2 rounded-lg border border-blue-600 hover:bg-blue-600"
+      activeLinkClassName="bg-blue-600 px-2 py-1 md:px-3 md:py-2 rounded-lg text-slate-900"
+      pageLinkClassName="hover:text-slate-900 px-2 py-1 md:px-3 md:py-2 rounded-lg border border-blue-600 hover:bg-blue-600"
 
       // Previous nand next button
       disabledLinkClassName={
