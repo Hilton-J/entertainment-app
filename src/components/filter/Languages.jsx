@@ -1,6 +1,7 @@
 import axios from 'axios';
-import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { API_URL } from '../../constant/env.const';
 
 const Languages = ({ setSelectedLanguage }) => {
   const [languages, setLanguages] = useState([]);
@@ -8,7 +9,7 @@ const Languages = ({ setSelectedLanguage }) => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const { data: languagesData } = await axios.get(`${import.meta.env.VITE_API_URL}/filter/languages`);
+        const { data: languagesData } = await axios.get(`${API_URL}/filter/languages`);
         setLanguages(languagesData);
       } catch (error) {
         console.error('Error fetching movie data: ', error);

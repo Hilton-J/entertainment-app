@@ -7,6 +7,7 @@ import Genres from './filter/Genres';
 import { motion } from 'framer-motion';
 import Countries from './filter/Countries';
 import Languages from './filter/Languages';
+import { API_URL } from '../constant/env.const';
 import React, { useState, useEffect } from 'react';
 import ReleaseDateForm from './filter/ReleaseDateForm';
 
@@ -26,9 +27,9 @@ const Movies = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const moviesURL = `${import.meta.env.EXPRESS_API_URL}/movies/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
+      const moviesURL = `${API_URL}/movies/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
 
-      const apiURL = searchQuery ? `${import.meta.env.EXPRESS_API_URL}/search/movies/${searchQuery}/${currentPage}` : moviesURL;
+      const apiURL = searchQuery ? `${API_URL}/search/movies/${searchQuery}/${currentPage}` : moviesURL;
 
       const { data: movies } = await axios.get(apiURL);
 

@@ -7,6 +7,7 @@ import Genres from './filter/Genres';
 import { motion } from 'framer-motion';
 import Countries from './filter/Countries';
 import Languages from './filter/Languages';
+import { API_URL } from '../constant/env.const';
 import React, { useEffect, useState } from 'react';
 import ReleaseDateForm from './filter/ReleaseDateForm';
 
@@ -26,9 +27,9 @@ const TVShows = () => {
 
   useEffect(() => {
     const fetchTvShows = async () => {
-      const tvShowsURL = `${import.meta.env.EXPRESS_API_URL}/tvshows/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
+      const tvShowsURL = `${API_URL}/tvshows/discover/${currentPage}?sort=${sort}&with_genres=${selectedGenres}&country=${selectedCountry}&language=${selectedLanguage}&fromDate=${fromReleaseDate}&toDate=${toReleaseDate}`;
 
-      const apiURL = searchQuery ? `${import.meta.env.EXPRESS_API_URL}/search/tvshows/${searchQuery}/${currentPage}` : tvShowsURL;
+      const apiURL = searchQuery ? `${API_URL}/search/tvshows/${searchQuery}/${currentPage}` : tvShowsURL;
 
       const { data: tvShows } = await axios.get(apiURL);
 
