@@ -2,7 +2,7 @@ import axios from 'axios';
 import Spinner from './Spinner';
 import Listing from './Listing';
 import Paginate from './Paginate';
-import { API_URL } from '../constant/env.const';
+// import { API_URL } from '../constant/env.const';
 import React, { useState, useEffect } from 'react';
 
 const Trending = () => {
@@ -13,7 +13,7 @@ const Trending = () => {
 
   useEffect(() => {
     const fetchTrending = async () => {
-      const { data } = await axios.get(`${API_URL}/trending`)
+      const { data } = await axios.get(`https://entertainment-app-amber.vercel.app/api/trending`)
       data.total_pages < 50 ? setPageCount(data.total_pages) : setPageCount(50)
       setTrending(data.results)
 
