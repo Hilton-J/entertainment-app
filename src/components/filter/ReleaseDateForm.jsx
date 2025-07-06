@@ -1,12 +1,12 @@
 import React from 'react'
-import Input from './DateInput'
+import DateInput from './DateInput'
 import PropTypes from 'prop-types'
 
 const ReleaseDateForm = ({ toDate, setToDate, fromDate, setFromDate }) => {
   return (
     <div className='mt-4 flex flex-col gap-3'>
-      <Input labelText='From Date' name='fromDate' value={fromDate} onChangeFunc={setFromDate} />
-      <Input labelText='To Date' name='toDate' value={toDate} onChangeFunc={setToDate} />
+      <DateInput labelText='From Date' name='fromDate' value={fromDate} onChangeFunc={setFromDate} />
+      <DateInput labelText='To Date' name='toDate' value={toDate} onChangeFunc={setToDate} />
     </div>
   )
 }
