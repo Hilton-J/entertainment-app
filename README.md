@@ -84,7 +84,7 @@ server/
     configurationService.mjs
     movieService.mjs
   ...
-index.mjs
+  index.mjs
 src/
   components/
     filter/
