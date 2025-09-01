@@ -2,8 +2,6 @@
 
 A modern web application to browse, filter, and discover movies and TV shows by genre, release date, and more—featuring an intuitive, responsive UI.
 
-![Entertainment App Banner](https://placehold.co/800x200?text=Entertainment+App) <!-- Replace with your project banner if available -->
-
 ![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?logo=tailwindcss&logoColor=white)
 ![MIT License](https://img.shields.io/github/license/Hilton-J/entertainment-app)
