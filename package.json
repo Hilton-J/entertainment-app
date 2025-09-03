@@ -20,7 +20,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "axios": "^1.10.0",
     "concurrently": "^9.1.2",
-    "framer-motion": "^12.4.10",
+    "framer-motion": "^12.18.1",
     "nodemon": "^3.1.9",
     "npm": "^10.8.2",
     "react": "^18.3.1",
