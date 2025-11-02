@@ -2,14 +2,15 @@ import axios from 'axios';
 import Listing from './Listing';
 import Spinner from './Spinner';
 import Paginate from './Paginate';
-import SortBy from './filter/SortBy';
-import Genres from './filter/Genres';
+// import SortBy from './filter/SortBy';
+// import Genres from './filter/Genres';
 import { motion } from 'framer-motion';
-import Countries from './filter/Countries';
-import Languages from './filter/Languages';
+// import Countries from './filter/Countries';
+// import Languages from './filter/Languages';
 import { BASE_URL } from '../constant/env.const';
 import React, { useState, useEffect } from 'react';
-import ReleaseDateForm from './filter/ReleaseDateForm';
+import Filter from './filter/Filter';
+// import ReleaseDateForm from './filter/ReleaseDateForm';
 
 const Movies = () => {
   const [loading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ const Movies = () => {
   const [movieList, setMovieList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
-  const [openFilter, setOpenFilter] = useState(false);
+  // const [openFilter, setOpenFilter] = useState(false);
   const [sort, setSort] = useState('polularity.desc');
   const [toReleaseDate, setToReleaseDate] = useState('');
   const [selectedGenres, setSelectedGenres] = useState([]);
@@ -40,9 +41,9 @@ const Movies = () => {
     fetchMovies();
   }, [currentPage, selectedGenres, searchQuery, sort, selectedCountry, selectedLanguage, toReleaseDate, fromReleaseDate]);
 
-  const toggleFilter = () => {
-    setOpenFilter((prevState) => !prevState)
-  }
+  // const toggleFilter = () => {
+  //   setOpenFilter((prevState) => !prevState)
+  // }
 
   return (
     <section className="px-4 py-10">
@@ -50,19 +51,16 @@ const Movies = () => {
         <div className="space-y-5">
           <h2 className="text-xl md:text-2xl font-bold text-blue-600">LATEST MOVIES</h2>
           <div className='flex gap-4'>
-            <div className='flex-1'>
-              <input type="search" name='search' placeholder='Search' className='rounded-lg w-full' onChange={(e) => setSearchQuery(e.target.value)} />
-            </div>
-
-            <button
+            <Filter setSearchQuery={setSearchQuery} setFromReleaseDate={setFromReleaseDate} setToReleaseDate={setToReleaseDate} setSelectedGenres={setSelectedGenres} setSelectedCountry={setSelectedCountry} setSelectedLanguage={setSelectedLanguage} setSort={setSort} />
+            {/* <button
               className="bg-blue-600 text-slate-900 hover:text-blue-600 hover:border-blue-600 hover:bg-transparent px-5 rounded-lg border border-transparent transition-all duration-300"
               onClick={toggleFilter}
             >
               FILTERS
-            </button>
+            </button> */}
           </div>
         </div>
-
+        {/* 
         <motion.div
           initial={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -79,7 +77,7 @@ const Movies = () => {
             <Countries setSelectedCountry={setSelectedCountry} />
             <Languages setSelectedLanguage={setSelectedLanguage} />
           </div>
-        </motion.div>
+        </motion.div> */}
 
         <motion.div
           animate={{ opacity: 1, y: 0 }}
