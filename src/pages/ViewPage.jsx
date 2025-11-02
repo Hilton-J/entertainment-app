@@ -7,43 +7,91 @@ import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import SeasonsListing from '../components/SeasonsListing';
 
+// Helper function to safely construct image URLs
+const getImageUrl = (path, size = 'w300') =>
+  path
+    ? `https://image.tmdb.org/t/p/${size}${path}`
+    : 'https://www.movienewz.com/img/films/poster-holder.jpg';
+
 const ViewPage = () => {
-  const { type, id } = useParams()
-  const [item, setItem] = useState([])
-  const [genres, setGenres] = useState([])
-  const [releaseYear, setReleaseYear] = useState('')
-  const [seasons, setSeasons] = useState([])
-  const [listCast, setListCast] = useState([])
+  const { type, id } = useParams();
+
+  // Initialize state with appropriate types for safety
+  const [item, setItem] = useState({});
+  // Initialize arrays with [] to prevent 'map' on undefined error
+  const [genres, setGenres] = useState([]);
+  const [releaseYear, setReleaseYear] = useState('N/A');
+  const [seasons, setSeasons] = useState([]);
+  const [listCast, setListCast] = useState([]);
+
+  // New state for robustness
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
 
   useEffect(() => {
-    const fetchItem = async () => {
-      const url = type === 'tv' ? `/api/tvshows/tv-id/${id}` : `/api/movies/movie-id/${id}`;
-      const { data } = await axios.get(url);
-      const releaseDate = data?.release_date || data?.first_air_date;
+    const fetchItemAndCrew = async () => {
+      setLoading(true);
+      setError(null);
 
-      setSeasons(data?.seasons);
-      setReleaseYear(releaseDate?.split('-')[0] ?? 'N/A');
-      setGenres(() => data?.genres.map((g) => g.name).join(', '));
-      setItem(data);
+      try {
+        // 1. Fetch Item Data
+        const itemUrl = type === 'tv' ? `/api/tvshows/tv-id/${id}` : `/api/movies/movie-id/${id}`;
+        const itemResponse = await axios.get(itemUrl);
+        const data = itemResponse.data;
 
+        const releaseDate = data?.release_date || data?.first_air_date;
+
+        setSeasons(data?.seasons || []); // Fallback to []
+
+        // FIX: Safely check releaseDate before calling .split()
+        if (releaseDate) {
+          setReleaseYear(releaseDate.split('-')[0]);
+        } else {
+          setReleaseYear('N/A');
+        }
+
+        // Setting genres as a list of strings to be joined later
+        setGenres(data?.genres?.map((g) => g.name) || []);
+        setItem(data);
+
+        // 2. Fetch Crew Data
+        const crewUrl = type === 'tv' ? `/api/tvshows/credits/${id}` : `/api/movies/credits/${id}`;
+        const crewResponse = await axios.get(crewUrl);
+        setListCast(crewResponse.data.cast || []); // Fallback to []
+
+      } catch (err) {
+        console.error('Failed to fetch data:', err);
+        setError('Failed to load details. Please check the network connection.');
+      } finally {
+        setLoading(false);
+      }
     }
 
-    const fetchCrew = async () => {
-      const url = type === 'tv' ? `/api/tvshows/credits/${id}` : `/api/movies/credits/${id}`;
-      const { data } = await axios.get(url);
+    fetchItemAndCrew();
 
-      setListCast(data.cast);
-    }
+  }, [type, id]);
 
-    fetchItem();
-    fetchCrew();
+  const backgroundImageUrl = getImageUrl(item.backdrop_path);
+  const genresString = genres.join(', '); // Join genres only when rendering
 
-  }, [type, id])
+  // --- LOADING AND ERROR STATES ---
+  if (loading) {
+    return (
+      <section className="min-h-screen bg-blue-50 text-white flex justify-center items-center">
+        <h1 className="text-3xl font-bold">Loading Details...</h1>
+      </section>
+    );
+  }
 
-  const backgroundImageUrl = item.backdrop_path
-    ? `https://image.tmdb.org/t/p/w300${item.backdrop_path}`
-    : 'https://www.movienewz.com/img/films/poster-holder.jpg';
+  if (error) {
+    return (
+      <section className="min-h-screen bg-blue-50 text-red-500 flex justify-center items-center">
+        <h1 className="text-3xl font-bold">{error}</h1>
+      </section>
+    );
+  }
+  // --- END LOADING AND ERROR STATES ---
 
   return (
     <section className="min-h-screen bg-blue-50 text-white flex flex-col gap-12">
@@ -55,11 +103,7 @@ const ViewPage = () => {
             <div className="flex items-center sm:items-start gap-5 flex-col sm:flex-row md:gap-10 w-full px-4">
               <div className="w-fit">
                 <img
-                  src={
-                    item.poster_path
-                      ? `https://image.tmdb.org/t/p/w300${item.poster_path}`
-                      : 'https://www.movienewz.com/img/films/poster-holder.jpg'
-                  }
+                  src={getImageUrl(item.poster_path)}
                   alt={item.title || item.name}
                   className="h-full w-full rounded-lg object-fit"
                 />
@@ -72,16 +116,19 @@ const ViewPage = () => {
                   </h1>
 
                   <div className='flex flex-col gap-2'>
-
                     <div className='flex gap-3'>
                       {releaseYear}
-                      {item.episode_run_time && item.episode_run_time.length > 0 && (
-                        <span>{item.episode_run_time}m</span>
+                      {/* Robust Runtime Display */}
+                      {type === 'movie' && item.runtime && <span>{item.runtime}m</span>}
+                      {type === 'tv' && item.episode_run_time?.[0] && (
+                        <span>{item.episode_run_time[0]}m</span>
                       )}
                     </div>
-                    <div>{genres}</div>
+                    <div>{genresString}</div> {/* Use the joined string */}
                     <div className='flex gap-3'>
-                      <img src={logo} alt='TMDB Logo' className='w-12 h-6' />{parseFloat(item.vote_average).toFixed(1)}
+                      <img src={logo} alt='TMDB Logo' className='w-12 h-6' />
+                      {/* Robust Vote Average Display */}
+                      {item.vote_average > 0 ? parseFloat(item.vote_average).toFixed(1) : 'N/A'}
                     </div>
                   </div>
                 </div>
@@ -102,7 +149,9 @@ const ViewPage = () => {
       </div>
 
       <div className='px-4 w-[90%] mx-auto space-y-10 mb-12'>
-        {seasons !== undefined && <SeasonsListing numSeason={item.number_of_seasons} list={seasons} />}
+        {/* Pass empty array if seasons is null/undefined to SeasonsListing for safety */}
+        {seasons?.length > 0 && <SeasonsListing numSeason={item.number_of_seasons} list={seasons} />}
+        {/* Pass empty array if listCast is null/undefined to Cast for safety */}
         {listCast?.length > 0 && <Cast list={listCast} title={item.name || item.original_title} />}
       </div>
     </section>
@@ -114,4 +163,4 @@ ViewPage.propTypes = {
   editItem: PropTypes.func,
 };
 
-export default ViewPage
+export default ViewPage;
