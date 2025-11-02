@@ -20,11 +20,11 @@ const ViewPage = () => {
     const fetchItem = async () => {
       const url = type === 'tv' ? `/api/tvshows/tv-id/${id}` : `/api/movies/movie-id/${id}`;
       const { data } = await axios.get(url);
-      const releaseDate = data.release_date || data.first_air_date;
+      const releaseDate = data?.release_date || data?.first_air_date;
 
-      setSeasons(data.seasons);
+      setSeasons(data?.seasons);
       setReleaseYear(releaseDate.split('-')[0]);
-      setGenres(() => data.genres.map((g) => g.name).join(', '));
+      setGenres(() => data?.genres.map((g) => g.name).join(', '));
       setItem(data);
 
     }
