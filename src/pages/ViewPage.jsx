@@ -23,7 +23,7 @@ const ViewPage = () => {
       const releaseDate = data?.release_date || data?.first_air_date;
 
       setSeasons(data?.seasons);
-      setReleaseYear(releaseDate.split('-')[0] ?? 'N/A');
+      setReleaseYear(releaseDate?.split('-')[0] ?? 'N/A');
       setGenres(() => data?.genres.map((g) => g.name).join(', '));
       setItem(data);
 
