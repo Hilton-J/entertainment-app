@@ -38,8 +38,8 @@ const ViewPage = () => {
             : `${BASE_URL}/movies/movie-id/${id}`;
         const crewUrl =
           type === 'tv'
-            ? `/api/tvshows/credits/${id}`
-            : `/api/movies/credits/${id}`;
+            ? `${BASE_URL}/tvshows/credits/${id}`
+            : `${BASE_URL}/movies/credits/${id}`;
 
         // Fetch both in parallel for speed
         const [itemResponse, crewResponse] = await Promise.all([
