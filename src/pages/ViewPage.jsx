@@ -6,6 +6,7 @@ import country from '../data/country.json';
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import SeasonsListing from '../components/SeasonsListing';
+import { BASE_URL } from '../constant/env.const';
 
 // Helper to build valid image URLs
 const getImageUrl = (path, size = 'w300') =>
@@ -33,8 +34,8 @@ const ViewPage = () => {
       try {
         const itemUrl =
           type === 'tv'
-            ? `/api/tvshows/tv-id/${id}`
-            : `/api/movies/movie-id/${id}`;
+            ? `${BASE_URL}/tvshows/tv-id/${id}`
+            : `${BASE_URL}/movies/movie-id/${id}`;
         const crewUrl =
           type === 'tv'
             ? `/api/tvshows/credits/${id}`
@@ -81,6 +82,7 @@ const ViewPage = () => {
       </section>
     );
   }
+  console.log(item);
 
   if (error) {
     return (
